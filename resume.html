@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joshua Sánchez — Lead Data Solutions Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ───────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* ── Print / A4 ──────────────────────────────────────────────── */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    /* ── Variables ───────────────────────────────────────────────── */
+    :root {
+      --blue:     #0071e3;
+      --black:    #1d1d1f;
+      --mid:      #3a3a3c;
+      --sub:      #6e6e73;
+      --divider:  #d2d2d7;
+      --chip-bg:  #f2f2f7;
+      --white:    #ffffff;
+
+      --f-name:   22pt;
+      --f-role:   10.5pt;
+      --f-sec:    6.2pt;
+      --f-body:   8pt;
+      --f-small:  7.2pt;
+      --f-micro:  6.7pt;
+      --f-badge:  6.3pt;
+      --f-co:     8.8pt;
+    }
+
+    /* ── Body (screen wrapper) ───────────────────────────────────── */
+    html, body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      background: #e8e8ed;
+      color: var(--black);
+      padding: 28px 0 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── A4 Page ─────────────────────────────────────────────────── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--white);
+      margin: 0 auto;
+      padding: 10.5mm 13mm 10mm 13mm;
+      position: relative;
+      box-shadow: 0 6px 40px rgba(0,0,0,0.14);
+    }
+
+    @media print {
+      html, body { background: var(--white); padding: 0; }
+      .page      { box-shadow: none; margin: 0; }
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────────────────────────── */
+    .hd-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12mm;
+    }
+
+    .hd-name {
+      font-size: var(--f-name);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      color: var(--blue);
+      line-height: 1.02;
+    }
+
+    .hd-title {
+      font-size: var(--f-role);
+      font-weight: 500;
+      color: var(--black);
+      letter-spacing: -0.015em;
+      margin-top: 3px;
+    }
+
+    .hd-contact {
+      text-align: right;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+
+    .hd-contact p {
+      font-size: var(--f-small);
+      color: var(--sub);
+      line-height: 1.7;
+    }
+
+    .hd-contact a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .divider-h {
+      width: 100%;
+      height: 0.6px;
+      background: var(--divider);
+      margin-top: 5.5mm;
+      margin-bottom: 0;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       TWO-COLUMN BODY
+    ───────────────────────────────────────────────────────────── */
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.44fr;
+      column-gap: 7mm;
+      align-items: start;
+      margin-top: 6mm;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       SECTION HEADER
+    ───────────────────────────────────────────────────────────── */
+    .sec-title {
+      font-size: var(--f-sec);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-bottom: 0.6px solid var(--divider);
+      padding-bottom: 3px;
+      margin-bottom: 5.5mm;
+    }
+
+    section { margin-bottom: 5.5mm; }
+    section:last-child { margin-bottom: 0; }
+
+    /* ─────────────────────────────────────────────────────────────
+       PERFIL
+    ───────────────────────────────────────────────────────────── */
+    .profile-text {
+      font-size: var(--f-body);
+      color: var(--mid);
+      line-height: 1.62;
+      letter-spacing: 0.002em;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       EXPERIENCE
+    ───────────────────────────────────────────────────────────── */
+    .exp-entry { margin-bottom: 4.8mm; }
+    .exp-entry:last-child { margin-bottom: 0; }
+
+    .exp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 1.5px;
+    }
+
+    .exp-company {
+      font-size: var(--f-co);
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.015em;
+    }
+
+    .exp-type {
+      font-size: var(--f-micro);
+      color: var(--sub);
+      font-weight: 400;
+      margin-left: 3px;
+    }
+
+    .exp-date {
+      font-size: var(--f-micro);
+      font-weight: 500;
+      color: var(--sub);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .exp-role {
+      font-size: var(--f-small);
+      font-weight: 500;
+      color: var(--mid);
+      letter-spacing: -0.01em;
+      margin-bottom: 3.5px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+    }
+
+    .exp-bullets li {
+      font-size: var(--f-body);
+      color: var(--mid);
+      line-height: 1.5;
+      padding-left: 9px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 300;
+      font-size: 7pt;
+      top: 0.5px;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       EDUCATION
+    ───────────────────────────────────────────────────────────── */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4mm;
+    }
+
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1px;
+    }
+
+    .edu-inst {
+      font-size: var(--f-small);
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+
+    .edu-year {
+      font-size: var(--f-micro);
+      color: var(--sub);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .edu-degree {
+      font-size: var(--f-small);
+      color: var(--mid);
+      line-height: 1.4;
+    }
+
+    .edu-sub {
+      font-size: var(--f-micro);
+      color: var(--sub);
+      line-height: 1.4;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       SKILLS / BADGES
+    ───────────────────────────────────────────────────────────── */
+    .skill-group { margin-bottom: 3.8mm; }
+    .skill-group:last-child { margin-bottom: 0; }
+
+    .skill-label {
+      font-size: var(--f-micro);
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--sub);
+      margin-bottom: 3px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: var(--f-badge);
+      font-weight: 500;
+      color: var(--black);
+      background: var(--chip-bg);
+      padding: 2.5px 6.5px;
+      border-radius: 5px;
+      line-height: 1.4;
+      letter-spacing: 0.005em;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       FOOTER (page) — subtle page number
+    ───────────────────────────────────────────────────────────── */
+    .page-footer {
+      position: absolute;
+      bottom: 7mm;
+      left: 13mm;
+      right: 13mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .page-footer span {
+      font-size: 6pt;
+      color: #c7c7cc;
+      letter-spacing: 0.04em;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HEADER
+  ════════════════════════════════════════════════════════════ -->
+  <header>
+    <div class="hd-wrap">
+      <div>
+        <h1 class="hd-name">Joshua Sánchez</h1>
+        <p class="hd-title">Lead Data Solutions Architect</p>
+      </div>
+      <div class="hd-contact">
+        <p>55 8354 3168 &nbsp;·&nbsp; <a href="mailto:joshuaisan17o@gmail.com">joshuaisan17o@gmail.com</a> &nbsp;·&nbsp; Azcapotzalco, CDMX</p>
+        <p style="margin-top: 1px;">
+          <a href="https://www.linkedin.com/in/joshua-ismael-s%C3%A1nchez-reyes-903abb270/" target="_blank">linkedin.com/in/joshuasanchez</a>
+          &nbsp;·&nbsp;
+          <a href="https://www.joshuasanchezds.com" target="_blank">joshuasanchezds.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="divider-h"></div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BODY
+  ════════════════════════════════════════════════════════════ -->
+  <div class="body-grid">
+
+    <!-- ──────────────────────────────────────────────────────
+         MAIN COLUMN
+    ─────────────────────────────────────────────────────── -->
+    <main>
+
+      <!-- Perfil Profesional -->
+      <section>
+        <h2 class="sec-title">Perfil Profesional</h2>
+        <p class="profile-text">
+          Arquitecto de soluciones de datos con trayectoria comprobada en el diseño e implementación de pipelines analíticos, sistemas de AI Agents y herramientas de inteligencia empresarial de alto impacto. Fundador con experiencia liderando equipos técnicos y gestionando ciclos de implementación end-to-end orientados a resultados. Transforma datos complejos en ventajas competitivas medibles: reducción de costos operativos, optimización de flujos de trabajo y soporte directo a la toma de decisiones estratégicas a nivel directivo. Especializado en arquitecturas predictivas, automatización inteligente y forecasting que generan impacto tangible en el negocio.
+        </p>
+      </section>
+
+      <!-- Experiencia Profesional -->
+      <section>
+        <h2 class="sec-title">Experiencia Profesional</h2>
+
+        <!-- FACTO -->
+        <div class="exp-entry">
+          <div class="exp-top">
+            <div>
+              <span class="exp-company">FACTO</span>
+              <span class="exp-type">Agencia de Data &amp; AI</span>
+            </div>
+            <span class="exp-date">Ene 2026 — Presente</span>
+          </div>
+          <p class="exp-role">Founder &amp; Lead Data Solutions Architect</p>
+          <ul class="exp-bullets">
+            <li>Fundación y dirección de una agencia especializada en automatización avanzada y analítica predictiva, con ciclos de implementación ágiles de 5 semanas orientados a impacto operativo inmediato y medible.</li>
+            <li>Arquitectura y despliegue de un <em>Dynamic Pricing Dashboard</em> basado en machine learning y time-series forecasting para la predicción de precios de mercado en entornos multiretail con múltiples variables dinámicas.</li>
+            <li>Implementación exitosa de AI Agents para automatización de procesos y social listening, integrando n8n, Claude y Apify para reducir significativamente los tiempos de ejecución operativa en clientes.</li>
+          </ul>
+        </div>
+
+        <!-- Ganem México -->
+        <div class="exp-entry">
+          <div class="exp-top">
+            <div>
+              <span class="exp-company">Ganem México</span>
+              <span class="exp-type">Corporativo Nacional</span>
+            </div>
+            <span class="exp-date">Feb 2024 — Presente</span>
+          </div>
+          <p class="exp-role">Data Analyst Senior &amp; AI Solutions Architect</p>
+          <ul class="exp-bullets">
+            <li>Diseño de arquitecturas de AI y automatización del reporte gerencial mediante pipelines de datos robustos, reduciendo tiempos de generación y elevando la fiabilidad de la información ejecutiva.</li>
+            <li>Desarrollo de tableros de control ejecutivos con KPIs estratégicos para el monitoreo continuo del cumplimiento de metas de calidad, eficiencia operativa y rentabilidad en tiempo real.</li>
+            <li>Implementación de análisis de funnels de conversión para identificar cuellos de botella, reducir puntos de abandono y optimizar la toma de decisiones de negocio con base en datos.</li>
+          </ul>
+        </div>
+
+        <!-- Genio Inventivo -->
+        <div class="exp-entry">
+          <div class="exp-top">
+            <div>
+              <span class="exp-company">Genio Inventivo</span>
+            </div>
+            <span class="exp-date">Jul 2023 — Ene 2024</span>
+          </div>
+          <p class="exp-role">Data Scientist Jr.</p>
+          <ul class="exp-bullets">
+            <li>Extracción, limpieza y estructuración de grandes volúmenes de datos mediante SQL para garantizar precisión y trazabilidad completa en el procesamiento de órdenes comerciales.</li>
+            <li>Desarrollo de modelos de análisis predictivo para anticipar necesidades operativas y soportar la planificación estratégica de escenarios a corto y mediano plazo.</li>
+          </ul>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- ──────────────────────────────────────────────────────
+         SIDEBAR
+    ─────────────────────────────────────────────────────── -->
+    <aside>
+
+      <!-- Educación y Certificaciones -->
+      <section>
+        <h2 class="sec-title">Educación y Certificaciones</h2>
+        <div class="edu-list">
+
+          <div>
+            <div class="edu-row">
+              <span class="edu-inst">MIT</span>
+              <span class="edu-year">En curso</span>
+            </div>
+            <p class="edu-degree">MicroMasters en Estadística y Ciencia de Datos</p>
+            <p class="edu-sub">Massachusetts Institute of Technology · Online</p>
+          </div>
+
+          <div>
+            <div class="edu-row">
+              <span class="edu-inst">MIT</span>
+              <span class="edu-year">Jun 2026</span>
+            </div>
+            <p class="edu-degree">Time Series with Intervention</p>
+            <p class="edu-sub">Certificación — Massachusetts Institute of Technology</p>
+          </div>
+
+          <div>
+            <div class="edu-row">
+              <span class="edu-inst">UNITEC</span>
+              <span class="edu-year">2025</span>
+            </div>
+            <p class="edu-degree">Ingeniería en Ciencia de Datos</p>
+            <p class="edu-sub">Universidad Tecnológica de México · CDMX</p>
+          </div>
+
+          <div>
+            <div class="edu-row">
+              <span class="edu-inst">IPN</span>
+              <span class="edu-year">2022</span>
+            </div>
+            <p class="edu-degree">Ingeniería Matemática</p>
+            <p class="edu-sub">Instituto Politécnico Nacional · CDMX</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Competencias Core & Tech Stack -->
+      <section>
+        <h2 class="sec-title">Competencias &amp; Tech Stack</h2>
+
+        <div class="skill-group">
+          <p class="skill-label">Liderazgo y BI</p>
+          <div class="badges">
+            <span class="badge">Planificación Estratégica</span>
+            <span class="badge">Desarrollo de KPIs</span>
+            <span class="badge">Optimización de Flujos</span>
+            <span class="badge">Modelado Predictivo</span>
+            <span class="badge">Operaciones de Negocio</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <p class="skill-label">AI y Automatización</p>
+          <div class="badges">
+            <span class="badge">Claude</span>
+            <span class="badge">Integración de LLMs</span>
+            <span class="badge">n8n</span>
+            <span class="badge">Multi-Agent Pipelines</span>
+            <span class="badge">Apify</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <p class="skill-label">Ingeniería de Datos</p>
+          <div class="badges">
+            <span class="badge">Python</span>
+            <span class="badge">SQL</span>
+            <span class="badge">Power BI</span>
+            <span class="badge">Looker Studio</span>
+            <span class="badge">Time-Series Forecasting</span>
+            <span class="badge">Pandas</span>
+            <span class="badge">NumPy</span>
+            <span class="badge">Scikit-learn</span>
+            <span class="badge">Excel Avanzado</span>
+          </div>
+        </div>
+
+      </section>
+
+    </aside>
+  </div><!-- /.body-grid -->
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE FOOTER
+  ════════════════════════════════════════════════════════════ -->
+  <div class="page-footer">
+    <span>Joshua Sánchez · Lead Data Solutions Architect</span>
+    <span>joshuasanchez.dev</span>
+  </div>
+
+</div><!-- /.page -->
+</body>
+</html>

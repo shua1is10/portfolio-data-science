@@ -1,0 +1,18 @@
+{
+  "metricas": {
+    "mae": 7.23,
+    "r2": 0.738
+  },
+  "top_features": {
+    "Precio": 0.5675,
+    "Tienda_Mercado Libre": 0.1091,
+    "Tienda_AT&T": 0.0632,
+    "Modelo_Honor 70": 0.031,
+    "semana": 0.0258,
+    "Tienda_Movistar": 0.0238,
+    "Modelo_Reno 10": 0.0227,
+    "GB": 0.0219,
+    "Tienda_Liverpool": 0.0216,
+    "Tienda_Aurrera": 0.0179
+  }
+}

@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "match_id": "J1-A-1",
+    "narrative": "Mexico opened the tournament with a controlled 2-0 win over South Africa, built on early territorial dominance and two well-worked goals from Julian Quinones (9') and Raul Jimenez (67'). The match featured two red cards -- Yaya Sithole (South Africa, 49') and Cesar Montes (Mexico, 90+2') -- but neither dismissal materially altered a game Mexico had already controlled from kickoff.",
+    "ai_verdict": "The 2-0 scoreline for Mexico was a fair reflection of a comprehensive performance rather than a fortunate one. Mexico generated 1.41 expected goals against just 0.07 for South Africa, a gap of nearly 20x that confirms the hosts dominated territory (60% possession), shot volume (16 attempts to 3), and quality of chances (2 big chances created to 0). Both goals -- a close-range finish from Julian Quinones and a header from Raul Jimenez off a cross -- arrived from sustained pressure rather than isolated set pieces, and Mexico also won the duel battle 46 to 33.\n\nFrom a variance standpoint, the underlying numbers suggest the result actually understated Mexico's edge: an xG differential of 1.34 would statistically project a wider margin over a larger sample, meaning South Africa's goalkeeper and defensive block (2 saves, 17 clearances) absorbed pressure that could plausibly have produced a 3- or 4-goal swing. The two red cards (one per side, plus a VAR-overturned third) had limited tactical impact given they arrived in the 49th and 90th+2 minutes respectively, after the game state was already well established.\n\nFor the Dynamic Bayesian ELO update, this profile registers as a low-surprise, high-margin victory for the model's pre-match favorite (Mexico was priced at 61.9% to win). The form index adjustment is therefore modest in magnitude but directionally reinforcing: Mexico's rating is nudged upward to reflect a dominant chance-creation profile, while South Africa's is nudged down, with the strong xG corroboration ensuring the update is not purely scoreline-driven.",
+    "advanced_stats": {
+      "xg_a": 1.41,
+      "xg_b": 0.07,
+      "possession_a": 60,
+      "possession_b": 40,
+      "duels_won_a": 46,
+      "duels_won_b": 33
+    }
+  }
+]

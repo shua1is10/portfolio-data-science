@@ -1,5 +1,5 @@
 match_id,fase,equipo_A,equipo_B,prob_A,prob_Empate,prob_B,prediccion_modelo,resultado_real,goles_A_real,goles_B_real,acierto_prediccion
-J1-A-1,Fase de Grupos - Jornada 1,Mexico,South Africa,0.619,0.2878,0.0933,Mexico,Pendiente,,,
+J1-A-1,Fase de Grupos - Jornada 1,Mexico,South Africa,0.619,0.2878,0.0933,Mexico,Victoria A,2.0,0.0,SI
 J1-A-2,Fase de Grupos - Jornada 1,South Korea,Czechia,0.372,0.3379,0.2901,South Korea,Pendiente,,,
 J1-B-1,Fase de Grupos - Jornada 1,Canada,Bosnia & Herzegovina,0.4394,0.3568,0.2038,Canada,Pendiente,,,
 J1-B-2,Fase de Grupos - Jornada 1,Qatar,Switzerland,0.1691,0.3521,0.4787,Switzerland,Pendiente,,,

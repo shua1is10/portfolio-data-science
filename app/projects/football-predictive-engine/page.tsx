@@ -3,9 +3,10 @@ import Link from "next/link";
 import {
   ArrowLeft, ArrowRight, Database, Cpu, TrendingUp,
   ShieldCheck, GitBranch, Scale, Lock, Sparkles,
-  Globe, BrainCircuit, FileJson,
+  BrainCircuit, FileText, Bot, Braces, Target, ChevronRight,
 } from "lucide-react";
 import { FadeUp, StaggerGrid, StaggerItem } from "@/components/ui/animate";
+import { GenAIBadge } from "@/components/ui/genai-badge";
 
 export const metadata: Metadata = {
   title: "International Football Predictive Engine — Joshua Sánchez",
@@ -68,26 +69,151 @@ const PIPELINE_STEPS = [
 
 const HYBRID_STEPS = [
   {
-    icon: Globe,
-    title: "AI-powered telemetry extraction",
-    body: "After each final whistle, an agentic scraping layer visits public results pages — driving a real browser to get past anti-bot walls — and hands the raw, messy HTML to a generative model. Instead of brittle CSS selectors that break with every site redesign, the LLM reads the page like an analyst would and extracts the post-match telemetry: expected goals, possession, and duel percentages.",
+    icon: Bot,
+    title: "LLM-Powered Agentic Workflows",
+    body: "Post-match intelligence does not arrive as clean tabular data — it arrives as unstructured match PDFs and anti-bot-walled results pages. An autonomous extraction agent orchestrates the run end-to-end: it drives a real browser, plans its own parsing strategy, self-corrects on malformed documents, and retries failed extractions. No brittle CSS selectors, no regex archaeology — the LLM reasons over each document the way a human analyst would.",
   },
   {
-    icon: FileJson,
-    title: "Structured insight store",
-    body: "The extraction is normalized into a strict JSON contract (ai_match_insights.json): per-match narrative, advanced stats, and a hybrid verdict. Every field is optional by design — the dashboard renders a graceful pending state for any fixture the pipeline hasn't processed yet, so a scraping failure never breaks the product.",
+    icon: FileText,
+    title: "NLP for Unstructured Data",
+    body: "Natural Language Processing (NLP) for unstructured data is the hard engineering problem here: a single match report mixes free-flowing narrative prose with embedded hard metrics. The generative layer performs layout-aware reading, entity resolution, and unit normalization to extract both the qualitative context (how the match actually unfolded) and the quantitative telemetry (xG, possession, duel percentages) from the same raw document.",
   },
   {
-    icon: TrendingUp,
-    title: "Telemetry feeds the dynamic ELO",
-    body: "The extracted expected-goals balance flows straight into the Live Form Index update: a team that loses the scoreline but dominates the xG suffers a softer penalty, and a lucky winner earns a smaller boost. The statistical engine no longer sees only the result — it sees how the match was actually played.",
+    icon: Braces,
+    title: "Generative AI Telemetry Parsing",
+    body: "Every extraction is distilled into a strict, machine-validated JSON contract (ai_match_insights.json) — the boundary where probabilistic generation meets deterministic engineering. Each field is optional by design: the dashboard renders graceful pending states for unprocessed fixtures, so a parsing failure degrades the experience instead of breaking it. The parsed expected-goals balance then flows straight into the surprise-weighted Bayesian form update.",
   },
   {
     icon: BrainCircuit,
-    title: "The hybrid verdict",
-    body: "Finally, the generative layer reconciles both worlds: it reads the model's pre-match probabilities alongside the extracted telemetry and writes a short analyst-grade verdict — did the model miss, or did football just do football things? Quantitative calibration plus qualitative context, in one loop.",
+    title: "The Hybrid Verdict",
+    body: "The final synthesis is where the Hybrid Intelligence Architecture earns its name: the generative layer reads the statistical model's pre-match probability distribution alongside the extracted telemetry and writes an analyst-grade verdict — did the model genuinely miss, or did variance simply win the day? Quantitative calibration and qualitative reasoning, reconciled in a single loop.",
   },
 ];
+
+/* ── Hybrid AI Pipeline — architecture diagram nodes ─────────── */
+const PIPELINE_NODES = [
+  {
+    icon: FileText,
+    label: "Unstructured Match PDF",
+    sub: "raw post-match reports",
+    mono: "input: *.pdf",
+    tint: "#ff9f0a",
+  },
+  {
+    icon: Bot,
+    label: "LLM / NLP Extraction Agent",
+    sub: "agentic parsing loop",
+    mono: "agent.extract()",
+    tint: "#a855f7",
+  },
+  {
+    icon: Braces,
+    label: "Data Normalization",
+    sub: "strict JSON contract",
+    mono: "ai_match_insights.json",
+    tint: "#0071e3",
+  },
+  {
+    icon: TrendingUp,
+    label: "Dynamic Bayesian ELO Update",
+    sub: "surprise-weighted posterior",
+    mono: "form ×= f(surprise, ΔxG)",
+    tint: "#30d158",
+  },
+  {
+    icon: Target,
+    label: "Predictive Engine Forecast",
+    sub: "form-tilted probabilities",
+    mono: "P(win · draw · win)",
+    tint: "#5ac8fa",
+  },
+];
+
+/** Animated flow connector between pipeline stages (rotates to point
+ *  downward when the diagram stacks vertically on small screens). */
+function FlowConnector() {
+  return (
+    <div
+      aria-hidden
+      className="flex items-center justify-center shrink-0 rotate-90 lg:rotate-0 py-1 lg:py-0"
+    >
+      {[0, 1, 2].map((i) => (
+        <ChevronRight
+          key={i}
+          className="w-4 h-4 -ml-2 first:ml-0 text-[#0071e3]"
+          style={{ animation: `orbital-pulse 1.6s ease-in-out ${i * 0.22}s infinite` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/** Hybrid AI Pipeline architecture visualization — pure Tailwind/CSS,
+ *  server-rendered, dark AI-tech aesthetic with a subtle blueprint grid. */
+function HybridPipelineDiagram() {
+  return (
+    <div className="relative rounded-[28px] bg-[#0a0a0f] border border-white/10 overflow-hidden">
+      {/* Blueprint grid backdrop */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(0,113,227,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(0,113,227,0.12) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+      {/* Ambient glow */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(168,85,247,0.16), transparent), radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,113,227,0.14), transparent)",
+        }}
+      />
+
+      <div className="relative p-6 sm:p-8">
+        {/* Panel header */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-7">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-[#30d158] animate-orbital-pulse" />
+            <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-white">
+              Hybrid AI Pipeline
+            </p>
+          </div>
+          <p className="font-mono text-[10px] text-[#8e8e93]">
+            // agentic_workflow · 5 stages · zero retraining
+          </p>
+        </div>
+
+        {/* Flow: stacked on mobile, left-to-right on desktop */}
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-1 lg:gap-2">
+          {PIPELINE_NODES.map(({ icon: Icon, label, sub, mono, tint }, i) => (
+            <div key={label} className="contents">
+              {i > 0 && <FlowConnector />}
+              <div className="flex-1 min-w-0 rounded-2xl bg-white/[0.045] border border-white/10 px-4 py-5 text-center transition-colors duration-200 hover:border-white/25">
+                <span
+                  className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3"
+                  style={{ background: `${tint}1f`, boxShadow: `0 0 18px ${tint}26` }}
+                >
+                  <Icon className="w-5 h-5" style={{ color: tint }} />
+                </span>
+                <p className="text-[12.5px] font-semibold text-white leading-snug">
+                  {label}
+                </p>
+                <p className="mt-1 text-[10.5px] text-[#8e8e93]">{sub}</p>
+                <p className="mt-2 font-mono text-[9.5px]" style={{ color: tint }}>
+                  {mono}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const SCARCITY_POINTS = [
   {
@@ -319,26 +445,33 @@ export default function PredictiveEngineCaseStudy() {
       <section className="px-6 pb-20">
         <div className="max-w-5xl mx-auto">
           <FadeUp>
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-violet-500/12 to-[#0071e3]/12 border border-violet-500/20 text-[11px] font-semibold text-violet-600 dark:text-violet-400 mb-5">
-                <Sparkles className="w-3.5 h-3.5" />
-                Powered by Generative AI Insights
-              </span>
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <GenAIBadge className="mb-6" />
               <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#0071e3]">
                 Hybrid Methodology
               </p>
               <h2 className="mt-4 text-[clamp(1.6rem,3.4vw,2.5rem)] font-bold tracking-[-0.03em] text-[#1d1d1f] dark:text-white">
-                Classical ML, fed by generative scraping
+                A Hybrid Intelligence Architecture
               </h2>
               <p className="mt-4 text-[1.0625rem] text-[#6e6e73] dark:text-[#a1a1a6] leading-relaxed">
-                The engine&apos;s second evolution closes its biggest data gap.
-                The dynamic ELO is no longer score-only: an NLP layer extracts
-                post-match telemetry from public results pages and pipes it
-                into the form update — turning a forecaster into a hybrid
-                intelligence system.
+                The engine&apos;s second evolution fuses its calibrated
+                statistical core with LLM-powered agentic workflows. Generative
+                AI telemetry parsing converts unstructured post-match documents
+                — qualitative narrative and hard metrics alike — into
+                machine-readable signal for the dynamic Bayesian ELO. This is
+                generative AI deployed as a data engineering instrument, not a
+                chat interface.
               </p>
             </div>
           </FadeUp>
+
+          {/* Architecture visualization */}
+          <FadeUp delay={0.08}>
+            <div className="mb-12">
+              <HybridPipelineDiagram />
+            </div>
+          </FadeUp>
+
           <StaggerGrid className="grid sm:grid-cols-2 gap-4">
             {HYBRID_STEPS.map(({ icon: Icon, title, body }, i) => (
               <StaggerItem key={title}>

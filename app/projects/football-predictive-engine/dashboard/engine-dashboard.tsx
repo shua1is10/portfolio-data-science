@@ -16,6 +16,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { GenAIBadge } from "@/components/ui/genai-badge";
 
 /* ── Types (filled server-side from the engine's output files) ─────────── */
 export interface TrackedMatch {
@@ -250,10 +251,7 @@ function TrackingRow({ m, insight }: { m: TrackedMatch; insight?: MatchInsight }
 
         {/* GenAI provenance badge */}
         <div className="mt-4 mb-6">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-violet-500/12 to-[#0071e3]/12 border border-violet-500/20 text-[11px] font-semibold text-violet-600 dark:text-violet-400">
-            <Sparkles className="w-3.5 h-3.5" />
-            Powered by Generative AI Insights
-          </span>
+          <GenAIBadge size="sm" />
         </div>
 
         <div className="space-y-6">

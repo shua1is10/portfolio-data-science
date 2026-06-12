@@ -11,5 +11,22 @@
       "duels_won_a": 46,
       "duels_won_b": 33
     }
+  },
+  {
+    "match_id": "J1-A-2",
+    "narrative": "South Korea overturned an early second-half deficit to beat Czechia 2-1, despite Ladislav Krejci's header (51') putting the Czechs ahead against the run of play. Hwang In-Beom (67') and Oh Hyeon-Gyu (80') scored the response goals that completed the comeback, both arriving from sustained second-half pressure built on South Korea's dominant possession share.",
+    "ai_verdict": "The 2-1 scoreline for South Korea was a fair, if slightly conservative, reflection of the underlying numbers. Korea produced 1.84 xG against Czechia's 0.81 -- a clear advantage that was matched across every other territorial metric: 62% possession, 15 shots to 7, 4 big chances created versus just 1, and a commanding 56-36 edge in duels won. The xG differential (+1.03) projects to roughly a one-goal margin, so the final 2-1 result sits almost exactly where the underlying performance data says it should.\n\nThere was a moment of variance, however: Czechia's opening goal (51') came from one of their only clear chances and briefly put the model's pre-match favorite behind, despite Korea having already generated the bulk of the half's pressure. That goal inflated Czechia's actual output relative to its expected output (0.81 xG conceded vs. 1 goal scored), meaning Korea's eventual win required overturning a scoreline that, on pure xG terms, Czechia had no business taking. Once Korea leveled through Hwang In-Beom and then won it through Oh Hyeon-Gyu, the result converged back toward the dominance the stats had been signaling all match.\n\nFor the Dynamic Bayesian ELO update, this registers as a moderate-surprise win for the model's pre-match favorite (South Korea was priced at 37.2% in a fairly open three-way market, so 'sorpresa' = 0.628). South Korea's form index rises to 1.266 and Czechia's falls to 0.697 -- a larger swing than a pure scoreline-based update would produce, but the strong xG corroboration (1.84 vs 0.81) confirms the win was earned on chance quality, not just on the back of a late surge after going behind.",
+    "advanced_stats": {
+      "xg_a": 1.84,
+      "xg_b": 0.81,
+      "possession_a": 62,
+      "possession_b": 38,
+      "total_shots_a": 15,
+      "total_shots_b": 7,
+      "big_chances_a": 4,
+      "big_chances_b": 1,
+      "duels_won_a": 56,
+      "duels_won_b": 36
+    }
   }
 ]

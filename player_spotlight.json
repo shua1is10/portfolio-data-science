@@ -44,5 +44,28 @@
         "note": "Headed Czechia into a surprise lead in the 56th minute from a Vladimir Coufal cross, briefly putting the pre-match favorite behind."
       }
     ]
+  },
+  {
+    "match_id": "J1-B-1",
+    "players": [
+      {
+        "name": "Jovo Lukic",
+        "team": "Bosnia & Herzegovina",
+        "role": "Goal",
+        "note": "Opened the scoring for the visitors in the 21st minute with a close-range header off a Sead Kolasinac corner, giving Bosnia an early lead despite Canada's territorial control."
+      },
+      {
+        "name": "Cyle Larin",
+        "team": "Canada",
+        "role": "Goal",
+        "note": "Came off the bench in the 76th minute and struck the equalizer two minutes later, finishing from the center of the box on a Promise David assist to salvage a point for the hosts."
+      },
+      {
+        "name": "Promise David",
+        "team": "Canada",
+        "role": "Assist",
+        "note": "Made an immediate impact off the bench, setting up Cyle Larin's 78th-minute equalizer on a swift counter-attack before narrowly missing a chance of his own moments later."
+      }
+    ]
   }
 ]

@@ -8,10 +8,6 @@
       "xg_b": 0.07,
       "possession_a": 60,
       "possession_b": 40,
-      "total_shots_a": 16,
-      "total_shots_b": 3,
-      "big_chances_a": 2,
-      "big_chances_b": 0,
       "duels_won_a": 46,
       "duels_won_b": 33
     }
@@ -31,6 +27,23 @@
       "big_chances_b": 1,
       "duels_won_a": 56,
       "duels_won_b": 36
+    }
+  },
+  {
+    "match_id": "J1-B-1",
+    "narrative": "Canada and Bosnia & Herzegovina shared the points in a 1-1 draw in the tournament's opening match, played in Canada. Bosnia struck first through Jovo Lukic's close-range header (21') from a Sead Kolasinac corner, catching the hosts cold despite their early territorial control. Cyle Larin leveled for Canada in the 78th minute, finishing a Promise David assist on the counter-attack after the hosts had spent the second half pressing for an equalizer. Five yellow cards were shown across both sides, but neither team finished with a numerical disadvantage.",
+    "ai_verdict": "The 1-1 scoreline broadly reflects a contested, evenly poised performance rather than a clear injustice for either side. Canada produced 1.25 xG to Bosnia's 0.98 -- a modest 0.27 edge -- while dominating possession (61% to 39%) and total shots (13 to 8). However, big chances were even at 2-2, and Bosnia actually won more individual duels (79 to 70) despite seeing far less of the ball, a sign that their compact defensive shape and physical battles offset Canada's territorial dominance.\n\nFrom a variance standpoint, neither goal was a fluke: Lukic's header (21') came from a well-worked corner routine, while Larin's equalizer (78') was a clean finish on the counter after Canada had missed several clear chances (Jonathan David, Tani Oluwaseyi, and Promise David all failed to convert before the leveler). The narrow xG gap (+0.27) is too small to argue the draw was a robbery for either team -- Canada created enough to have won, but Bosnia's resilience and duel-winning earned their share of the point.\n\nFor the Dynamic Bayesian ELO update, this draw registers as a moderate-surprise result against the model's pre-match favorite (Canada was priced at 43.9% to win versus 35.7% for a draw, so 'sorpresa' = 0.643). Canada's form index dips slightly to 0.848 while Bosnia's rises to 1.013, reflecting that the pre-tournament favorite failed to convert a territorial and shot-volume advantage into three points. The marginal xG edge for Canada tempers the adjustment, keeping the model from overreacting to a tightly-contested draw where both sides created and missed real chances.",
+    "advanced_stats": {
+      "xg_a": 1.25,
+      "xg_b": 0.98,
+      "possession_a": 61,
+      "possession_b": 39,
+      "total_shots_a": 13,
+      "total_shots_b": 8,
+      "big_chances_a": 2,
+      "big_chances_b": 2,
+      "duels_won_a": 70,
+      "duels_won_b": 79
     }
   }
 ]

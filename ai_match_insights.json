@@ -8,6 +8,10 @@
       "xg_b": 0.07,
       "possession_a": 60,
       "possession_b": 40,
+      "total_shots_a": 16,
+      "total_shots_b": 3,
+      "big_chances_a": 2,
+      "big_chances_b": 0,
       "duels_won_a": 46,
       "duels_won_b": 33
     }

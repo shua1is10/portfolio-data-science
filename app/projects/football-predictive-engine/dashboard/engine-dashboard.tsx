@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  Cell, ReferenceLine,
+  Cell, ReferenceLine, ScatterChart, Scatter, CartesianGrid,
 } from "recharts";
 import {
   ArrowLeft, CalendarClock, CheckCircle2, XCircle,
@@ -59,6 +59,19 @@ export interface MatchInsight {
     big_chances_a?: number; big_chances_b?: number;
     duels_won_a?: number;   duels_won_b?: number;
   };
+}
+
+/** Standout-player telemetry for a single match, extracted by the AI
+ *  scraping layer and stored in player_spotlight.json. Surfaced in the
+ *  Tournament Summary tab. */
+export interface PlayerSpotlightEntry {
+  match_id: string;
+  players: {
+    name: string;
+    team: string;
+    role: string;
+    note: string;
+  }[];
 }
 
 /* ── Apple palette tokens ───────────────────────────────────────────────── */
@@ -313,77 +326,50 @@ function TrackingRow({ m, insight }: { m: TrackedMatch; insight?: MatchInsight }
   );
 }
 
-/* ── AI Telemetry insight card (full, non-modal) ────────────────────────── */
-function InsightCard({ m, insight }: { m: TrackedMatch; insight: MatchInsight }) {
-  const stats = insight.advanced_stats;
+/* ── Player Spotlight card (Tournament Summary) ─────────────────────────── */
+const ROLE_COLOR: Record<string, string> = {
+  "Goal": GREEN,
+  "Assist": BLUE,
+  "Goal & Assist": "#bf5af2",
+};
+
+function PlayerSpotlightCard({
+  entry, match,
+}: { entry: PlayerSpotlightEntry; match?: TrackedMatch }) {
   return (
-    <div className="rounded-3xl bg-white dark:bg-[#2c2c2e] p-4 sm:p-6">
-      <div className="flex flex-wrap items-center gap-2 mb-2">
+    <div className="rounded-2xl bg-white dark:bg-[#2c2c2e] p-4 sm:p-5">
+      <div className="flex flex-wrap items-center gap-2 mb-3">
         <span className="px-2.5 py-0.5 rounded-full bg-[#0071e3]/10 text-[10px] font-bold text-[#0071e3]">
-          Group {m.group} · Round {m.round}
+          {match ? `Group ${match.group} · Round ${match.round}` : entry.match_id}
         </span>
-        <span className="text-[10px] font-bold text-[#86868b] dark:text-[#8e8e93]">
-          {m.id}
-        </span>
-      </div>
-      <h3 className="text-sm sm:text-lg font-bold text-[#1d1d1f] dark:text-white mb-4">
-        {m.teamA}{" "}
-        <span className="text-[#0071e3]">{m.goalsA}–{m.goalsB}</span>{" "}
-        {m.teamB}
-      </h3>
-      <div className="mb-5">
-        <GenAIBadge size="sm" />
-      </div>
-      <div className="space-y-5">
-        {insight.narrative ? (
-          <InsightSection icon={BookOpenText} title="Match Narrative">
-            <p className="text-[12.5px] sm:text-[13px] leading-relaxed text-[#515154] dark:text-[#a1a1a6]">
-              {insight.narrative}
-            </p>
-          </InsightSection>
-        ) : (
-          <InsightSection icon={BookOpenText} title="Match Narrative">
-            <PendingInsight what="Narrative" />
-          </InsightSection>
+        {match && (
+          <span className="text-[11px] font-semibold text-[#1d1d1f] dark:text-white truncate">
+            {match.teamA} {match.goalsA}–{match.goalsB} {match.teamB}
+          </span>
         )}
-
-        <InsightSection icon={BarChart3} title="Advanced Stats">
-          {stats ? (
-            <>
-              <div className="flex items-center justify-between px-1 mb-2">
-                <span className="text-[11px] font-semibold text-[#1d1d1f] dark:text-white">
-                  {m.teamA}
+      </div>
+      <div className="space-y-3">
+        {entry.players.map((p, i) => (
+          <div key={i} className="flex items-start gap-3">
+            <span
+              className="shrink-0 mt-0.5 px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap"
+              style={{ background: `${ROLE_COLOR[p.role] ?? SKY}1f`, color: ROLE_COLOR[p.role] ?? SKY }}
+            >
+              {p.role}
+            </span>
+            <div className="min-w-0">
+              <p className="text-[12px] font-semibold text-[#1d1d1f] dark:text-white">
+                {p.name}{" "}
+                <span className="text-[#86868b] dark:text-[#8e8e93] font-normal">
+                  · {p.team}
                 </span>
-                <span className="text-[11px] font-semibold text-[#1d1d1f] dark:text-white">
-                  {m.teamB}
-                </span>
-              </div>
-              <div className="space-y-2">
-                <StatDuel label="Expected Goals" a={stats.xg_a} b={stats.xg_b} />
-                <StatDuel label="Possession" a={stats.possession_a} b={stats.possession_b} unit="%" />
-                <StatDuel label="Total Shots" a={stats.total_shots_a} b={stats.total_shots_b} />
-                <StatDuel label="Big Chances" a={stats.big_chances_a} b={stats.big_chances_b} />
-                <StatDuel label="Duels Won" a={stats.duels_won_a} b={stats.duels_won_b} />
-              </div>
-            </>
-          ) : (
-            <PendingInsight what="Advanced telemetry" />
-          )}
-        </InsightSection>
-
-        {insight.ai_verdict ? (
-          <InsightSection icon={BrainCircuit} title="AI Hybrid Verdict">
-            <div className="rounded-2xl bg-[#0071e3]/6 dark:bg-[#0071e3]/10 border border-[#0071e3]/15 px-3.5 sm:px-4 py-3.5">
-              <p className="text-[12.5px] sm:text-[13px] leading-relaxed text-[#1d1d1f] dark:text-white whitespace-pre-line">
-                {insight.ai_verdict}
+              </p>
+              <p className="text-[11.5px] leading-relaxed text-[#515154] dark:text-[#a1a1a6] mt-0.5">
+                {p.note}
               </p>
             </div>
-          </InsightSection>
-        ) : (
-          <InsightSection icon={BrainCircuit} title="AI Hybrid Verdict">
-            <PendingInsight what="Hybrid verdict" />
-          </InsightSection>
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -402,6 +388,40 @@ function FormTip({ active, payload }: any) {
       >
         {e.deltaPct >= 0 ? "+" : ""}
         {e.deltaPct.toFixed(1)}% · index {e.index.toFixed(3)}
+      </p>
+    </div>
+  );
+}
+
+/* ── xG vs Goals scatter tooltip ────────────────────────────────────────── */
+function TelemetryScatterTip({ active, payload }: any) {
+  if (!active || !payload?.length) return null;
+  const p = payload[0]?.payload as { team: string; matchId: string; xg: number; goals: number };
+  const diff = p.goals - p.xg;
+  return (
+    <div className="rounded-2xl bg-white/95 dark:bg-[#1d1d1f]/95 backdrop-blur-md shadow-lg border border-black/5 dark:border-white/10 px-4 py-3">
+      <p className="text-[12px] font-semibold text-[#1d1d1f] dark:text-white">{p.team}</p>
+      <p className="text-[11px] text-[#86868b] dark:text-[#8e8e93]">{p.matchId}</p>
+      <p className="text-[12px] font-bold mt-1 text-[#1d1d1f] dark:text-white">
+        {p.goals} goal{p.goals === 1 ? "" : "s"} vs {p.xg.toFixed(2)} xG
+      </p>
+      <p className="text-[11px] font-semibold" style={{ color: diff >= 0 ? GREEN : RED }}>
+        {diff >= 0 ? "+" : ""}{diff.toFixed(2)} vs expected
+      </p>
+    </div>
+  );
+}
+
+/* ── Shot conversion bar tooltip ────────────────────────────────────────── */
+function ConversionTip({ active, payload }: any) {
+  if (!active || !payload?.length) return null;
+  const e = payload[0]?.payload as { team: string; matchId: string; conversion: number; goals: number; shots: number };
+  return (
+    <div className="rounded-2xl bg-white/95 dark:bg-[#1d1d1f]/95 backdrop-blur-md shadow-lg border border-black/5 dark:border-white/10 px-4 py-3">
+      <p className="text-[12px] font-semibold text-[#1d1d1f] dark:text-white">{e.team}</p>
+      <p className="text-[11px] text-[#86868b] dark:text-[#8e8e93]">{e.matchId}</p>
+      <p className="text-[12px] font-bold mt-1" style={{ color: BLUE }}>
+        {e.conversion.toFixed(1)}% conversion · {e.goals}/{e.shots} shots
       </p>
     </div>
   );
@@ -661,9 +681,10 @@ const TAB_ITEMS: TabItem[] = [
    DASHBOARD
 ═══════════════════════════════════════════════════════════════════════════ */
 export function EngineDashboard({
-  matches, form, insights = [],
+  matches, form, insights = [], playerSpotlight = [],
 }: {
   matches: TrackedMatch[]; form: FormEntry[]; insights?: MatchInsight[];
+  playerSpotlight?: PlayerSpotlightEntry[];
 }) {
   const [activeTab, setActiveTab] = useState<string>("summary");
   const [groupFilter, setGroupFilter] = useState<string>("All");
@@ -703,6 +724,47 @@ export function EngineDashboard({
 
   const standings = useMemo(() => computeGroupStandings(matches), [matches]);
   const summary = useMemo(() => computeSummary(matches, insights), [matches, insights]);
+
+  /* xG vs actual goals — one point per team per resolved fixture with
+   * telemetry, used by the AI Telemetry macro dashboard. */
+  const telemetryPoints = useMemo(() => {
+    const points: { team: string; matchId: string; xg: number; goals: number }[] = [];
+    insights.forEach((ins) => {
+      const m = matches.find((mm) => mm.id === ins.match_id);
+      const stats = ins.advanced_stats;
+      if (!m || !m.resolved || !stats) return;
+      if (stats.xg_a !== undefined && m.goalsA !== null) {
+        points.push({ team: m.teamA, matchId: m.id, xg: stats.xg_a, goals: m.goalsA });
+      }
+      if (stats.xg_b !== undefined && m.goalsB !== null) {
+        points.push({ team: m.teamB, matchId: m.id, xg: stats.xg_b, goals: m.goalsB });
+      }
+    });
+    return points;
+  }, [insights, matches]);
+
+  const telemetryMax = useMemo(
+    () => Math.max(1, ...telemetryPoints.flatMap((p) => [p.xg, p.goals])) + 0.5,
+    [telemetryPoints]
+  );
+
+  /* Shot conversion (goals / total shots) per team, used for the second
+   * macro chart in the AI Telemetry dashboard. */
+  const conversionData = useMemo(() => {
+    const rows: { team: string; matchId: string; conversion: number; goals: number; shots: number }[] = [];
+    insights.forEach((ins) => {
+      const m = matches.find((mm) => mm.id === ins.match_id);
+      const stats = ins.advanced_stats;
+      if (!m || !m.resolved || !stats) return;
+      if (stats.total_shots_a && m.goalsA !== null) {
+        rows.push({ team: m.teamA, matchId: m.id, goals: m.goalsA, shots: stats.total_shots_a, conversion: (m.goalsA / stats.total_shots_a) * 100 });
+      }
+      if (stats.total_shots_b && m.goalsB !== null) {
+        rows.push({ team: m.teamB, matchId: m.id, goals: m.goalsB, shots: stats.total_shots_b, conversion: (m.goalsB / stats.total_shots_b) * 100 });
+      }
+    });
+    return rows.sort((a, b) => b.conversion - a.conversion);
+  }, [insights, matches]);
 
   const topRiser  = form[0];
   const topFaller = form[form.length - 1];
@@ -848,7 +910,19 @@ export function EngineDashboard({
 
             <FadeUp delay={0.1}>
               <InsightSection icon={Award} title="Player Spotlight">
-                <PendingInsight what="Standout-player telemetry" />
+                {playerSpotlight.length === 0 ? (
+                  <PendingInsight what="Standout-player telemetry" />
+                ) : (
+                  <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                    {playerSpotlight.map((entry) => (
+                      <PlayerSpotlightCard
+                        key={entry.match_id}
+                        entry={entry}
+                        match={matches.find((m) => m.id === entry.match_id)}
+                      />
+                    ))}
+                  </div>
+                )}
               </InsightSection>
             </FadeUp>
           </div>
@@ -1107,12 +1181,14 @@ export function EngineDashboard({
                 </h2>
               </div>
               <p className="text-xs sm:text-[13px] text-[#86868b] dark:text-[#8e8e93] mb-7 max-w-2xl">
-                Qualitative match narratives, advanced telemetry, and hybrid
-                xG-based verdicts generated by the AI scraping layer for every
-                resolved fixture.
+                Aggregate view of the advanced telemetry generated by the AI
+                scraping layer across every resolved fixture — how actual
+                output compares to the underlying expected-goals model.
+                Per-match narratives and hybrid verdicts are available from
+                the Match Tracking tab.
               </p>
             </FadeUp>
-            {resolved.length === 0 ? (
+            {telemetryPoints.length === 0 ? (
               <FadeUp>
                 <div className="rounded-3xl border-2 border-dashed border-[#d2d2d7] dark:border-[#3a3a3c] py-12 text-center">
                   <p className="text-sm font-medium text-[#6e6e73] dark:text-[#8e8e93]">
@@ -1122,32 +1198,123 @@ export function EngineDashboard({
                 </div>
               </FadeUp>
             ) : (
-              <StaggerGrid className="grid lg:grid-cols-2 gap-3 sm:gap-4">
-                {resolved.map((m) => (
-                  <StaggerItem key={m.id}>
-                    {insightById.has(m.id) ? (
-                      <InsightCard m={m} insight={insightById.get(m.id)!} />
-                    ) : (
-                      <div className="rounded-3xl bg-white dark:bg-[#2c2c2e] p-4 sm:p-6">
-                        <div className="flex flex-wrap items-center gap-2 mb-2">
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#0071e3]/10 text-[10px] font-bold text-[#0071e3]">
-                            Group {m.group} · Round {m.round}
-                          </span>
-                          <span className="text-[10px] font-bold text-[#86868b] dark:text-[#8e8e93]">
-                            {m.id}
-                          </span>
-                        </div>
-                        <h3 className="text-sm sm:text-lg font-bold text-[#1d1d1f] dark:text-white mb-4">
-                          {m.teamA}{" "}
-                          <span className="text-[#0071e3]">{m.goalsA}–{m.goalsB}</span>{" "}
-                          {m.teamB}
-                        </h3>
-                        <PendingInsight what="AI telemetry" />
-                      </div>
-                    )}
+              <>
+                <FadeUp delay={0.05}>
+                  <div className="mb-4">
+                    <GenAIBadge size="sm" />
+                  </div>
+                </FadeUp>
+
+                <StaggerGrid className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mb-4">
+                  <StaggerItem>
+                    <Kpi icon={Target} label="Avg xG per Performance"
+                         value={(telemetryPoints.reduce((s, p) => s + p.xg, 0) / telemetryPoints.length).toFixed(2)}
+                         sub={`across ${telemetryPoints.length} team performances`} />
                   </StaggerItem>
-                ))}
-              </StaggerGrid>
+                  <StaggerItem>
+                    <Kpi icon={Goal} label="Avg Goals per Performance"
+                         value={(telemetryPoints.reduce((s, p) => s + p.goals, 0) / telemetryPoints.length).toFixed(2)}
+                         sub="actual output across the same sample" color={SKY} />
+                  </StaggerItem>
+                  <StaggerItem>
+                    <Kpi icon={TrendingUp} label="Overperformed xG"
+                         value={`${telemetryPoints.filter((p) => p.goals > p.xg).length}`}
+                         sub="scored more than the model expected" color={GREEN} />
+                  </StaggerItem>
+                  <StaggerItem>
+                    <Kpi icon={TrendingDown} label="Underperformed xG"
+                         value={`${telemetryPoints.filter((p) => p.goals < p.xg).length}`}
+                         sub="scored less than the model expected" color={RED} />
+                  </StaggerItem>
+                </StaggerGrid>
+
+                <div className="grid lg:grid-cols-2 gap-3 sm:gap-4">
+                  {/* Scatter — xG vs Actual Goals */}
+                  <FadeUp delay={0.08}>
+                    <div className="rounded-3xl bg-white dark:bg-[#2c2c2e] p-4 sm:p-6">
+                      <h3 className="text-sm sm:text-base font-bold text-[#1d1d1f] dark:text-white mb-1">
+                        Expected vs Actual Goals
+                      </h3>
+                      <p className="text-[11px] sm:text-[12px] text-[#86868b] dark:text-[#8e8e93] mb-4">
+                        One point per team per fixture. Above the dashed line
+                        means the team scored more than its xG; below means
+                        it underperformed its chances.
+                      </p>
+                      <div style={{ height: 320 }} className="text-[#6e6e73] dark:text-[#8e8e93]">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <ScatterChart margin={{ top: 8, right: 16, bottom: 24, left: 8 }}>
+                            <CartesianGrid stroke="currentColor" strokeOpacity={0.08} />
+                            <XAxis
+                              type="number" dataKey="xg" name="Expected Goals (xG)"
+                              domain={[0, telemetryMax]}
+                              tick={{ fill: "currentColor", fontSize: 11 }}
+                              axisLine={false} tickLine={false}
+                              label={{ value: "xG", position: "insideBottom", offset: -4, fill: "currentColor", fontSize: 11 }}
+                            />
+                            <YAxis
+                              type="number" dataKey="goals" name="Actual Goals"
+                              domain={[0, telemetryMax]}
+                              tick={{ fill: "currentColor", fontSize: 11 }}
+                              axisLine={false} tickLine={false}
+                              label={{ value: "Goals", angle: -90, position: "insideLeft", fill: "currentColor", fontSize: 11 }}
+                            />
+                            <ReferenceLine
+                              segment={[{ x: 0, y: 0 }, { x: telemetryMax, y: telemetryMax }]}
+                              stroke="currentColor" strokeOpacity={0.25} strokeDasharray="4 4"
+                              ifOverflow="extendDomain"
+                            />
+                            <Tooltip content={<TelemetryScatterTip />} cursor={{ strokeDasharray: "3 3" }} />
+                            <Scatter data={telemetryPoints}>
+                              {telemetryPoints.map((p, i) => (
+                                <Cell key={`${p.matchId}-${p.team}-${i}`} fill={p.goals >= p.xg ? GREEN : RED} />
+                              ))}
+                            </Scatter>
+                          </ScatterChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                  </FadeUp>
+
+                  {/* Bar — Shot conversion rate */}
+                  <FadeUp delay={0.12}>
+                    <div className="rounded-3xl bg-white dark:bg-[#2c2c2e] p-4 sm:p-6">
+                      <h3 className="text-sm sm:text-base font-bold text-[#1d1d1f] dark:text-white mb-1">
+                        Shot Conversion Rate
+                      </h3>
+                      <p className="text-[11px] sm:text-[12px] text-[#86868b] dark:text-[#8e8e93] mb-4">
+                        Goals scored as a share of total shots taken, per
+                        team performance.
+                      </p>
+                      <div
+                        style={{ height: Math.max(160, conversionData.length * 40 + 40) }}
+                        className="text-[#6e6e73] dark:text-[#8e8e93]"
+                      >
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart
+                            data={conversionData}
+                            layout="vertical"
+                            margin={{ top: 8, right: 28, bottom: 8, left: 8 }}
+                          >
+                            <XAxis
+                              type="number" domain={[0, "auto"]}
+                              tickFormatter={(v: number) => `${v}%`}
+                              tick={{ fill: "currentColor", fontSize: 11 }}
+                              axisLine={false} tickLine={false}
+                            />
+                            <YAxis
+                              type="category" dataKey="team" width={100} interval={0}
+                              tick={{ fill: "currentColor", fontSize: 11, fontWeight: 600 }}
+                              axisLine={false} tickLine={false}
+                            />
+                            <Tooltip content={<ConversionTip />} cursor={{ fill: "rgba(0,113,227,0.05)" }} />
+                            <Bar dataKey="conversion" radius={[0, 8, 8, 0]} barSize={16} fill={BLUE} />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                  </FadeUp>
+                </div>
+              </>
             )}
           </div>
         </section>

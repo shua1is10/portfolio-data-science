@@ -4,7 +4,7 @@ import path from "path";
 import Papa from "papaparse";
 import {
   EngineDashboard,
-  type TrackedMatch, type FormEntry, type MatchInsight,
+  type TrackedMatch, type FormEntry, type MatchInsight, type PlayerSpotlightEntry,
 } from "./engine-dashboard";
 
 export const metadata: Metadata = {
@@ -45,10 +45,26 @@ function loadInsights(root: string): MatchInsight[] {
   }
 }
 
+/** Tolerant loader for the standout-player telemetry store. Mirrors
+ *  loadInsights: missing file, malformed JSON, or empty array all degrade
+ *  to "no spotlight" — the UI renders its pending state instead of breaking. */
+function loadPlayerSpotlight(root: string): PlayerSpotlightEntry[] {
+  const file = path.join(root, "player_spotlight.json");
+  if (!existsSync(file)) return [];
+  try {
+    const raw = readFileSync(file, "utf-8").replace(/^﻿/, "");
+    const data = JSON.parse(raw);
+    return Array.isArray(data) ? (data as PlayerSpotlightEntry[]) : [];
+  } catch {
+    return [];
+  }
+}
+
 /** Reads the engine's own output files (tracking CSV + form JSON) at build
  *  time and normalizes them into English-labelled props for the client UI. */
 function loadEngineOutput(): {
   matches: TrackedMatch[]; form: FormEntry[]; insights: MatchInsight[];
+  playerSpotlight: PlayerSpotlightEntry[];
 } {
   const root = process.cwd();
 
@@ -94,10 +110,19 @@ function loadEngineOutput(): {
     .map(([team, index]) => ({ team, index, deltaPct: (index - 1) * 100 }))
     .sort((a, b) => b.index - a.index);
 
-  return { matches, form, insights: loadInsights(root) };
+  return {
+    matches, form,
+    insights: loadInsights(root),
+    playerSpotlight: loadPlayerSpotlight(root),
+  };
 }
 
 export default function EngineDashboardPage() {
-  const { matches, form, insights } = loadEngineOutput();
-  return <EngineDashboard matches={matches} form={form} insights={insights} />;
+  const { matches, form, insights, playerSpotlight } = loadEngineOutput();
+  return (
+    <EngineDashboard
+      matches={matches} form={form} insights={insights}
+      playerSpotlight={playerSpotlight}
+    />
+  );
 }

@@ -4,7 +4,7 @@ import path from "path";
 import Papa from "papaparse";
 import {
   EngineDashboard,
-  type TrackedMatch, type FormEntry, type MatchInsight, type PlayerSpotlightEntry,
+  type TrackedMatch, type FormEntry, type MatchInsight, type TournamentLeaderboard,
 } from "./engine-dashboard";
 
 export const metadata: Metadata = {
@@ -45,18 +45,26 @@ function loadInsights(root: string): MatchInsight[] {
   }
 }
 
-/** Tolerant loader for the standout-player telemetry store. Mirrors
- *  loadInsights: missing file, malformed JSON, or empty array all degrade
- *  to "no spotlight" — the UI renders its pending state instead of breaking. */
-function loadPlayerSpotlight(root: string): PlayerSpotlightEntry[] {
+const EMPTY_LEADERBOARD: TournamentLeaderboard = {
+  topScorers: [], topAssists: [], topShooters: [],
+};
+
+/** Tolerant loader for the tournament leaderboard store. Mirrors
+ *  loadInsights: missing file or malformed JSON degrades to empty
+ *  leaderboard columns — the UI renders its pending state instead of breaking. */
+function loadPlayerSpotlight(root: string): TournamentLeaderboard {
   const file = path.join(root, "player_spotlight.json");
-  if (!existsSync(file)) return [];
+  if (!existsSync(file)) return EMPTY_LEADERBOARD;
   try {
     const raw = readFileSync(file, "utf-8").replace(/^﻿/, "");
     const data = JSON.parse(raw);
-    return Array.isArray(data) ? (data as PlayerSpotlightEntry[]) : [];
+    return {
+      topScorers:  Array.isArray(data?.topScorers)  ? data.topScorers  : [],
+      topAssists:  Array.isArray(data?.topAssists)  ? data.topAssists  : [],
+      topShooters: Array.isArray(data?.topShooters) ? data.topShooters : [],
+    };
   } catch {
-    return [];
+    return EMPTY_LEADERBOARD;
   }
 }
 
@@ -64,7 +72,7 @@ function loadPlayerSpotlight(root: string): PlayerSpotlightEntry[] {
  *  time and normalizes them into English-labelled props for the client UI. */
 function loadEngineOutput(): {
   matches: TrackedMatch[]; form: FormEntry[]; insights: MatchInsight[];
-  playerSpotlight: PlayerSpotlightEntry[];
+  playerSpotlight: TournamentLeaderboard;
 } {
   const root = process.cwd();
 

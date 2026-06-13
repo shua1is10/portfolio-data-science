@@ -1,71 +1,17 @@
-[
-  {
-    "match_id": "J1-A-1",
-    "players": [
-      {
-        "name": "Raul Jimenez",
-        "team": "Mexico",
-        "role": "Goal",
-        "note": "Sealed the 2-0 with a close-range header in the 67th minute, converting a Roberto Alvarado cross after a sustained spell of pressure."
-      },
-      {
-        "name": "Julian Quinones",
-        "team": "Mexico",
-        "role": "Goal",
-        "note": "Opened the scoring in the 9th minute with a clinical first-time finish from inside the box, assisted by Erik Lira."
-      },
-      {
-        "name": "Roberto Alvarado",
-        "team": "Mexico",
-        "role": "Assist",
-        "note": "Provided the assist for Mexico's second goal and was a constant outlet down the right, finishing with 4/12 crosses completed."
-      }
-    ]
-  },
-  {
-    "match_id": "J1-A-2",
-    "players": [
-      {
-        "name": "Oh Hyeon-Gyu",
-        "team": "South Korea",
-        "role": "Goal",
-        "note": "Scored the 80th-minute winner moments after coming off the bench, finishing from close range off a Hwang In-Beom assist."
-      },
-      {
-        "name": "Hwang In-Beom",
-        "team": "South Korea",
-        "role": "Goal & Assist",
-        "note": "Equalized in the 67th minute from a Lee Kang-In assist, then turned provider for the winning goal 13 minutes later."
-      },
-      {
-        "name": "Ladislav Krejci",
-        "team": "Czech Republic",
-        "role": "Goal",
-        "note": "Headed Czechia into a surprise lead in the 56th minute from a Vladimir Coufal cross, briefly putting the pre-match favorite behind."
-      }
-    ]
-  },
-  {
-    "match_id": "J1-B-1",
-    "players": [
-      {
-        "name": "Jovo Lukic",
-        "team": "Bosnia & Herzegovina",
-        "role": "Goal",
-        "note": "Opened the scoring for the visitors in the 21st minute with a close-range header off a Sead Kolasinac corner, giving Bosnia an early lead despite Canada's territorial control."
-      },
-      {
-        "name": "Cyle Larin",
-        "team": "Canada",
-        "role": "Goal",
-        "note": "Came off the bench in the 76th minute and struck the equalizer two minutes later, finishing from the center of the box on a Promise David assist to salvage a point for the hosts."
-      },
-      {
-        "name": "Promise David",
-        "team": "Canada",
-        "role": "Assist",
-        "note": "Made an immediate impact off the bench, setting up Cyle Larin's 78th-minute equalizer on a swift counter-attack before narrowly missing a chance of his own moments later."
-      }
-    ]
-  }
-]
+{
+  "topScorers": [
+    { "name": "Folarin Balogun", "team": "United States", "stats": 2 },
+    { "name": "Hwang In-Beom", "team": "South Korea", "stats": 1 },
+    { "name": "Julián Quiñones", "team": "Mexico", "stats": 1 }
+  ],
+  "topAssists": [
+    { "name": "Roberto Alvarado", "team": "Mexico", "stats": 1 },
+    { "name": "Hwang In-Beom", "team": "South Korea", "stats": 1 },
+    { "name": "Sead Kolasinac", "team": "Bosnia & Herzegovina", "stats": 1 }
+  ],
+  "topShooters": [
+    { "name": "Son Heung-Min", "team": "South Korea", "stats": 6 },
+    { "name": "Brian Gutiérrez", "team": "Mexico", "stats": 4 },
+    { "name": "Julián Quiñones", "team": "Mexico", "stats": 4 }
+  ]
+}

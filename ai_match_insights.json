@@ -8,6 +8,10 @@
       "xg_b": 0.07,
       "possession_a": 60,
       "possession_b": 40,
+      "total_shots_a": 16,
+      "total_shots_b": 3,
+      "big_chances_a": 2,
+      "big_chances_b": 0,
       "duels_won_a": 46,
       "duels_won_b": 33
     }
@@ -44,6 +48,23 @@
       "big_chances_b": 2,
       "duels_won_a": 70,
       "duels_won_b": 79
+    }
+  },
+  {
+    "match_id": "J1-D-1",
+    "narrative": "The United States opened Group D with a commanding 4-1 win over Paraguay, controlling the game from the opening whistle. Folarin Balogun led the attack with a brace, anchoring a US side that produced 16 shots and 4 big chances across the match. Paraguay grabbed a consolation goal but managed only 9 shots and a single big chance, never seriously threatening to disrupt the hosts' rhythm.",
+    "ai_verdict": "The 4-1 scoreline for the United States was a fair, if anything understated, reflection of a one-sided performance. The US produced 1.42 expected goals against just 0.54 for Paraguay, while dominating possession (65% to 35%), shot volume (16 to 9), and big chances created (4 to 1). Folarin Balogun's brace anchored an attack that converted its territorial dominance into goals at a rate well above its underlying xG.\n\nFrom a variance standpoint, the four-goal margin slightly overstates the gap suggested by the xG differential (+0.88), meaning Paraguay's defense conceded a couple of goals that a tighter backline might have prevented. Still, the breadth of the US advantage across every metric, including duels won (65 to 55), leaves little doubt about which side deserved the result.\n\nFor the AI Hybrid Verdict and the Dynamic Bayesian ELO update, this profile registers as a routine, low-surprise win for a side that out-created its opponent across the board. The United States' form index moves upward to reflect a dominant chance-creation profile, while Paraguay's form index is adjusted downward, with the strong xG corroboration confirming the result was earned rather than fortunate.",
+    "advanced_stats": {
+      "xg_a": 1.42,
+      "xg_b": 0.54,
+      "possession_a": 65,
+      "possession_b": 35,
+      "total_shots_a": 16,
+      "total_shots_b": 9,
+      "big_chances_a": 4,
+      "big_chances_b": 1,
+      "duels_won_a": 65,
+      "duels_won_b": 55
     }
   }
 ]

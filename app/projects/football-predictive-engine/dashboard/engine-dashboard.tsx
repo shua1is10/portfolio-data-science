@@ -61,17 +61,20 @@ export interface MatchInsight {
   };
 }
 
-/** Standout-player telemetry for a single match, extracted by the AI
- *  scraping layer and stored in player_spotlight.json. Surfaced in the
- *  Tournament Summary tab. */
-export interface PlayerSpotlightEntry {
-  match_id: string;
-  players: {
-    name: string;
-    team: string;
-    role: string;
-    note: string;
-  }[];
+/** A single ranked row in the Tournament Leaderboard. */
+export interface LeaderboardEntry {
+  name:  string;
+  team:  string;
+  stats: number;
+}
+
+/** Tournament-wide player leaderboard, extracted by the AI scraping layer
+ *  and stored in player_spotlight.json. Surfaced in the Tournament Summary
+ *  tab as a three-column ranking (Goals / Assists / Total Shots). */
+export interface TournamentLeaderboard {
+  topScorers:  LeaderboardEntry[];
+  topAssists:  LeaderboardEntry[];
+  topShooters: LeaderboardEntry[];
 }
 
 /* ── Apple palette tokens ───────────────────────────────────────────────── */
@@ -326,51 +329,52 @@ function TrackingRow({ m, insight }: { m: TrackedMatch; insight?: MatchInsight }
   );
 }
 
-/* ── Player Spotlight card (Tournament Summary) ─────────────────────────── */
-const ROLE_COLOR: Record<string, string> = {
-  "Goal": GREEN,
-  "Assist": BLUE,
-  "Goal & Assist": "#bf5af2",
-};
-
-function PlayerSpotlightCard({
-  entry, match,
-}: { entry: PlayerSpotlightEntry; match?: TrackedMatch }) {
+/* ── Tournament Leaderboard column (Tournament Summary) ─────────────────── */
+function LeaderboardColumn({
+  icon: Icon, title, unit, color, entries,
+}: {
+  icon: React.ElementType; title: string; unit: string; color: string;
+  entries: LeaderboardEntry[];
+}) {
   return (
     <div className="rounded-2xl bg-white dark:bg-[#2c2c2e] p-4 sm:p-5">
-      <div className="flex flex-wrap items-center gap-2 mb-3">
-        <span className="px-2.5 py-0.5 rounded-full bg-[#0071e3]/10 text-[10px] font-bold text-[#0071e3]">
-          {match ? `Group ${match.group} · Round ${match.round}` : entry.match_id}
-        </span>
-        {match && (
-          <span className="text-[11px] font-semibold text-[#1d1d1f] dark:text-white truncate">
-            {match.teamA} {match.goalsA}–{match.goalsB} {match.teamB}
-          </span>
-        )}
+      <div className="flex items-center gap-2 mb-3.5">
+        <Icon className="w-4 h-4" style={{ color }} />
+        <h3 className="text-[11px] font-bold uppercase tracking-[0.07em] text-[#1d1d1f] dark:text-white">
+          {title}
+        </h3>
       </div>
-      <div className="space-y-3">
-        {entry.players.map((p, i) => (
-          <div key={i} className="flex items-start gap-3">
-            <span
-              className="shrink-0 mt-0.5 px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap"
-              style={{ background: `${ROLE_COLOR[p.role] ?? SKY}1f`, color: ROLE_COLOR[p.role] ?? SKY }}
-            >
-              {p.role}
-            </span>
-            <div className="min-w-0">
-              <p className="text-[12px] font-semibold text-[#1d1d1f] dark:text-white">
-                {p.name}{" "}
-                <span className="text-[#86868b] dark:text-[#8e8e93] font-normal">
-                  · {p.team}
+      {entries.length === 0 ? (
+        <p className="text-[11px] text-[#86868b] dark:text-[#8e8e93]">
+          No data yet.
+        </p>
+      ) : (
+        <div className="space-y-2.5">
+          {entries.map((p, i) => (
+            <div key={`${p.name}-${i}`} className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="shrink-0 w-5 h-5 rounded-full bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[10px] font-bold text-[#86868b] dark:text-[#8e8e93] flex items-center justify-center">
+                  {i + 1}
                 </span>
-              </p>
-              <p className="text-[11.5px] leading-relaxed text-[#515154] dark:text-[#a1a1a6] mt-0.5">
-                {p.note}
-              </p>
+                <div className="min-w-0">
+                  <p className="text-[12px] font-semibold text-[#1d1d1f] dark:text-white truncate">
+                    {p.name}
+                  </p>
+                  <p className="text-[10px] text-[#86868b] dark:text-[#8e8e93] truncate">
+                    {p.team}
+                  </p>
+                </div>
+              </div>
+              <span className="text-[13px] font-bold tabular-nums shrink-0" style={{ color }}>
+                {p.stats}
+              </span>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
+      <p className="mt-3.5 pt-3 border-t border-[#f5f5f7] dark:border-[#3a3a3c] text-[10px] font-semibold uppercase tracking-[0.07em] text-[#86868b] dark:text-[#8e8e93]">
+        {unit}
+      </p>
     </div>
   );
 }
@@ -680,11 +684,15 @@ const TAB_ITEMS: TabItem[] = [
 /* ═════════════════════════════════════════════════════════════════════════
    DASHBOARD
 ═══════════════════════════════════════════════════════════════════════════ */
+const EMPTY_LEADERBOARD: TournamentLeaderboard = {
+  topScorers: [], topAssists: [], topShooters: [],
+};
+
 export function EngineDashboard({
-  matches, form, insights = [], playerSpotlight = [],
+  matches, form, insights = [], playerSpotlight = EMPTY_LEADERBOARD,
 }: {
   matches: TrackedMatch[]; form: FormEntry[]; insights?: MatchInsight[];
-  playerSpotlight?: PlayerSpotlightEntry[];
+  playerSpotlight?: TournamentLeaderboard;
 }) {
   const [activeTab, setActiveTab] = useState<string>("summary");
   const [groupFilter, setGroupFilter] = useState<string>("All");
@@ -909,18 +917,25 @@ export function EngineDashboard({
             </StaggerGrid>
 
             <FadeUp delay={0.1}>
-              <InsightSection icon={Award} title="Player Spotlight">
-                {playerSpotlight.length === 0 ? (
-                  <PendingInsight what="Standout-player telemetry" />
+              <InsightSection icon={Award} title="Tournament Leaderboard">
+                {playerSpotlight.topScorers.length === 0 &&
+                 playerSpotlight.topAssists.length === 0 &&
+                 playerSpotlight.topShooters.length === 0 ? (
+                  <PendingInsight what="Tournament leaderboard telemetry" />
                 ) : (
-                  <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
-                    {playerSpotlight.map((entry) => (
-                      <PlayerSpotlightCard
-                        key={entry.match_id}
-                        entry={entry}
-                        match={matches.find((m) => m.id === entry.match_id)}
-                      />
-                    ))}
+                  <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
+                    <LeaderboardColumn
+                      icon={Goal} title="Top Scorers" unit="Goals" color={GREEN}
+                      entries={playerSpotlight.topScorers}
+                    />
+                    <LeaderboardColumn
+                      icon={Sparkles} title="Top Playmakers" unit="Assists" color={BLUE}
+                      entries={playerSpotlight.topAssists}
+                    />
+                    <LeaderboardColumn
+                      icon={Target} title="Most Active Shooters" unit="Total Shots" color={SKY}
+                      entries={playerSpotlight.topShooters}
+                    />
                   </div>
                 )}
               </InsightSection>

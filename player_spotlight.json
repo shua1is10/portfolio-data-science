@@ -1,17 +1,17 @@
 {
   "topScorers": [
+    { "name": "Kai Havertz", "team": "Germany", "stats": 2 },
     { "name": "Folarin Balogun", "team": "United States", "stats": 2 },
-    { "name": "Hwang In-Beom", "team": "South Korea", "stats": 1 },
-    { "name": "Julián Quiñones", "team": "Mexico", "stats": 1 }
+    { "name": "Nestory Irankunda", "team": "Australia", "stats": 1 }
   ],
   "topAssists": [
-    { "name": "Roberto Alvarado", "team": "Mexico", "stats": 1 },
-    { "name": "Hwang In-Beom", "team": "South Korea", "stats": 1 },
-    { "name": "Sead Kolasinac", "team": "Bosnia & Herzegovina", "stats": 1 }
+    { "name": "Deniz Undav", "team": "Germany", "stats": 2 },
+    { "name": "Joshua Kimmich", "team": "Germany", "stats": 2 },
+    { "name": "Ryan Gravenberch", "team": "Netherlands", "stats": 2 }
   ],
   "topShooters": [
     { "name": "Son Heung-Min", "team": "South Korea", "stats": 6 },
-    { "name": "Brian Gutiérrez", "team": "Mexico", "stats": 4 },
-    { "name": "Julián Quiñones", "team": "Mexico", "stats": 4 }
+    { "name": "Hakan Çalhanoğlu", "team": "Turkey", "stats": 5 },
+    { "name": "Dan Ndoye", "team": "Switzerland", "stats": 5 }
   ]
 }

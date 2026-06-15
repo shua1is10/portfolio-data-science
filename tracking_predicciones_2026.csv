@@ -2,14 +2,14 @@ match_id,fase,equipo_A,equipo_B,prob_A,prob_Empate,prob_B,prediccion_modelo,resu
 J1-A-1,Fase de Grupos - Jornada 1,Mexico,South Africa,0.619,0.2878,0.0933,Mexico,Victoria A,2.0,0.0,SI
 J1-A-2,Fase de Grupos - Jornada 1,South Korea,Czechia,0.372,0.3379,0.2901,South Korea,Victoria A,2.0,1.0,SI
 J1-B-1,Fase de Grupos - Jornada 1,Canada,Bosnia & Herzegovina,0.4394,0.3568,0.2038,Canada,Empate,1.0,1.0,NO
-J1-B-2,Fase de Grupos - Jornada 1,Qatar,Switzerland,0.1691,0.3521,0.4787,Switzerland,Pendiente,,,
-J1-C-1,Fase de Grupos - Jornada 1,Brazil,Morocco,0.3111,0.3648,0.3241,Empate,Pendiente,,,
-J1-C-2,Fase de Grupos - Jornada 1,Haiti,Scotland,0.2208,0.3488,0.4304,Scotland,Pendiente,,,
+J1-B-2,Fase de Grupos - Jornada 1,Qatar,Switzerland,0.1691,0.3521,0.4787,Switzerland,Empate,1.0,1.0,NO
+J1-C-1,Fase de Grupos - Jornada 1,Brazil,Morocco,0.3111,0.3648,0.3241,Empate,Empate,1.0,1.0,SI
+J1-C-2,Fase de Grupos - Jornada 1,Haiti,Scotland,0.2208,0.3488,0.4304,Scotland,Victoria B,0.0,1.0,SI
 J1-D-1,Fase de Grupos - Jornada 1,United States,Paraguay,0.0332,0.2117,0.7551,Paraguay,Victoria A,4.0,1.0,NO
-J1-D-2,Fase de Grupos - Jornada 1,Australia,Turkey,0.2882,0.3259,0.386,Turkey,Pendiente,,,
-J1-E-1,Fase de Grupos - Jornada 1,Germany,Curaçao,0.6053,0.3079,0.0867,Germany,Pendiente,,,
+J1-D-2,Fase de Grupos - Jornada 1,Australia,Turkey,0.2882,0.3259,0.386,Turkey,Victoria A,2.0,0.0,NO
+J1-E-1,Fase de Grupos - Jornada 1,Germany,Curaçao,0.6053,0.3079,0.0867,Germany,Victoria A,7.0,1.0,SI
 J1-E-2,Fase de Grupos - Jornada 1,Ivory Coast,Ecuador,0.5001,0.3418,0.1582,Ivory Coast,Pendiente,,,
-J1-F-1,Fase de Grupos - Jornada 1,Netherlands,Japan,0.2442,0.3587,0.397,Japan,Pendiente,,,
+J1-F-1,Fase de Grupos - Jornada 1,Netherlands,Japan,0.2442,0.3587,0.397,Japan,Empate,2.0,2.0,NO
 J1-F-2,Fase de Grupos - Jornada 1,Sweden,Tunisia,0.2453,0.4091,0.3456,Empate,Pendiente,,,
 J1-G-1,Fase de Grupos - Jornada 1,Belgium,Egypt,0.4833,0.3595,0.1571,Belgium,Pendiente,,,
 J1-G-2,Fase de Grupos - Jornada 1,Iran,New Zealand,0.3722,0.3637,0.2641,Iran,Pendiente,,,

@@ -66,5 +66,107 @@
       "duels_won_a": 65,
       "duels_won_b": 55
     }
+  },
+  {
+    "match_id": "J1-B-2",
+    "narrative": "Qatar salvaged a dramatic 1-1 draw against Switzerland courtesy of a 90+4' own goal, despite being heavily outplayed for most of the match. Switzerland controlled 68% of possession and created a flurry of chances, but wasteful finishing and a string of missed opportunities left the door open for the hosts to escape with a point in the dying seconds.",
+    "ai_verdict": "A massive statistical anomaly. Switzerland dominated every metric, generating 3.20 xG and 26 shots, but poor finishing and a 90+4' own goal handed Qatar an incredibly fortunate draw.",
+    "advanced_stats": {
+      "xg_a": 0.60,
+      "xg_b": 3.20,
+      "possession_a": 32,
+      "possession_b": 68,
+      "total_shots_a": 6,
+      "total_shots_b": 26,
+      "big_chances_a": 1,
+      "big_chances_b": 6,
+      "duels_won_a": 36,
+      "duels_won_b": 37
+    }
+  },
+  {
+    "match_id": "J1-E-1",
+    "narrative": "Germany delivered the tournament's most emphatic statement so far, routing Curacao 7-1 behind a Kai Havertz brace. Joshua Kimmich and Deniz Undav each contributed two assists as Germany's relentless attack overwhelmed Curacao's defense from the opening whistle, with the visitors managing only a single consolation goal.",
+    "ai_verdict": "Absolute dominance. Germany's 7-1 victory perfectly reflects their overwhelming 4.80 xG, suffocating possession, and relentless high-quality chance creation.",
+    "advanced_stats": {
+      "xg_a": 4.80,
+      "xg_b": 0.40,
+      "possession_a": 65,
+      "possession_b": 35,
+      "total_shots_a": 26,
+      "total_shots_b": 8,
+      "big_chances_a": 6,
+      "big_chances_b": 0,
+      "duels_won_a": 46,
+      "duels_won_b": 48
+    }
+  },
+  {
+    "match_id": "J1-F-1",
+    "narrative": "Netherlands and Japan shared the points in a thrilling 2-2 draw, with Ryan Gravenberch setting up both Dutch goals. Japan matched the Netherlands' tempo throughout and twice fought back to level the score, producing one of the most entertaining matches of the opening round.",
+    "ai_verdict": "A highly efficient 2-2 draw. Both teams drastically overperformed their low xG (0.79 vs 0.54), demonstrating clinical finishing in a tactically balanced encounter.",
+    "advanced_stats": {
+      "xg_a": 0.79,
+      "xg_b": 0.54,
+      "possession_a": 60,
+      "possession_b": 40,
+      "total_shots_a": 10,
+      "total_shots_b": 10,
+      "big_chances_a": 1,
+      "big_chances_b": 0,
+      "duels_won_a": 44,
+      "duels_won_b": 28
+    }
+  },
+  {
+    "match_id": "J1-C-1",
+    "narrative": "Brazil and Morocco played out a tense 1-1 draw in a tightly contested Group C clash. Both sides traded chances throughout, with Morocco edging the underlying numbers but Brazil's resilience ensuring a share of the spoils.",
+    "ai_verdict": "A fiercely contested 1-1 draw. Morocco slightly edged the underlying metrics (1.37 xG and 62 duels won), but the result is a fair reflection of an evenly matched tactical battle.",
+    "advanced_stats": {
+      "xg_a": 1.26,
+      "xg_b": 1.37,
+      "possession_a": 51,
+      "possession_b": 49,
+      "total_shots_a": 12,
+      "total_shots_b": 14,
+      "big_chances_a": 1,
+      "big_chances_b": 2,
+      "duels_won_a": 53,
+      "duels_won_b": 62
+    }
+  },
+  {
+    "match_id": "J1-C-2",
+    "narrative": "Scotland snatched a 1-0 win over Haiti despite being outshot 15-9 and seeing less of the ball. Haiti pressed for an equalizer throughout, but Scotland's compact defensive shape and a clinical finish were enough to secure all three points in a tightly contested encounter.",
+    "ai_verdict": "An incredibly tight match mirroring the identical 1.05 xG for both sides. Scotland maximized their limited opportunities to steal a 1-0 win despite Haiti's shot volume advantage.",
+    "advanced_stats": {
+      "xg_a": 1.05,
+      "xg_b": 1.05,
+      "possession_a": 54,
+      "possession_b": 46,
+      "total_shots_a": 15,
+      "total_shots_b": 9,
+      "big_chances_a": 2,
+      "big_chances_b": 2,
+      "duels_won_a": 51,
+      "duels_won_b": 59
+    }
+  },
+  {
+    "match_id": "J1-D-2",
+    "narrative": "Australia claimed a 2-0 win over Turkey in a classic smash-and-grab performance, with Nestory Irankunda among the scorers. Turkey dominated possession and shot volume throughout, but Australia's clinical counter-attacking proved decisive.",
+    "ai_verdict": "A classic smash-and-grab. Turkey generated a staggering 30 shots and held 72% possession, but Australia was ruthlessly efficient on the counter-attack to secure a 2-0 win.",
+    "advanced_stats": {
+      "xg_a": 1.18,
+      "xg_b": 1.36,
+      "possession_a": 28,
+      "possession_b": 72,
+      "total_shots_a": 9,
+      "total_shots_b": 30,
+      "big_chances_a": 1,
+      "big_chances_b": 2,
+      "duels_won_a": 42,
+      "duels_won_b": 46
+    }
   }
 ]

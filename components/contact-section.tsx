@@ -33,9 +33,25 @@ export function ContactSection() {
     e.preventDefault();
     setStatus("loading");
 
-    /* ── Simulated submission (replace with your API endpoint) ── */
-    await new Promise((res) => setTimeout(res, 1200));
-    setStatus("success");
+    try {
+      const res = await fetch(process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL!, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name:    form.name,
+          email:   form.email,
+          company: form.company || undefined,
+          problem: form.message,
+        }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      setForm(INITIAL);
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const isLoading = status === "loading";
@@ -181,7 +197,7 @@ export function ContactSection() {
               </div>
 
               {/* Submit */}
-              <div className="pt-2">
+              <div className="pt-2 space-y-3">
                 <Button
                   type="submit"
                   variant="default"
@@ -201,6 +217,18 @@ export function ContactSection() {
                     </>
                   )}
                 </Button>
+
+                {status === "error" && (
+                  <p className="text-[13px] text-red-400/80 leading-relaxed">
+                    Something went wrong. Please try again or reach me directly at{" "}
+                    <a
+                      href="mailto:joshuaisan17o@gmail.com"
+                      className="underline underline-offset-2 hover:text-red-300 transition-colors"
+                    >
+                      joshuaisan17o@gmail.com
+                    </a>
+                  </p>
+                )}
               </div>
 
               {/* Footnote */}

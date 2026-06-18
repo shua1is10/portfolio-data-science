@@ -170,105 +170,139 @@
     }
   },
   {
-    "match_id": "J1-H-1",
-    "narrative": "Spain and Cape Verde played out a historic 0-0 draw in Group H, with the Iberian side firing 27 shots and controlling 74% of possession but unable to breach a disciplined Cape Verde defensive block.",
-    "ai_verdict": "An unprecedented, historic upset. Cape Verde pulled off a miraculous 0-0 draw against a dominant Spanish side that held 74% possession and fired 27 shots. Keeping a clean sheet against such overwhelming offensive pressure is a monumental defensive achievement that defies all predictive models.",
+    "match_id": "J1-I-1",
+    "narrative": "France delivered a clinical 3-1 victory over Senegal in Group I, converting three goals from just six shots despite a relatively balanced contest. Senegal created moments of danger but France's ruthless efficiency in front of goal proved the decisive factor.",
+    "ai_verdict": "A masterclass in clinical efficiency. France converted 3 goals from just 6 total shots and 1.79 xG, punishing Senegal's defensive lapses despite a relatively balanced overall flow of play.",
     "advanced_stats": {
-      "xg_a": 2.10,
-      "xg_b": 0.20,
-      "possession_a": 74,
-      "possession_b": 26,
-      "total_shots_a": 27,
+      "xg_a": 1.79,
+      "xg_b": 0.53,
+      "possession_a": 53,
+      "possession_b": 47,
+      "total_shots_a": 6,
       "total_shots_b": 6,
       "big_chances_a": 2,
-      "big_chances_b": 1,
-      "duels_won_a": 40,
-      "duels_won_b": 40
+      "big_chances_b": 2,
+      "duels_won_a": 44,
+      "duels_won_b": 35
     }
   },
   {
-    "match_id": "J1-H-2",
-    "narrative": "Uruguay and Saudi Arabia shared the spoils in a 1-1 draw in Group H, with Uruguay dominating possession and shot volume throughout but failing to convert a dominant performance into three points.",
-    "ai_verdict": "A frustrating 1-1 draw for Uruguay, who completely dictated the tempo with 67% possession and a massive 27 shots. Saudi Arabia exhibited immense resilience, converting their limited 0.99 xG into a highly valuable point.",
+    "match_id": "J1-I-2",
+    "narrative": "Norway overwhelmed Iraq 4-1 in a one-sided Group I contest, generating a massive 2.52 xG and five big chances to assert total offensive dominance. Iraq struggled to build out from deep and managed only one big chance across the entire match.",
+    "ai_verdict": "Total offensive dominance from Norway. They suffocated Iraq by generating a massive 2.52 xG and 5 big chances, showcasing overwhelming superiority in the final third.",
     "advanced_stats": {
-      "xg_a": 0.99,
-      "xg_b": 1.54,
-      "possession_a": 33,
-      "possession_b": 67,
-      "total_shots_a": 7,
-      "total_shots_b": 27,
+      "xg_a": 0.80,
+      "xg_b": 2.52,
+      "possession_a": 39,
+      "possession_b": 61,
+      "total_shots_a": 11,
+      "total_shots_b": 12,
       "big_chances_a": 1,
-      "big_chances_b": 2,
-      "duels_won_a": 41,
+      "big_chances_b": 5,
+      "duels_won_a": 52,
+      "duels_won_b": 48
+    }
+  },
+  {
+    "match_id": "J1-J-1",
+    "narrative": "Argentina secured a commanding 3-0 win over Algeria in Group J, with Lionel Messi delivering a hat-trick to neutralize Algeria's possession-heavy approach. Despite ceding the ball (48%), Argentina's individual quality proved decisive as Algeria managed just 0.32 xG.",
+    "ai_verdict": "A tactical victory built on ruthless individual quality. Despite conceding the possession battle (48%), Argentina neutralized Algeria completely (0.32 xG) and capitalized on half-chances to secure a comfortable 3-0 win.",
+    "advanced_stats": {
+      "xg_a": 1.26,
+      "xg_b": 0.32,
+      "possession_a": 48,
+      "possession_b": 52,
+      "total_shots_a": 10,
+      "total_shots_b": 7,
+      "big_chances_a": 0,
+      "big_chances_b": 0,
+      "duels_won_a": 39,
+      "duels_won_b": 43
+    }
+  },
+  {
+    "match_id": "J1-J-2",
+    "narrative": "Austria controlled Group J's second fixture from start to finish, defeating Jordan 3-1 through sustained possession (63%) and consistent territorial pressure. Jordan managed a consolation goal but were unable to trouble an organized Austrian defensive structure.",
+    "ai_verdict": "Austria dictated the tempo through sustained possession (63%) and consistent territorial control. Their 1.69 xG accurately reflects their structured approach against a deep-sitting Jordanian block.",
+    "advanced_stats": {
+      "xg_a": 1.69,
+      "xg_b": 0.46,
+      "possession_a": 63,
+      "possession_b": 37,
+      "total_shots_a": 11,
+      "total_shots_b": 11,
+      "big_chances_a": 0,
+      "big_chances_b": 0,
+      "duels_won_a": 43,
+      "duels_won_b": 48
+    }
+  },
+  {
+    "match_id": "J1-K-1",
+    "narrative": "Portugal were held to a frustrating 1-1 draw by DR Congo in Group K despite hoarding 75% possession. DR Congo's resilient low block absorbed relentless pressure and actually edged the xG metric (0.87 vs 0.65), earning a deserved point.",
+    "ai_verdict": "A massive tactical frustration for Portugal. Despite hoarding 75% possession, they failed to break down DR Congo's resilient low block, generating an abysmal 0.65 xG. DR Congo actually edged the chance-quality metric (0.87 xG).",
+    "advanced_stats": {
+      "xg_a": 0.65,
+      "xg_b": 0.87,
+      "possession_a": 75,
+      "possession_b": 25,
+      "total_shots_a": 7,
+      "total_shots_b": 3,
+      "big_chances_a": 0,
+      "big_chances_b": 0,
+      "duels_won_a": 34,
+      "duels_won_b": 34
+    }
+  },
+  {
+    "match_id": "J1-K-2",
+    "narrative": "Colombia beat Uzbekistan 3-1 in Group K, combining possession control (61%) with sharp verticality to create three big chances. Despite a surprisingly close xG battle (1.16 vs 1.01), Colombia's superior finishing proved the difference-maker.",
+    "ai_verdict": "Colombia combined possession control (61%) with sharp verticality, creating 3 big chances. While the xG was surprisingly close (1.16 vs 1.01), Colombia's superior finishing power was the difference-maker.",
+    "advanced_stats": {
+      "xg_a": 1.16,
+      "xg_b": 1.01,
+      "possession_a": 39,
+      "possession_b": 61,
+      "total_shots_a": 8,
+      "total_shots_b": 15,
+      "big_chances_a": 1,
+      "big_chances_b": 3,
+      "duels_won_a": 34,
+      "duels_won_b": 36
+    }
+  },
+  {
+    "match_id": "J1-L-1",
+    "narrative": "England put on an offensive clinic in Group L, defeating Croatia 4-2 in a high-scoring encounter. With an astonishing 3.20 xG, 22 shots, and 5 big chances, England consistently carved through Croatia's defensive structure throughout the match.",
+    "ai_verdict": "An absolute offensive clinic from England. Racking up an astonishing 3.20 xG, 22 shots, and 5 big chances, they consistently carved through Croatia's defensive structure in a highly entertaining shootout.",
+    "advanced_stats": {
+      "xg_a": 3.20,
+      "xg_b": 0.70,
+      "possession_a": 52,
+      "possession_b": 48,
+      "total_shots_a": 22,
+      "total_shots_b": 10,
+      "big_chances_a": 5,
+      "big_chances_b": 1,
+      "duels_won_a": 40,
       "duels_won_b": 42
     }
   },
   {
-    "match_id": "J1-G-1",
-    "narrative": "Belgium and Egypt shared the points in a 1-1 draw in Group G, with both sides trading chances in a tactically balanced encounter across the full 90 minutes.",
-    "ai_verdict": "A tightly contested 1-1 draw. The underlying telemetry reflects a very balanced encounter, with Belgium slightly edging possession (54%) and xG (1.35 vs 1.08), but Egypt holding their own in duel win-rates.",
+    "match_id": "J1-L-2",
+    "narrative": "Ghana earned a 1-0 win over Panama in Group L despite Panama controlling 62% of the ball. Ghana's defensive solidity and sharp counter-attacking transitions generated higher-quality chances (1.31 xG), making sterile possession the story of the match.",
+    "ai_verdict": "A classic example of sterile possession. Panama controlled the ball for 62% of the match, but Ghana's defensive solidity and sharp transitions generated higher quality chances (1.31 xG), earning them a deserved victory.",
     "advanced_stats": {
-      "xg_a": 1.35,
-      "xg_b": 1.08,
-      "possession_a": 54,
-      "possession_b": 46,
-      "total_shots_a": 15,
-      "total_shots_b": 14,
+      "xg_a": 1.31,
+      "xg_b": 0.73,
+      "possession_a": 38,
+      "possession_b": 62,
+      "total_shots_a": 8,
+      "total_shots_b": 11,
       "big_chances_a": 2,
       "big_chances_b": 2,
-      "duels_won_a": 58,
-      "duels_won_b": 59
-    }
-  },
-  {
-    "match_id": "J1-G-2",
-    "narrative": "Iran and New Zealand produced an entertaining 2-2 draw in Group G, with both teams creating and converting high-quality chances in an open, end-to-end contest.",
-    "ai_verdict": "An entertaining 2-2 shootout. The metrics validate the scoreline perfectly, as both sides generated healthy xG figures (1.49 vs 1.24) and maintained a high volume of penalty area entries.",
-    "advanced_stats": {
-      "xg_a": 1.49,
-      "xg_b": 1.24,
-      "possession_a": 48,
-      "possession_b": 52,
-      "total_shots_a": 17,
-      "total_shots_b": 14,
-      "big_chances_a": 3,
-      "big_chances_b": 2,
-      "duels_won_a": 53,
-      "duels_won_b": 46
-    }
-  },
-  {
-    "match_id": "J1-E-2",
-    "narrative": "Ivory Coast secured a narrow 1-0 victory over Ecuador in Group E, edging a possession-heavy Ecuadorian side through superior chance quality and physical dominance in duels.",
-    "ai_verdict": "A narrow but justified 1-0 win for Ivory Coast. While Ecuador edged the possession battle, Ivory Coast was far more dangerous in the final third, accumulating 1.52 xG and winning 58 duels to secure the victory.",
-    "advanced_stats": {
-      "xg_a": 1.52,
-      "xg_b": 1.01,
-      "possession_a": 48,
-      "possession_b": 52,
-      "total_shots_a": 15,
-      "total_shots_b": 12,
-      "big_chances_a": 2,
-      "big_chances_b": 1,
-      "duels_won_a": 58,
-      "duels_won_b": 44
-    }
-  },
-  {
-    "match_id": "J1-F-2",
-    "narrative": "Sweden routed Tunisia 5-1 in Group F in a masterclass of clinical finishing, with the Swedes converting their limited shot volume into goals with extraordinary efficiency while Tunisia managed zero big chances.",
-    "ai_verdict": "A masterclass in clinical finishing from Sweden. Despite slightly lower possession, Sweden wildly overperformed their 1.33 xG to score 5 times, punishing a Tunisian side that managed zero big chances.",
-    "advanced_stats": {
-      "xg_a": 1.33,
-      "xg_b": 0.28,
-      "possession_a": 49,
-      "possession_b": 51,
-      "total_shots_a": 13,
-      "total_shots_b": 6,
-      "big_chances_a": 4,
-      "big_chances_b": 0,
-      "duels_won_a": 41,
-      "duels_won_b": 51
+      "duels_won_a": 56,
+      "duels_won_b": 57
     }
   }
 ]

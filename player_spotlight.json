@@ -1,17 +1,17 @@
 {
   "topScorers": [
-    { "name": "Kai Havertz", "team": "Germany", "stats": 2 },
-    { "name": "Folarin Balogun", "team": "United States", "stats": 2 },
-    { "name": "Nestory Irankunda", "team": "Australia", "stats": 1 }
+    { "name": "Lionel Messi", "team": "Argentina", "stats": 3 },
+    { "name": "Erling Haaland", "team": "Norway", "stats": 2 },
+    { "name": "Kai Havertz", "team": "Germany", "stats": 2 }
   ],
   "topAssists": [
+    { "name": "Declan Rice", "team": "England", "stats": 2 },
     { "name": "Deniz Undav", "team": "Germany", "stats": 2 },
-    { "name": "Joshua Kimmich", "team": "Germany", "stats": 2 },
-    { "name": "Ryan Gravenberch", "team": "Netherlands", "stats": 2 }
+    { "name": "Joshua Kimmich", "team": "Germany", "stats": 2 }
   ],
   "topShooters": [
     { "name": "Son Heung-Min", "team": "South Korea", "stats": 6 },
-    { "name": "Hakan Çalhanoğlu", "team": "Turkey", "stats": 5 },
-    { "name": "Dan Ndoye", "team": "Switzerland", "stats": 5 }
+    { "name": "Lionel Messi", "team": "Argentina", "stats": 5 },
+    { "name": "Hakan Çalhanoğlu", "team": "Turkey", "stats": 5 }
   ]
 }

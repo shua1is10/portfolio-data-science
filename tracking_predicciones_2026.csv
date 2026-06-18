@@ -15,14 +15,14 @@ J1-G-1,Fase de Grupos - Jornada 1,Belgium,Egypt,0.4833,0.3595,0.1571,Belgium,Emp
 J1-G-2,Fase de Grupos - Jornada 1,Iran,New Zealand,0.3722,0.3637,0.2641,Iran,Empate,2.0,2.0,NO
 J1-H-1,Fase de Grupos - Jornada 1,Spain,Cape Verde,0.4572,0.3266,0.2161,Spain,Empate,0.0,0.0,NO
 J1-H-2,Fase de Grupos - Jornada 1,Saudi Arabia,Uruguay,0.092,0.2601,0.6479,Uruguay,Empate,1.0,1.0,NO
-J1-I-1,Fase de Grupos - Jornada 1,France,Senegal,0.5428,0.3325,0.1247,France,Pendiente,,,
-J1-I-2,Fase de Grupos - Jornada 1,Iraq,Norway,0.281,0.3755,0.3435,Empate,Pendiente,,,
-J1-J-1,Fase de Grupos - Jornada 1,Argentina,Algeria,0.4393,0.3389,0.2218,Argentina,Pendiente,,,
-J1-J-2,Fase de Grupos - Jornada 1,Austria,Jordan,0.7778,0.1919,0.0303,Austria,Pendiente,,,
-J1-K-1,Fase de Grupos - Jornada 1,Portugal,DR Congo,0.4199,0.3706,0.2096,Portugal,Pendiente,,,
-J1-K-2,Fase de Grupos - Jornada 1,Uzbekistan,Colombia,0.1072,0.2689,0.6239,Colombia,Pendiente,,,
-J1-L-1,Fase de Grupos - Jornada 1,England,Croatia,0.6715,0.2486,0.08,England,Pendiente,,,
-J1-L-2,Fase de Grupos - Jornada 1,Ghana,Panama,0.1568,0.3098,0.5334,Panama,Pendiente,,,
+J1-I-1,Fase de Grupos - Jornada 1,France,Senegal,0.5428,0.3325,0.1247,France,Victoria A,3.0,1.0,SI
+J1-I-2,Fase de Grupos - Jornada 1,Iraq,Norway,0.281,0.3755,0.3435,Empate,Victoria B,1.0,4.0,NO
+J1-J-1,Fase de Grupos - Jornada 1,Argentina,Algeria,0.4393,0.3389,0.2218,Argentina,Victoria A,3.0,0.0,SI
+J1-J-2,Fase de Grupos - Jornada 1,Austria,Jordan,0.7778,0.1919,0.0303,Austria,Victoria A,3.0,1.0,SI
+J1-K-1,Fase de Grupos - Jornada 1,Portugal,DR Congo,0.4199,0.3706,0.2096,Portugal,Empate,1.0,1.0,NO
+J1-K-2,Fase de Grupos - Jornada 1,Uzbekistan,Colombia,0.1072,0.2689,0.6239,Colombia,Victoria B,1.0,3.0,SI
+J1-L-1,Fase de Grupos - Jornada 1,England,Croatia,0.6715,0.2486,0.08,England,Victoria A,4.0,2.0,SI
+J1-L-2,Fase de Grupos - Jornada 1,Ghana,Panama,0.1568,0.3098,0.5334,Panama,Victoria A,1.0,0.0,NO
 J2-A-1,Fase de Grupos - Jornada 2,Mexico,South Korea,0.4441,0.3498,0.206,Mexico,Pendiente,,,
 J2-A-2,Fase de Grupos - Jornada 2,South Africa,Czechia,0.1664,0.304,0.5296,Czechia,Pendiente,,,
 J2-B-1,Fase de Grupos - Jornada 2,Canada,Qatar,0.5968,0.2871,0.1161,Canada,Pendiente,,,

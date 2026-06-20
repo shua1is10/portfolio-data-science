@@ -1,0 +1,10 @@
+requests
+pandas
+python-dotenv
+requests-cache
+beautifulsoup4
+geopy
+SQLAlchemy
+git+https://github.com/federicorabanos/LanusStats.git
+transfermarkt-wrapper
+cloudscraper

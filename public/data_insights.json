@@ -1,0 +1,352 @@
+{
+  "meta": {
+    "sources": [
+      "country_wise_analysis_addiction.csv",
+      "screen_time_behavior.csv",
+      "tiktok_instagram_global_100countries.csv"
+    ],
+    "total_rows": 60100
+  },
+  "key_metrics": {
+    "avg_daily_screen_hours": 6.22,
+    "avg_focus_span_minutes": 17.9,
+    "pct_high_addiction": 86.8,
+    "corr_engagement_addiction": 0.883,
+    "corr_addiction_sleep": -0.3,
+    "countries_analyzed": 100,
+    "total_observations": 60100
+  },
+  "tiktok_vs_instagram": [
+    {
+      "year": 2015,
+      "tiktok_minutes": 123.9,
+      "instagram_minutes": 100.8
+    },
+    {
+      "year": 2020,
+      "tiktok_minutes": 115.8,
+      "instagram_minutes": 101.1
+    },
+    {
+      "year": 2025,
+      "tiktok_minutes": 120.1,
+      "instagram_minutes": 99.1
+    },
+    {
+      "year": 2030,
+      "tiktok_minutes": 120.9,
+      "instagram_minutes": 98.4
+    },
+    {
+      "year": 2035,
+      "tiktok_minutes": 127.3,
+      "instagram_minutes": 98.6
+    },
+    {
+      "year": 2040,
+      "tiktok_minutes": 112.7,
+      "instagram_minutes": 94.7
+    },
+    {
+      "year": 2045,
+      "tiktok_minutes": 124.2,
+      "instagram_minutes": 99.2
+    },
+    {
+      "year": 2050,
+      "tiktok_minutes": 123.5,
+      "instagram_minutes": 95.6
+    },
+    {
+      "year": 2055,
+      "tiktok_minutes": 124.4,
+      "instagram_minutes": 102.1
+    },
+    {
+      "year": 2060,
+      "tiktok_minutes": 119.8,
+      "instagram_minutes": 98.1
+    }
+  ],
+  "attention_trend": [
+    {
+      "year": 2015,
+      "attention_span": 81.27,
+      "addiction_score": 58.84,
+      "impulsivity": 48.69
+    },
+    {
+      "year": 2020,
+      "attention_span": 81.93,
+      "addiction_score": 58.65,
+      "impulsivity": 51.19
+    },
+    {
+      "year": 2025,
+      "attention_span": 81.73,
+      "addiction_score": 58.87,
+      "impulsivity": 46.61
+    },
+    {
+      "year": 2030,
+      "attention_span": 81.72,
+      "addiction_score": 58.17,
+      "impulsivity": 51.12
+    },
+    {
+      "year": 2035,
+      "attention_span": 81.17,
+      "addiction_score": 59.44,
+      "impulsivity": 48.59
+    },
+    {
+      "year": 2040,
+      "attention_span": 82.72,
+      "addiction_score": 57.15,
+      "impulsivity": 47.96
+    },
+    {
+      "year": 2045,
+      "attention_span": 81.39,
+      "addiction_score": 58.92,
+      "impulsivity": 51.35
+    },
+    {
+      "year": 2050,
+      "attention_span": 81.74,
+      "addiction_score": 58.45,
+      "impulsivity": 48.53
+    },
+    {
+      "year": 2055,
+      "attention_span": 81.12,
+      "addiction_score": 58.96,
+      "impulsivity": 50.15
+    },
+    {
+      "year": 2060,
+      "attention_span": 81.84,
+      "addiction_score": 57.65,
+      "impulsivity": 46.3
+    }
+  ],
+  "top5_platform_exposure": [
+    {
+      "country": "Tanzania",
+      "tiktok": 134.7,
+      "instagram": 106.9,
+      "total": 241.5,
+      "addiction_score": 60.5,
+      "MHRI": 44.6
+    },
+    {
+      "country": "Argentina",
+      "tiktok": 130.6,
+      "instagram": 105.0,
+      "total": 235.6,
+      "addiction_score": 60.4,
+      "MHRI": 46.2
+    },
+    {
+      "country": "Malaysia",
+      "tiktok": 130.2,
+      "instagram": 104.6,
+      "total": 234.8,
+      "addiction_score": 60.1,
+      "MHRI": 42.6
+    },
+    {
+      "country": "Indonesia",
+      "tiktok": 130.5,
+      "instagram": 104.2,
+      "total": 234.7,
+      "addiction_score": 60.5,
+      "MHRI": 46.0
+    },
+    {
+      "country": "South Korea",
+      "tiktok": 124.8,
+      "instagram": 109.3,
+      "total": 234.1,
+      "addiction_score": 59.8,
+      "MHRI": 45.1
+    }
+  ],
+  "top10_addiction_rank": [
+    {
+      "country": "Tanzania",
+      "addiction_score": 60.47,
+      "addiction_rank": 1,
+      "tiktok_minutes_daily": 134.67,
+      "sleep_hours": 7.26,
+      "MHRI": 44.57
+    },
+    {
+      "country": "Indonesia",
+      "addiction_score": 60.47,
+      "addiction_rank": 2,
+      "tiktok_minutes_daily": 130.53,
+      "sleep_hours": 7.12,
+      "MHRI": 46.05
+    },
+    {
+      "country": "Argentina",
+      "addiction_score": 60.43,
+      "addiction_rank": 3,
+      "tiktok_minutes_daily": 130.62,
+      "sleep_hours": 6.85,
+      "MHRI": 46.24
+    },
+    {
+      "country": "Canada",
+      "addiction_score": 60.35,
+      "addiction_rank": 4,
+      "tiktok_minutes_daily": 129.34,
+      "sleep_hours": 6.88,
+      "MHRI": 47.76
+    },
+    {
+      "country": "Spain",
+      "addiction_score": 60.14,
+      "addiction_rank": 5,
+      "tiktok_minutes_daily": 119.87,
+      "sleep_hours": 6.93,
+      "MHRI": 45.24
+    },
+    {
+      "country": "Malaysia",
+      "addiction_score": 60.08,
+      "addiction_rank": 6,
+      "tiktok_minutes_daily": 130.16,
+      "sleep_hours": 6.89,
+      "MHRI": 42.63
+    },
+    {
+      "country": "Panama",
+      "addiction_score": 60.02,
+      "addiction_rank": 7,
+      "tiktok_minutes_daily": 131.66,
+      "sleep_hours": 7.06,
+      "MHRI": 41.83
+    },
+    {
+      "country": "Switzerland",
+      "addiction_score": 59.94,
+      "addiction_rank": 8,
+      "tiktok_minutes_daily": 122.65,
+      "sleep_hours": 7.43,
+      "MHRI": 42.08
+    },
+    {
+      "country": "Syria",
+      "addiction_score": 59.93,
+      "addiction_rank": 9,
+      "tiktok_minutes_daily": 128.65,
+      "sleep_hours": 7.01,
+      "MHRI": 42.24
+    },
+    {
+      "country": "UK",
+      "addiction_score": 59.93,
+      "addiction_rank": 10,
+      "tiktok_minutes_daily": 119.29,
+      "sleep_hours": 6.72,
+      "MHRI": 46.77
+    }
+  ],
+  "focus_by_age": [
+    {
+      "age_group": "Adult",
+      "mean_focus": 18.02,
+      "std_focus": 7.02
+    },
+    {
+      "age_group": "Children",
+      "mean_focus": 17.89,
+      "std_focus": 6.94
+    },
+    {
+      "age_group": "Senior",
+      "mean_focus": 17.99,
+      "std_focus": 6.95
+    },
+    {
+      "age_group": "Teen",
+      "mean_focus": 17.96,
+      "std_focus": 6.97
+    },
+    {
+      "age_group": "Young Adult",
+      "mean_focus": 17.88,
+      "std_focus": 6.96
+    }
+  ],
+  "platform_focus": [
+    {
+      "platform": "Snapchat",
+      "mean_focus": 18.11
+    },
+    {
+      "platform": "Discord",
+      "mean_focus": 18.04
+    },
+    {
+      "platform": "Reddit",
+      "mean_focus": 18.02
+    },
+    {
+      "platform": "TikTok",
+      "mean_focus": 17.98
+    },
+    {
+      "platform": "Facebook",
+      "mean_focus": 17.93
+    },
+    {
+      "platform": "Twitch",
+      "mean_focus": 17.92
+    },
+    {
+      "platform": "LinkedIn",
+      "mean_focus": 17.91
+    },
+    {
+      "platform": "X/Twitter",
+      "mean_focus": 17.89
+    }
+  ],
+  "insights": [
+    {
+      "id": 1,
+      "icon": "TrendingUp",
+      "stat": "r = +0.883",
+      "color": "blue",
+      "title": "Engagement Drives Addiction",
+      "body": "Strong positive correlation between combined TikTok + Instagram daily exposure and the Addiction Score Index across 100 countries."
+    },
+    {
+      "id": 2,
+      "icon": "Brain",
+      "stat": "~18 min",
+      "color": "amber",
+      "title": "Universal Focus Floor",
+      "body": "Mean focus span stabilizes at 18 minutes across all age groups, from children to seniors — a population-wide cognitive plateau."
+    },
+    {
+      "id": 3,
+      "icon": "Moon",
+      "stat": "r = -0.300",
+      "color": "violet",
+      "title": "Sleep as Mental Health Bridge",
+      "body": "Addiction pressure inversely predicts sleep quality, identifying disrupted sleep as the primary physiological mediator of digital addiction harm."
+    },
+    {
+      "id": 4,
+      "icon": "AlertTriangle",
+      "stat": "86.8%",
+      "color": "rose",
+      "title": "High-Risk Majority",
+      "body": "86.8% of 10,000 global observations across 100 countries exhibit a High addiction risk classification."
+    }
+  ]
+}

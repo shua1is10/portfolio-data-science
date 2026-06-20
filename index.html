@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joshua Sánchez — Data Science Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens (extraídos del design-system.json) ─────────────────── */
+    :root {
+      /* Colors — background */
+      --bg-primary:   #FFFFFF;
+      --bg-secondary: #F5F5F7;
+      --bg-tertiary:  #EBEBED;
+
+      /* Colors — text */
+      --text-primary:   #1D1D1F;
+      --text-secondary: #515154;
+      --text-tertiary:  #86868B;
+      --text-inverse:   #FFFFFF;
+
+      /* Colors — accent */
+      --blue-50:  #EBF4FF;
+      --blue-300: #66B2FF;
+      --blue-500: #007AFF;
+      --blue-600: #0071E3;
+      --blue-700: #0055B3;
+
+      /* Colors — liquid glass */
+      --glass-white-10: rgba(255,255,255,0.10);
+      --glass-white-20: rgba(255,255,255,0.20);
+      --glass-white-40: rgba(255,255,255,0.40);
+      --glass-white-60: rgba(255,255,255,0.60);
+      --glass-white-80: rgba(255,255,255,0.80);
+      --glass-blue-08:  rgba(0,122,255,0.08);
+      --glass-blue-12:  rgba(0,122,255,0.12);
+      --glass-blue-20:  rgba(0,122,255,0.20);
+      --glass-neutral-06: rgba(29,29,31,0.06);
+      --glass-neutral-12: rgba(29,29,31,0.12);
+
+      /* Typography */
+      --font-sans: -apple-system,'Inter','Helvetica Neue',sans-serif;
+      --font-mono: 'SF Mono','JetBrains Mono','Fira Code',monospace;
+
+      /* Border radius — squircle */
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   16px;
+      --radius-xl:   20px;
+      --radius-2xl:  24px;
+      --radius-3xl:  32px;
+      --radius-pill: 9999px;
+      --sq-sm:  14px;
+      --sq-md:  20px;
+      --sq-lg:  28px;
+      --sq-xl:  36px;
+      --sq-2xl: 48px;
+
+      /* Shadows */
+      --shadow-sm:  0 2px 8px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md:  0 4px 16px rgba(0,0,0,0.08),0 2px 6px rgba(0,0,0,0.04);
+      --shadow-lg:  0 8px 32px rgba(0,0,0,0.10),0 4px 12px rgba(0,0,0,0.06);
+      --shadow-xl:  0 16px 48px rgba(0,0,0,0.12),0 8px 20px rgba(0,0,0,0.06);
+      --shadow-glow-sm: 0 0 20px rgba(0,122,255,0.15),0 4px 16px rgba(0,0,0,0.08);
+      --shadow-glow-md: 0 0 40px rgba(0,122,255,0.20),0 8px 32px rgba(0,0,0,0.10);
+      --shadow-glass: 0 8px 32px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04),inset 0 1px 0 rgba(255,255,255,0.6);
+
+      /* Animation */
+      --dur-fast:   150ms;
+      --dur-normal: 250ms;
+      --dur-slow:   400ms;
+      --ease:       cubic-bezier(0.25,0.46,0.45,0.94);
+      --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    /* ─── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ─── Scrollbar ────────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--glass-neutral-12); border-radius: var(--radius-pill); }
+
+    /* ─── Selection ────────────────────────────────────────────────────────── */
+    ::selection { background: var(--glass-blue-20); color: var(--blue-700); }
+
+    /* ─── Typography helpers ───────────────────────────────────────────────── */
+    .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue-600);
+    }
+
+    /* ─── Layout ───────────────────────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { position: relative; }
+
+    /* ─── Nav ──────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(29,29,31,0.08);
+      transition: background var(--dur-normal) var(--ease);
+    }
+
+    .nav-logo {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue-600); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ─── Liquid Glass — core mixin ────────────────────────────────────────── */
+    .glass {
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.60);
+      box-shadow: var(--shadow-glass);
+    }
+
+    .glass-blue {
+      background: rgba(0,122,255,0.08);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(0,122,255,0.20);
+      box-shadow: 0 4px 16px rgba(0,122,255,0.10),inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    /* ─── Buttons ──────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      transition:
+        transform     var(--dur-fast)   var(--ease-spring),
+        box-shadow    var(--dur-normal) var(--ease),
+        background    var(--dur-normal) var(--ease),
+        border-color  var(--dur-normal) var(--ease);
+      position: relative;
+      overflow: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.30) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .btn:active { transform: scale(0.97) !important; }
+
+    /* Primary — solid blue */
+    .btn-primary {
+      background: var(--blue-600);
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(0,113,227,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--blue-500);
+      box-shadow: var(--shadow-glow-sm);
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    /* Secondary — liquid glass */
+    .btn-glass {
+      background: rgba(255,255,255,0.55);
+      color: var(--text-primary);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: var(--shadow-glass);
+    }
+    .btn-glass:hover {
+      background: rgba(255,255,255,0.75);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    /* Ghost blue */
+    .btn-ghost {
+      background: var(--glass-blue-08);
+      color: var(--blue-600);
+      border: 1px solid rgba(0,122,255,0.20);
+      box-shadow: none;
+    }
+    .btn-ghost:hover {
+      background: var(--glass-blue-12);
+      box-shadow: var(--shadow-glow-sm);
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    /* ─── Hero ─────────────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ambient gradient blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      will-change: transform;
+      animation: float 12s ease-in-out infinite;
+    }
+    .hero-blob-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,122,255,0.12) 0%, transparent 70%);
+      top: -100px; left: -100px;
+      animation-delay: 0s;
+    }
+    .hero-blob-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(100,160,255,0.10) 0%, transparent 70%);
+      bottom: -80px; right: -80px;
+      animation-delay: -6s;
+    }
+    .hero-blob-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,122,255,0.08) 0%, transparent 70%);
+      top: 40%; left: 55%;
+      animation-delay: -3s;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(15px, -20px) scale(1.03); }
+      66%      { transform: translate(-10px, 10px) scale(0.98); }
+    }
+
+    /* Hero eyebrow */
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--glass-blue-08);
+      border: 1px solid rgba(0,122,255,0.18);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--blue-600);
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s var(--ease) both;
+    }
+
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      background: var(--blue-500);
+      border-radius: 50%;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:0.5; transform:scale(0.7); }
+    }
+
+    /* Hero headline */
+    .hero-title {
+      font-size: clamp(2.75rem, 7vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.04;
+      color: var(--text-primary);
+      max-width: 820px;
+      animation: fadeUp 0.6s var(--ease) 0.1s both;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--blue-500) 0%, #4CA4FF 50%, var(--blue-300) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Hero role badge */
+    .hero-role {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.0625rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: -0.01em;
+      margin-top: 16px;
+      animation: fadeUp 0.6s var(--ease) 0.18s both;
+    }
+    .hero-role .separator { color: var(--text-tertiary); }
+
+    /* Hero description */
+    .hero-description {
+      font-size: clamp(1rem, 2.2vw, 1.1875rem);
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-top: 28px;
+      animation: fadeUp 0.6s var(--ease) 0.26s both;
+    }
+
+    /* Hero CTA group */
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 44px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.6s var(--ease) 0.34s both;
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-tertiary);
+      font-size: 0.6875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeIn 1s var(--ease) 1s both;
+    }
+    .scroll-hint .chevron {
+      width: 20px; height: 20px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg);
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%,100% { transform: rotate(45deg) translate(0,0); opacity:1; }
+      50%      { transform: rotate(45deg) translate(3px,3px); opacity:0.4; }
+    }
+
+    /* ─── Animations (entry) ───────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; }
+      to   { opacity:1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Skills Section ───────────────────────────────────────────────────── */
+    #skills {
+      background: var(--bg-secondary);
+      padding: 100px 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-top: 12px;
+    }
+
+    .section-subtitle {
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+      margin-top: 14px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* Skill card */
+    .skill-card {
+      background: rgba(255,255,255,0.60);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.70);
+      box-shadow: var(--shadow-glass);
+      border-radius: var(--sq-xl);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition:
+        transform      var(--dur-normal) var(--ease-spring),
+        box-shadow     var(--dur-normal) var(--ease),
+        background     var(--dur-normal) var(--ease),
+        border-color   var(--dur-normal) var(--ease);
+    }
+
+    /* Inner shine line */
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 50%, transparent);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px) scale(1.015);
+      box-shadow: var(--shadow-xl), 0 0 0 1px rgba(0,122,255,0.12);
+      background: rgba(255,255,255,0.78);
+      border-color: rgba(0,122,255,0.18);
+    }
+
+    .skill-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--sq-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.375rem;
+      background: var(--glass-blue-08);
+      border: 1px solid rgba(0,122,255,0.15);
+      flex-shrink: 0;
+    }
+
+    .skill-name {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+
+    .skill-desc {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      background: var(--glass-blue-08);
+      color: var(--blue-600);
+      border: 1px solid rgba(0,122,255,0.15);
+      width: fit-content;
+    }
+
+    /* ─── Components Showcase ──────────────────────────────────────────────── */
+    #components {
+      padding: 100px 24px;
+      background: var(--bg-primary);
+    }
+
+    .components-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .components-grid { grid-template-columns: 1fr; }
+    }
+
+    .component-panel {
+      border-radius: var(--sq-2xl);
+      padding: 40px 36px;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .component-panel.panel-glass {
+      background: rgba(255,255,255,0.50);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: var(--shadow-glass);
+    }
+
+    .component-panel.panel-dark {
+      background: linear-gradient(140deg, #0A0A0F 0%, #0F1520 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .component-panel.panel-blue {
+      background: linear-gradient(140deg, var(--blue-600) 0%, #0055B3 100%);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: var(--shadow-glow-md);
+    }
+
+    .component-panel.panel-subtle {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-tertiary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .panel-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-body {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      opacity: 0.7;
+    }
+
+    /* Button group inside panel */
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Dark panel text overrides */
+    .panel-dark .panel-title,
+    .panel-dark .panel-body,
+    .panel-dark .panel-label { color: #fff; }
+
+    .panel-blue .panel-title,
+    .panel-blue .panel-body,
+    .panel-blue .panel-label { color: #fff; }
+
+    /* Dark glass button variant */
+    .btn-glass-dark {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.20);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.20);
+    }
+    .btn-glass-dark:hover {
+      background: rgba(255,255,255,0.20);
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+
+    /* ─── Color Palette showcase ───────────────────────────────────────────── */
+    #palette {
+      padding: 80px 24px;
+      background: var(--bg-secondary);
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .swatch {
+      flex: 1;
+      min-width: 80px;
+      height: 80px;
+      border-radius: var(--sq-md);
+      position: relative;
+      transition: transform var(--dur-normal) var(--ease-spring);
+      cursor: default;
+    }
+    .swatch:hover { transform: translateY(-4px) scale(1.04); }
+    .swatch-label {
+      position: absolute;
+      bottom: 8px; left: 10px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.85);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      text-transform: uppercase;
+    }
+    .swatch-label.dark { color: rgba(29,29,31,0.55); text-shadow: none; }
+
+    /* ─── Typography showcase ──────────────────────────────────────────────── */
+    #typography {
+      padding: 80px 24px;
+      background: var(--bg-primary);
+    }
+
+    .type-sample {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--glass-neutral-06);
+    }
+    .type-meta {
+      width: 100px;
+      flex-shrink: 0;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    /* ─── Footer ───────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid rgba(29,29,31,0.08);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .footer-name {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .footer-sub {
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .footer-links a:hover { color: var(--blue-600); }
+
+    /* ─── Responsive ───────────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .skill-card { padding: 20px 16px; border-radius: var(--sq-lg); }
+      .components-grid { grid-template-columns: 1fr; }
+      .component-panel { padding: 28px 24px; }
+    }
+
+    @media (max-width: 400px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────────────────────────────── -->
+  <nav>
+    <a href="#" class="nav-logo">Joshua<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#components">UI Kit</a></li>
+      <li><a href="#palette">Paleta</a></li>
+    </ul>
+    <a href="#hero" class="btn btn-ghost" style="padding:8px 18px;font-size:0.8125rem;">Contactar</a>
+  </nav>
+
+  <!-- ─── Hero ──────────────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      Available for opportunities
+    </div>
+
+    <h1 class="hero-title">
+      Joshua Ismael<br/>
+      <span class="highlight">Sánchez Reyes</span>
+    </h1>
+
+    <p class="hero-role">
+      Data Science Engineer
+      <span class="separator">·</span>
+      AI Systems
+      <span class="separator">·</span>
+      México
+    </p>
+
+    <p class="hero-description">
+      Diseño e implemento soluciones end-to-end que convierten datos complejos en decisiones accionables.
+      Especializado en AI Agents, Time Series forecasting y la optimización de pipelines de datos
+      que impulsan productos reales.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#skills" class="btn btn-primary">
+        Ver Proyectos
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#components" class="btn btn-glass">Contactar</a>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="chevron"></div>
+    </div>
+  </section>
+
+  <!-- ─── Skills / Stack ──────────────────────────────────────────────────── -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="label">Stack técnico</span>
+      <h2 class="section-title">Skills & Herramientas</h2>
+      <p class="section-subtitle">Tecnologías y disciplinas con las que construyo soluciones de impacto real.</p>
+    </div>
+
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🐍</div>
+        <div>
+          <div class="skill-name">Python</div>
+          <div class="skill-desc">Ecosistema completo: NumPy, Pandas, Scikit-learn, PyTorch.</div>
+        </div>
+        <span class="skill-tag">Core</span>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <div>
+          <div class="skill-name">AI Agents</div>
+          <div class="skill-desc">Diseño de sistemas agenticos con LangChain, LangGraph y APIs de OpenAI / Anthropic.</div>
+        </div>
+        <span class="skill-tag">Especialidad</span>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">📈</div>
+        <div>
+          <div class="skill-name">Time Series</div>
+          <div class="skill-desc">Forecasting con Prophet, ARIMA, NeuralForecast y modelos ensemble.</div>
+        </div>
+        <span class="skill-tag">Especialidad</span>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚗️</div>
+        <div>
+          <div class="skill-name">Data Science</div>
+          <div class="skill-desc">EDA, feature engineering, modelado estadístico y comunicación de insights.</div>
+        </div>
+        <span class="skill-tag">Core</span>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🧠</div>
+        <div>
+          <div class="skill-name">Machine Learning</div>
+          <div class="skill-desc">Clasificación, regresión, clustering y optimización de hiperparámetros.</div>
+        </div>
+        <span class="skill-tag">Core</span>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <div>
+          <div class="skill-name">Data Engineering</div>
+          <div class="skill-desc">Pipelines con Airflow, dbt, Spark y arquitecturas Lakehouse.</div>
+        </div>
+        <span class="skill-tag">Infraestructura</span>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <div>
+          <div class="skill-name">Cloud & MLOps</div>
+          <div class="skill-desc">GCP, AWS, Docker, MLflow y despliegue de modelos en producción.</div>
+        </div>
+        <span class="skill-tag">Infraestructura</span>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <div>
+          <div class="skill-name">Visualization</div>
+          <div class="skill-desc">Dashboards con Plotly, Tableau y storytelling orientado a negocio.</div>
+        </div>
+        <span class="skill-tag">Comunicación</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── UI Components Showcase ──────────────────────────────────────────── -->
+  <section id="components">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Design System</span>
+        <h2 class="section-title">Componentes Liquid Glass</h2>
+        <p class="section-subtitle">Interactúa con los botones y tarjetas para experimentar las microinteracciones.</p>
+      </div>
+
+      <div class="components-grid">
+
+        <!-- Panel 1: Light glass + buttons -->
+        <div class="component-panel panel-glass reveal">
+          <div class="panel-label" style="color:var(--text-tertiary);">Light Glass</div>
+          <div class="panel-content">
+            <div class="panel-title" style="color:var(--text-primary);">Liquid Glass UI</div>
+            <div class="panel-body" style="color:var(--text-secondary);">
+              Glassmorphism con backdrop-filter, bordes translúcidos y brillo de superficie.
+              Hover para sentir la profundidad.
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-primary">Ver Proyectos</button>
+              <button class="btn btn-ghost">GitHub</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: Dark glass -->
+        <div class="component-panel panel-dark reveal">
+          <div class="panel-label">Dark Mode</div>
+          <div class="panel-content">
+            <div class="panel-title">Modo Oscuro</div>
+            <div class="panel-body">
+              El sistema soporta fondo oscuro con cristal translúcido y acentos azules sobre negro profundo.
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-primary">Contactar</button>
+              <button class="btn btn-glass-dark">LinkedIn</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Accent blue -->
+        <div class="component-panel panel-blue reveal">
+          <div class="panel-label">Accent Blue</div>
+          <div class="panel-content">
+            <div class="panel-title">Call to Action</div>
+            <div class="panel-body">
+              Variante de alta conversión. Gradiente azul tecnológico con glow shadow para CTAs primarios.
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-glass-dark">Descargar CV</button>
+              <button class="btn btn-glass-dark">Ver Demo</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4: Subtle -->
+        <div class="component-panel panel-subtle reveal">
+          <div class="panel-label" style="color:var(--text-tertiary);">Subtle</div>
+          <div class="panel-content">
+            <div class="panel-title" style="color:var(--text-primary);">UI Secundaria</div>
+            <div class="panel-body" style="color:var(--text-secondary);">
+              Paneles de bajo contraste para contenido secundario. Esquinas squircle que imitan el estilo Apple.
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-glass">Explorar</button>
+              <button class="btn btn-ghost">Blog</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Color Palette ───────────────────────────────────────────────────── -->
+  <section id="palette">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Tokens visuales</span>
+        <h2 class="section-title">Paleta de Color</h2>
+      </div>
+
+      <div class="palette-row reveal">
+        <div class="swatch" style="background:#007AFF"><span class="swatch-label">Blue 500</span></div>
+        <div class="swatch" style="background:#0071E3"><span class="swatch-label">Blue 600</span></div>
+        <div class="swatch" style="background:#0055B3"><span class="swatch-label">Blue 700</span></div>
+        <div class="swatch" style="background:#001E57"><span class="swatch-label">Blue 900</span></div>
+        <div class="swatch" style="background:#66B2FF"><span class="swatch-label">Blue 300</span></div>
+        <div class="swatch" style="background:#CCE5FF"><span class="swatch-label dark">Blue 100</span></div>
+        <div class="swatch" style="background:#EBF4FF"><span class="swatch-label dark">Blue 50</span></div>
+      </div>
+
+      <div class="palette-row reveal" style="margin-top:12px;">
+        <div class="swatch" style="background:#1D1D1F"><span class="swatch-label">Text 1</span></div>
+        <div class="swatch" style="background:#515154"><span class="swatch-label">Text 2</span></div>
+        <div class="swatch" style="background:#86868B"><span class="swatch-label">Text 3</span></div>
+        <div class="swatch" style="background:#EBEBED"><span class="swatch-label dark">Bg Ter.</span></div>
+        <div class="swatch" style="background:#F5F5F7"><span class="swatch-label dark">Bg Sec.</span></div>
+        <div class="swatch" style="background:#FFFFFF; border:1px solid #EBEBED"><span class="swatch-label dark">Bg Pri.</span></div>
+        <div class="swatch" style="background:rgba(0,122,255,0.12); backdrop-filter:blur(12px); border:1px solid rgba(0,122,255,0.20)"><span class="swatch-label dark">Glass</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Typography ──────────────────────────────────────────────────────── -->
+  <section id="typography">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Tokens tipográficos</span>
+        <h2 class="section-title">Escala Tipográfica</h2>
+      </div>
+
+      <div class="reveal">
+        <div class="type-sample">
+          <div class="type-meta">8xl / 700</div>
+          <div style="font-size:clamp(2.5rem,7vw,6rem);font-weight:700;letter-spacing:-0.05em;line-height:1;color:var(--text-primary)">Display</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-meta">5xl / 700</div>
+          <div style="font-size:clamp(2rem,5vw,3rem);font-weight:700;letter-spacing:-0.04em;line-height:1;color:var(--text-primary)">Heading 1</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-meta">3xl / 600</div>
+          <div style="font-size:1.875rem;font-weight:600;letter-spacing:-0.03em;color:var(--text-primary)">Heading 2</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-meta">xl / 500</div>
+          <div style="font-size:1.25rem;font-weight:500;letter-spacing:-0.01em;color:var(--text-primary)">Subheading</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-meta">base / 400</div>
+          <div style="font-size:1rem;font-weight:400;color:var(--text-secondary);line-height:1.65">Cuerpo de texto. Legible, espaciado generoso. Gris oscuro sobre fondo blanco.</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-meta">sm / 400</div>
+          <div style="font-size:0.875rem;font-weight:400;color:var(--text-tertiary)">Texto de apoyo y labels secundarios.</div>
+        </div>
+        <div class="type-sample" style="border-bottom:none">
+          <div class="type-meta">xs / mono</div>
+          <div style="font-size:0.8125rem;font-family:var(--font-mono);color:var(--blue-600);background:var(--glass-blue-08);padding:4px 10px;border-radius:6px">data_pipeline.run(optimize=True)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-name">Joshua Ismael Sánchez Reyes</div>
+    <div class="footer-sub">Data Science Engineer · AI · México</div>
+    <ul class="footer-links">
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">Email</a></li>
+      <li><a href="#">Kaggle</a></li>
+    </ul>
+    <p style="font-size:0.6875rem;color:var(--text-tertiary);margin-top:24px;letter-spacing:0.02em;">
+      © 2026 Joshua Sánchez · Design System v1.0
+    </p>
+  </footer>
+
+  <!-- ─── JS: Intersection Observer for reveal animations ─────────────────── -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Scroll reveal
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              // Stagger children inside grids
+              const delay = entry.target.closest('.skills-grid')
+                ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 60
+                : 0;
+              setTimeout(() => entry.target.classList.add('visible'), delay);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      revealEls.forEach(el => observer.observe(el));
+
+      // Tilt effect on skill cards (mouse tracking)
+      const cards = document.querySelectorAll('.skill-card');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) / (rect.width / 2);
+          const dy = (e.clientY - cy) / (rect.height / 2);
+          card.style.transform = `
+            translateY(-4px) scale(1.015)
+            rotateX(${-dy * 4}deg)
+            rotateY(${dx * 4}deg)
+          `;
+          card.style.transition = 'transform 60ms linear, box-shadow 250ms ease, background 250ms ease, border-color 250ms ease';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          card.style.transition = '';
+        });
+      });
+
+      // Nav background on scroll
+      const nav = document.querySelector('nav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+          nav.style.background = 'rgba(255,255,255,0.88)';
+        } else {
+          nav.style.background = 'rgba(255,255,255,0.72)';
+        }
+      }, { passive: true });
+
+      // Button ripple
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          const rect = this.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          const size = Math.max(rect.width, rect.height) * 2;
+          ripple.style.cssText = `
+            position:absolute;
+            border-radius:50%;
+            width:${size}px;height:${size}px;
+            left:${e.clientX - rect.left - size/2}px;
+            top:${e.clientY - rect.top - size/2}px;
+            background:rgba(255,255,255,0.28);
+            transform:scale(0);
+            animation:ripple 500ms ease-out forwards;
+            pointer-events:none;
+          `;
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 520);
+        });
+      });
+
+      // Ripple keyframe (injected once)
+      const style = document.createElement('style');
+      style.textContent = '@keyframes ripple{to{transform:scale(1);opacity:0;}}';
+      document.head.appendChild(style);
+    })();
+  </script>
+
+</body>
+</html>

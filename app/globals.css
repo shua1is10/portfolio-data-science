@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ───────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Backgrounds */
+    --background:            0 0% 100%;
+    --foreground:            0 0% 11%;
+    --card:                  0 0% 100%;
+    --card-foreground:       0 0% 11%;
+    --popover:               0 0% 100%;
+    --popover-foreground:    0 0% 11%;
+
+    /* Semantic */
+    --primary:               211 100% 50%;   /* #007AFF */
+    --primary-foreground:    0 0% 100%;
+    --secondary:             0 0% 96%;
+    --secondary-foreground:  0 0% 11%;
+    --muted:                 0 0% 96%;
+    --muted-foreground:      0 0% 47%;
+    --accent:                0 0% 96%;
+    --accent-foreground:     0 0% 11%;
+    --destructive:           0 84% 60%;
+    --destructive-foreground:0 0% 98%;
+
+    /* Structure */
+    --border:                0 0% 91%;
+    --input:                 0 0% 91%;
+    --ring:                  211 100% 50%;
+    --radius:                0.625rem;
+
+    /* Glass */
+    --glass-bg:              rgba(255,255,255,0.65);
+    --glass-border:          rgba(255,255,255,0.55);
+    --glass-shine:           rgba(255,255,255,0.7);
+    --glass-shadow:          0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.65);
+  }
+
+  .dark {
+    --background:            0 0% 4%;        /* #0A0A0A */
+    --foreground:            0 0% 98%;
+    --card:                  0 0% 7%;
+    --card-foreground:       0 0% 98%;
+    --popover:               0 0% 7%;
+    --popover-foreground:    0 0% 98%;
+
+    --primary:               211 100% 50%;
+    --primary-foreground:    0 0% 100%;
+    --secondary:             0 0% 12%;
+    --secondary-foreground:  0 0% 98%;
+    --muted:                 0 0% 12%;
+    --muted-foreground:      0 0% 58%;
+    --accent:                0 0% 12%;
+    --accent-foreground:     0 0% 98%;
+    --destructive:           0 63% 31%;
+    --destructive-foreground:0 0% 98%;
+
+    --border:                0 0% 14%;
+    --input:                 0 0% 14%;
+    --ring:                  211 100% 50%;
+
+    --glass-bg:              rgba(255,255,255,0.055);
+    --glass-border:          rgba(255,255,255,0.09);
+    --glass-shine:           rgba(255,255,255,0.06);
+    --glass-shadow:          0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+}
+
+/* ── Base Styles ─────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    background: rgba(0, 122, 255, 0.18);
+    color: hsl(211 100% 35%);
+  }
+
+  .dark ::selection {
+    background: rgba(0, 122, 255, 0.25);
+    color: hsl(211 100% 75%);
+  }
+
+  ::-webkit-scrollbar        { width: 5px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  { background: hsl(var(--border)); border-radius: 9999px; }
+}
+
+/* ── Liquid Glass Utilities ──────────────────────────────────────────────── */
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-subtle {
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.40);
+  }
+  .dark .glass-subtle {
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .glass-blue {
+    background: rgba(0,122,255,0.07);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(0,122,255,0.18);
+    box-shadow: 0 4px 16px rgba(0,122,255,0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+  }
+  .dark .glass-blue {
+    background: rgba(0,122,255,0.10);
+    border: 1px solid rgba(0,122,255,0.22);
+    box-shadow: 0 4px 16px rgba(0,122,255,0.15);
+  }
+
+  /* Orbital center circle */
+  .glass-orbital-center {
+    background: var(--glass-bg);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), 0 0 0 8px rgba(0,122,255,0.04);
+  }
+
+  /* Gradient text */
+  .text-gradient-blue {
+    background: linear-gradient(135deg, hsl(211 100% 50%) 0%, hsl(211 100% 65%) 50%, hsl(200 100% 60%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effect */
+  .glow-blue {
+    box-shadow: 0 0 28px rgba(0,122,255,0.45), 0 4px 16px rgba(0,0,0,0.12);
+  }
+}
+
+/* ── Orbital Timeline custom CSS ─────────────────────────────────────────── */
+.orbital-ring-dashed {
+  stroke-dasharray: 5 10;
+  stroke-dashoffset: 0;
+  animation: orbital-dash 40s linear infinite;
+}
+@keyframes orbital-dash {
+  to { stroke-dashoffset: -200; }
+}
+
+/* ── Animation delays ────────────────────────────────────────────────────── */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }

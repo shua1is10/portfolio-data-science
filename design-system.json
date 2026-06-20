@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "name": "Joshua Sánchez DS — Design System",
+    "version": "1.0.0",
+    "description": "Design tokens for a premium, tech-forward personal brand. Style: Apple-inspired minimalism with Liquid Glass UI.",
+    "author": "Joshua Ismael Sánchez Reyes"
+  },
+
+  "colors": {
+    "background": {
+      "primary":   "#FFFFFF",
+      "secondary": "#F5F5F7",
+      "tertiary":  "#EBEBED",
+      "dark":      "#0A0A0F"
+    },
+    "text": {
+      "primary":   "#1D1D1F",
+      "secondary": "#515154",
+      "tertiary":  "#86868B",
+      "inverse":   "#FFFFFF",
+      "link":      "#0071E3"
+    },
+    "accent": {
+      "blue_50":  "#EBF4FF",
+      "blue_100": "#CCE5FF",
+      "blue_300": "#66B2FF",
+      "blue_500": "#007AFF",
+      "blue_600": "#0071E3",
+      "blue_700": "#0055B3",
+      "blue_900": "#001E57"
+    },
+    "status": {
+      "success": "#30D158",
+      "warning": "#FF9F0A",
+      "error":   "#FF3B30",
+      "info":    "#007AFF"
+    },
+    "liquid_glass": {
+      "white_10":  "rgba(255, 255, 255, 0.10)",
+      "white_20":  "rgba(255, 255, 255, 0.20)",
+      "white_40":  "rgba(255, 255, 255, 0.40)",
+      "white_60":  "rgba(255, 255, 255, 0.60)",
+      "white_80":  "rgba(255, 255, 255, 0.80)",
+      "blue_08":   "rgba(  0, 122, 255, 0.08)",
+      "blue_12":   "rgba(  0, 122, 255, 0.12)",
+      "blue_20":   "rgba(  0, 122, 255, 0.20)",
+      "neutral_06":"rgba( 29,  29,  31, 0.06)",
+      "neutral_12":"rgba( 29,  29,  31, 0.12)"
+    }
+  },
+
+  "typography": {
+    "font_families": {
+      "display": "-apple-system, 'SF Pro Display', 'Inter Display', 'Helvetica Neue', sans-serif",
+      "body":    "-apple-system, 'SF Pro Text',    'Inter',          'Helvetica Neue', sans-serif",
+      "mono":    "'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace"
+    },
+    "scale": {
+      "xs":   { "size": "0.75rem",  "line_height": "1rem",    "tracking": "0.02em"  },
+      "sm":   { "size": "0.875rem", "line_height": "1.25rem", "tracking": "0.01em"  },
+      "base": { "size": "1rem",     "line_height": "1.5rem",  "tracking": "0"       },
+      "lg":   { "size": "1.125rem", "line_height": "1.75rem", "tracking": "-0.01em" },
+      "xl":   { "size": "1.25rem",  "line_height": "1.75rem", "tracking": "-0.01em" },
+      "2xl":  { "size": "1.5rem",   "line_height": "2rem",    "tracking": "-0.02em" },
+      "3xl":  { "size": "1.875rem", "line_height": "2.25rem", "tracking": "-0.02em" },
+      "4xl":  { "size": "2.25rem",  "line_height": "2.5rem",  "tracking": "-0.03em" },
+      "5xl":  { "size": "3rem",     "line_height": "1",       "tracking": "-0.04em" },
+      "6xl":  { "size": "3.75rem",  "line_height": "1",       "tracking": "-0.04em" },
+      "7xl":  { "size": "4.5rem",   "line_height": "1",       "tracking": "-0.05em" },
+      "8xl":  { "size": "6rem",     "line_height": "1",       "tracking": "-0.05em" }
+    },
+    "weights": {
+      "regular":   400,
+      "medium":    500,
+      "semibold":  600,
+      "bold":      700,
+      "extrabold": 800
+    }
+  },
+
+  "spacing": {
+    "0":   "0px",
+    "1":   "4px",
+    "2":   "8px",
+    "3":   "12px",
+    "4":   "16px",
+    "5":   "20px",
+    "6":   "24px",
+    "8":   "32px",
+    "10":  "40px",
+    "12":  "48px",
+    "16":  "64px",
+    "20":  "80px",
+    "24":  "96px",
+    "32":  "128px",
+    "40":  "160px",
+    "section_y": "120px",
+    "content_max_width": "1120px"
+  },
+
+  "border_radius": {
+    "none":    "0px",
+    "sm":      "6px",
+    "md":      "12px",
+    "lg":      "16px",
+    "xl":      "20px",
+    "2xl":     "24px",
+    "3xl":     "32px",
+    "4xl":     "40px",
+    "pill":    "9999px",
+    "squircle_sm":  "14px",
+    "squircle_md":  "20px",
+    "squircle_lg":  "28px",
+    "squircle_xl":  "36px",
+    "squircle_2xl": "48px"
+  },
+
+  "borders": {
+    "liquid_glass_light": "1px solid rgba(255, 255, 255, 0.55)",
+    "liquid_glass_blue":  "1px solid rgba(  0, 122, 255, 0.25)",
+    "subtle":             "1px solid rgba( 29,  29,  31, 0.08)",
+    "medium":             "1px solid rgba( 29,  29,  31, 0.16)"
+  },
+
+  "shadows": {
+    "xs":     "0 1px 2px rgba(0,0,0,0.04)",
+    "sm":     "0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
+    "md":     "0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04)",
+    "lg":     "0 8px 32px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06)",
+    "xl":     "0 16px 48px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.06)",
+    "2xl":    "0 24px 64px rgba(0,0,0,0.14), 0 12px 24px rgba(0,0,0,0.06)",
+    "glow_blue_sm": "0 0 20px rgba(0,122,255,0.15), 0 4px 16px rgba(0,0,0,0.08)",
+    "glow_blue_md": "0 0 40px rgba(0,122,255,0.20), 0 8px 32px rgba(0,0,0,0.10)",
+    "liquid_glass": "0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6)"
+  },
+
+  "blur": {
+    "sm":  "8px",
+    "md":  "16px",
+    "lg":  "24px",
+    "xl":  "40px",
+    "2xl": "60px"
+  },
+
+  "animation": {
+    "duration": {
+      "instant":  "80ms",
+      "fast":     "150ms",
+      "normal":   "250ms",
+      "slow":     "400ms",
+      "glacial":  "700ms"
+    },
+    "easing": {
+      "standard": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "decelerate":"cubic-bezier(0, 0, 0.2, 1)",
+      "accelerate":"cubic-bezier(0.4, 0, 1, 1)",
+      "spring":   "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      "apple":    "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+    }
+  },
+
+  "breakpoints": {
+    "sm":  "640px",
+    "md":  "768px",
+    "lg":  "1024px",
+    "xl":  "1280px",
+    "2xl": "1536px"
+  },
+
+  "z_index": {
+    "base":    0,
+    "raised":  10,
+    "overlay": 100,
+    "modal":   200,
+    "toast":   300,
+    "cursor":  400
+  }
+}

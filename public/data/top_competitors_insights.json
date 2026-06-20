@@ -1,0 +1,47 @@
+[
+  {
+    "modelo": "Redmi Note 13 Pro",
+    "precio_promedio": 7525.21,
+    "precio_minimo": 1262.0,
+    "volatilidad": 1780.4,
+    "tienda_mas_barata": "Aurrera",
+    "descuento_promedio_pct": 29.8,
+    "total_registros": 5433
+  },
+  {
+    "modelo": "Galaxy A55",
+    "precio_promedio": 8702.75,
+    "precio_minimo": 4499.0,
+    "volatilidad": 1270.41,
+    "tienda_mas_barata": "Aurrera",
+    "descuento_promedio_pct": 27.4,
+    "total_registros": 4550
+  },
+  {
+    "modelo": "Galaxy A35",
+    "precio_promedio": 6581.5,
+    "precio_minimo": 3499.0,
+    "volatilidad": 1267.27,
+    "tienda_mas_barata": "Aurrera",
+    "descuento_promedio_pct": 30.0,
+    "total_registros": 4127
+  },
+  {
+    "modelo": "Galaxy A25",
+    "precio_promedio": 5773.87,
+    "precio_minimo": 3200.0,
+    "volatilidad": 1278.09,
+    "tienda_mas_barata": "Aurrera",
+    "descuento_promedio_pct": 40.7,
+    "total_registros": 2363
+  },
+  {
+    "modelo": "Redmi Note 11 Pro",
+    "precio_promedio": 6012.62,
+    "precio_minimo": 1009.0,
+    "volatilidad": 1972.17,
+    "tienda_mas_barata": "Mercado Libre",
+    "descuento_promedio_pct": 49.9,
+    "total_registros": 1480
+  }
+]

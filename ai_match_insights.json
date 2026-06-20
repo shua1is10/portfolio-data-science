@@ -1,0 +1,468 @@
+[
+  {
+    "match_id": "J1-A-1",
+    "narrative": "Mexico opened the tournament with a controlled 2-0 win over South Africa, built on early territorial dominance and two well-worked goals from Julian Quinones (9') and Raul Jimenez (67'). The match featured two red cards -- Yaya Sithole (South Africa, 49') and Cesar Montes (Mexico, 90+2') -- but neither dismissal materially altered a game Mexico had already controlled from kickoff.",
+    "ai_verdict": "The 2-0 scoreline for Mexico was a fair reflection of a comprehensive performance rather than a fortunate one. Mexico generated 1.41 expected goals against just 0.07 for South Africa, a gap of nearly 20x that confirms the hosts dominated territory (60% possession), shot volume (16 attempts to 3), and quality of chances (2 big chances created to 0). Both goals -- a close-range finish from Julian Quinones and a header from Raul Jimenez off a cross -- arrived from sustained pressure rather than isolated set pieces, and Mexico also won the duel battle 46 to 33.\n\nFrom a variance standpoint, the underlying numbers suggest the result actually understated Mexico's edge: an xG differential of 1.34 would statistically project a wider margin over a larger sample, meaning South Africa's goalkeeper and defensive block (2 saves, 17 clearances) absorbed pressure that could plausibly have produced a 3- or 4-goal swing. The two red cards (one per side, plus a VAR-overturned third) had limited tactical impact given they arrived in the 49th and 90th+2 minutes respectively, after the game state was already well established.\n\nFor the Dynamic Bayesian ELO update, this profile registers as a low-surprise, high-margin victory for the model's pre-match favorite (Mexico was priced at 61.9% to win). The form index adjustment is therefore modest in magnitude but directionally reinforcing: Mexico's rating is nudged upward to reflect a dominant chance-creation profile, while South Africa's is nudged down, with the strong xG corroboration ensuring the update is not purely scoreline-driven.",
+    "advanced_stats": {
+      "xg_a": 1.41,
+      "xg_b": 0.07,
+      "possession_a": 60,
+      "possession_b": 40,
+      "total_shots_a": 16,
+      "total_shots_b": 3,
+      "big_chances_a": 2,
+      "big_chances_b": 0,
+      "duels_won_a": 46,
+      "duels_won_b": 33
+    }
+  },
+  {
+    "match_id": "J1-A-2",
+    "narrative": "South Korea overturned an early second-half deficit to beat Czechia 2-1, despite Ladislav Krejci's header (51') putting the Czechs ahead against the run of play. Hwang In-Beom (67') and Oh Hyeon-Gyu (80') scored the response goals that completed the comeback, both arriving from sustained second-half pressure built on South Korea's dominant possession share.",
+    "ai_verdict": "The 2-1 scoreline for South Korea was a fair, if slightly conservative, reflection of the underlying numbers. Korea produced 1.84 xG against Czechia's 0.81 -- a clear advantage that was matched across every other territorial metric: 62% possession, 15 shots to 7, 4 big chances created versus just 1, and a commanding 56-36 edge in duels won. The xG differential (+1.03) projects to roughly a one-goal margin, so the final 2-1 result sits almost exactly where the underlying performance data says it should.\n\nThere was a moment of variance, however: Czechia's opening goal (51') came from one of their only clear chances and briefly put the model's pre-match favorite behind, despite Korea having already generated the bulk of the half's pressure. That goal inflated Czechia's actual output relative to its expected output (0.81 xG conceded vs. 1 goal scored), meaning Korea's eventual win required overturning a scoreline that, on pure xG terms, Czechia had no business taking. Once Korea leveled through Hwang In-Beom and then won it through Oh Hyeon-Gyu, the result converged back toward the dominance the stats had been signaling all match.\n\nFor the Dynamic Bayesian ELO update, this registers as a moderate-surprise win for the model's pre-match favorite (South Korea was priced at 37.2% in a fairly open three-way market, so 'sorpresa' = 0.628). South Korea's form index rises to 1.266 and Czechia's falls to 0.697 -- a larger swing than a pure scoreline-based update would produce, but the strong xG corroboration (1.84 vs 0.81) confirms the win was earned on chance quality, not just on the back of a late surge after going behind.",
+    "advanced_stats": {
+      "xg_a": 1.84,
+      "xg_b": 0.81,
+      "possession_a": 62,
+      "possession_b": 38,
+      "total_shots_a": 15,
+      "total_shots_b": 7,
+      "big_chances_a": 4,
+      "big_chances_b": 1,
+      "duels_won_a": 56,
+      "duels_won_b": 36
+    }
+  },
+  {
+    "match_id": "J1-B-1",
+    "narrative": "Canada and Bosnia & Herzegovina shared the points in a 1-1 draw in the tournament's opening match, played in Canada. Bosnia struck first through Jovo Lukic's close-range header (21') from a Sead Kolasinac corner, catching the hosts cold despite their early territorial control. Cyle Larin leveled for Canada in the 78th minute, finishing a Promise David assist on the counter-attack after the hosts had spent the second half pressing for an equalizer. Five yellow cards were shown across both sides, but neither team finished with a numerical disadvantage.",
+    "ai_verdict": "The 1-1 scoreline broadly reflects a contested, evenly poised performance rather than a clear injustice for either side. Canada produced 1.25 xG to Bosnia's 0.98 -- a modest 0.27 edge -- while dominating possession (61% to 39%) and total shots (13 to 8). However, big chances were even at 2-2, and Bosnia actually won more individual duels (79 to 70) despite seeing far less of the ball, a sign that their compact defensive shape and physical battles offset Canada's territorial dominance.\n\nFrom a variance standpoint, neither goal was a fluke: Lukic's header (21') came from a well-worked corner routine, while Larin's equalizer (78') was a clean finish on the counter after Canada had missed several clear chances (Jonathan David, Tani Oluwaseyi, and Promise David all failed to convert before the leveler). The narrow xG gap (+0.27) is too small to argue the draw was a robbery for either team -- Canada created enough to have won, but Bosnia's resilience and duel-winning earned their share of the point.\n\nFor the Dynamic Bayesian ELO update, this draw registers as a moderate-surprise result against the model's pre-match favorite (Canada was priced at 43.9% to win versus 35.7% for a draw, so 'sorpresa' = 0.643). Canada's form index dips slightly to 0.848 while Bosnia's rises to 1.013, reflecting that the pre-tournament favorite failed to convert a territorial and shot-volume advantage into three points. The marginal xG edge for Canada tempers the adjustment, keeping the model from overreacting to a tightly-contested draw where both sides created and missed real chances.",
+    "advanced_stats": {
+      "xg_a": 1.25,
+      "xg_b": 0.98,
+      "possession_a": 61,
+      "possession_b": 39,
+      "total_shots_a": 13,
+      "total_shots_b": 8,
+      "big_chances_a": 2,
+      "big_chances_b": 2,
+      "duels_won_a": 70,
+      "duels_won_b": 79
+    }
+  },
+  {
+    "match_id": "J1-D-1",
+    "narrative": "The United States opened Group D with a commanding 4-1 win over Paraguay, controlling the game from the opening whistle. Folarin Balogun led the attack with a brace, anchoring a US side that produced 16 shots and 4 big chances across the match. Paraguay grabbed a consolation goal but managed only 9 shots and a single big chance, never seriously threatening to disrupt the hosts' rhythm.",
+    "ai_verdict": "The 4-1 scoreline for the United States was a fair, if anything understated, reflection of a one-sided performance. The US produced 1.42 expected goals against just 0.54 for Paraguay, while dominating possession (65% to 35%), shot volume (16 to 9), and big chances created (4 to 1). Folarin Balogun's brace anchored an attack that converted its territorial dominance into goals at a rate well above its underlying xG.\n\nFrom a variance standpoint, the four-goal margin slightly overstates the gap suggested by the xG differential (+0.88), meaning Paraguay's defense conceded a couple of goals that a tighter backline might have prevented. Still, the breadth of the US advantage across every metric, including duels won (65 to 55), leaves little doubt about which side deserved the result.\n\nFor the AI Hybrid Verdict and the Dynamic Bayesian ELO update, this profile registers as a routine, low-surprise win for a side that out-created its opponent across the board. The United States' form index moves upward to reflect a dominant chance-creation profile, while Paraguay's form index is adjusted downward, with the strong xG corroboration confirming the result was earned rather than fortunate.",
+    "advanced_stats": {
+      "xg_a": 1.42,
+      "xg_b": 0.54,
+      "possession_a": 65,
+      "possession_b": 35,
+      "total_shots_a": 16,
+      "total_shots_b": 9,
+      "big_chances_a": 4,
+      "big_chances_b": 1,
+      "duels_won_a": 65,
+      "duels_won_b": 55
+    }
+  },
+  {
+    "match_id": "J1-B-2",
+    "narrative": "Qatar salvaged a dramatic 1-1 draw against Switzerland courtesy of a 90+4' own goal, despite being heavily outplayed for most of the match. Switzerland controlled 68% of possession and created a flurry of chances, but wasteful finishing and a string of missed opportunities left the door open for the hosts to escape with a point in the dying seconds.",
+    "ai_verdict": "A massive statistical anomaly. Switzerland dominated every metric, generating 3.20 xG and 26 shots, but poor finishing and a 90+4' own goal handed Qatar an incredibly fortunate draw.",
+    "advanced_stats": {
+      "xg_a": 0.60,
+      "xg_b": 3.20,
+      "possession_a": 32,
+      "possession_b": 68,
+      "total_shots_a": 6,
+      "total_shots_b": 26,
+      "big_chances_a": 1,
+      "big_chances_b": 6,
+      "duels_won_a": 36,
+      "duels_won_b": 37
+    }
+  },
+  {
+    "match_id": "J1-E-1",
+    "narrative": "Germany delivered the tournament's most emphatic statement so far, routing Curacao 7-1 behind a Kai Havertz brace. Joshua Kimmich and Deniz Undav each contributed two assists as Germany's relentless attack overwhelmed Curacao's defense from the opening whistle, with the visitors managing only a single consolation goal.",
+    "ai_verdict": "Absolute dominance. Germany's 7-1 victory perfectly reflects their overwhelming 4.80 xG, suffocating possession, and relentless high-quality chance creation.",
+    "advanced_stats": {
+      "xg_a": 4.80,
+      "xg_b": 0.40,
+      "possession_a": 65,
+      "possession_b": 35,
+      "total_shots_a": 26,
+      "total_shots_b": 8,
+      "big_chances_a": 6,
+      "big_chances_b": 0,
+      "duels_won_a": 46,
+      "duels_won_b": 48
+    }
+  },
+  {
+    "match_id": "J1-F-1",
+    "narrative": "Netherlands and Japan shared the points in a thrilling 2-2 draw, with Ryan Gravenberch setting up both Dutch goals. Japan matched the Netherlands' tempo throughout and twice fought back to level the score, producing one of the most entertaining matches of the opening round.",
+    "ai_verdict": "A highly efficient 2-2 draw. Both teams drastically overperformed their low xG (0.79 vs 0.54), demonstrating clinical finishing in a tactically balanced encounter.",
+    "advanced_stats": {
+      "xg_a": 0.79,
+      "xg_b": 0.54,
+      "possession_a": 60,
+      "possession_b": 40,
+      "total_shots_a": 10,
+      "total_shots_b": 10,
+      "big_chances_a": 1,
+      "big_chances_b": 0,
+      "duels_won_a": 44,
+      "duels_won_b": 28
+    }
+  },
+  {
+    "match_id": "J1-C-1",
+    "narrative": "Brazil and Morocco played out a tense 1-1 draw in a tightly contested Group C clash. Both sides traded chances throughout, with Morocco edging the underlying numbers but Brazil's resilience ensuring a share of the spoils.",
+    "ai_verdict": "A fiercely contested 1-1 draw. Morocco slightly edged the underlying metrics (1.37 xG and 62 duels won), but the result is a fair reflection of an evenly matched tactical battle.",
+    "advanced_stats": {
+      "xg_a": 1.26,
+      "xg_b": 1.37,
+      "possession_a": 51,
+      "possession_b": 49,
+      "total_shots_a": 12,
+      "total_shots_b": 14,
+      "big_chances_a": 1,
+      "big_chances_b": 2,
+      "duels_won_a": 53,
+      "duels_won_b": 62
+    }
+  },
+  {
+    "match_id": "J1-C-2",
+    "narrative": "Scotland snatched a 1-0 win over Haiti despite being outshot 15-9 and seeing less of the ball. Haiti pressed for an equalizer throughout, but Scotland's compact defensive shape and a clinical finish were enough to secure all three points in a tightly contested encounter.",
+    "ai_verdict": "An incredibly tight match mirroring the identical 1.05 xG for both sides. Scotland maximized their limited opportunities to steal a 1-0 win despite Haiti's shot volume advantage.",
+    "advanced_stats": {
+      "xg_a": 1.05,
+      "xg_b": 1.05,
+      "possession_a": 54,
+      "possession_b": 46,
+      "total_shots_a": 15,
+      "total_shots_b": 9,
+      "big_chances_a": 2,
+      "big_chances_b": 2,
+      "duels_won_a": 51,
+      "duels_won_b": 59
+    }
+  },
+  {
+    "match_id": "J1-D-2",
+    "narrative": "Australia claimed a 2-0 win over Turkey in a classic smash-and-grab performance, with Nestory Irankunda among the scorers. Turkey dominated possession and shot volume throughout, but Australia's clinical counter-attacking proved decisive.",
+    "ai_verdict": "A classic smash-and-grab. Turkey generated a staggering 30 shots and held 72% possession, but Australia was ruthlessly efficient on the counter-attack to secure a 2-0 win.",
+    "advanced_stats": {
+      "xg_a": 1.18,
+      "xg_b": 1.36,
+      "possession_a": 28,
+      "possession_b": 72,
+      "total_shots_a": 9,
+      "total_shots_b": 30,
+      "big_chances_a": 1,
+      "big_chances_b": 2,
+      "duels_won_a": 42,
+      "duels_won_b": 46
+    }
+  },
+  {
+    "match_id": "J1-I-1",
+    "narrative": "France delivered a clinical 3-1 victory over Senegal in Group I, converting three goals from just six shots despite a relatively balanced contest. Senegal created moments of danger but France's ruthless efficiency in front of goal proved the decisive factor.",
+    "ai_verdict": "A masterclass in clinical efficiency. France converted 3 goals from just 6 total shots and 1.79 xG, punishing Senegal's defensive lapses despite a relatively balanced overall flow of play.",
+    "advanced_stats": {
+      "xg_a": 1.79,
+      "xg_b": 0.53,
+      "possession_a": 53,
+      "possession_b": 47,
+      "total_shots_a": 6,
+      "total_shots_b": 6,
+      "big_chances_a": 2,
+      "big_chances_b": 2,
+      "duels_won_a": 44,
+      "duels_won_b": 35
+    }
+  },
+  {
+    "match_id": "J1-I-2",
+    "narrative": "Norway overwhelmed Iraq 4-1 in a one-sided Group I contest, generating a massive 2.52 xG and five big chances to assert total offensive dominance. Iraq struggled to build out from deep and managed only one big chance across the entire match.",
+    "ai_verdict": "Total offensive dominance from Norway. They suffocated Iraq by generating a massive 2.52 xG and 5 big chances, showcasing overwhelming superiority in the final third.",
+    "advanced_stats": {
+      "xg_a": 0.80,
+      "xg_b": 2.52,
+      "possession_a": 39,
+      "possession_b": 61,
+      "total_shots_a": 11,
+      "total_shots_b": 12,
+      "big_chances_a": 1,
+      "big_chances_b": 5,
+      "duels_won_a": 52,
+      "duels_won_b": 48
+    }
+  },
+  {
+    "match_id": "J1-J-1",
+    "narrative": "Argentina secured a commanding 3-0 win over Algeria in Group J, with Lionel Messi delivering a hat-trick to neutralize Algeria's possession-heavy approach. Despite ceding the ball (48%), Argentina's individual quality proved decisive as Algeria managed just 0.32 xG.",
+    "ai_verdict": "A tactical victory built on ruthless individual quality. Despite conceding the possession battle (48%), Argentina neutralized Algeria completely (0.32 xG) and capitalized on half-chances to secure a comfortable 3-0 win.",
+    "advanced_stats": {
+      "xg_a": 1.26,
+      "xg_b": 0.32,
+      "possession_a": 48,
+      "possession_b": 52,
+      "total_shots_a": 10,
+      "total_shots_b": 7,
+      "big_chances_a": 0,
+      "big_chances_b": 0,
+      "duels_won_a": 39,
+      "duels_won_b": 43
+    }
+  },
+  {
+    "match_id": "J1-J-2",
+    "narrative": "Austria controlled Group J's second fixture from start to finish, defeating Jordan 3-1 through sustained possession (63%) and consistent territorial pressure. Jordan managed a consolation goal but were unable to trouble an organized Austrian defensive structure.",
+    "ai_verdict": "Austria dictated the tempo through sustained possession (63%) and consistent territorial control. Their 1.69 xG accurately reflects their structured approach against a deep-sitting Jordanian block.",
+    "advanced_stats": {
+      "xg_a": 1.69,
+      "xg_b": 0.46,
+      "possession_a": 63,
+      "possession_b": 37,
+      "total_shots_a": 11,
+      "total_shots_b": 11,
+      "big_chances_a": 0,
+      "big_chances_b": 0,
+      "duels_won_a": 43,
+      "duels_won_b": 48
+    }
+  },
+  {
+    "match_id": "J1-K-1",
+    "narrative": "Portugal were held to a frustrating 1-1 draw by DR Congo in Group K despite hoarding 75% possession. DR Congo's resilient low block absorbed relentless pressure and actually edged the xG metric (0.87 vs 0.65), earning a deserved point.",
+    "ai_verdict": "A massive tactical frustration for Portugal. Despite hoarding 75% possession, they failed to break down DR Congo's resilient low block, generating an abysmal 0.65 xG. DR Congo actually edged the chance-quality metric (0.87 xG).",
+    "advanced_stats": {
+      "xg_a": 0.65,
+      "xg_b": 0.87,
+      "possession_a": 75,
+      "possession_b": 25,
+      "total_shots_a": 7,
+      "total_shots_b": 3,
+      "big_chances_a": 0,
+      "big_chances_b": 0,
+      "duels_won_a": 34,
+      "duels_won_b": 34
+    }
+  },
+  {
+    "match_id": "J1-K-2",
+    "narrative": "Colombia beat Uzbekistan 3-1 in Group K, combining possession control (61%) with sharp verticality to create three big chances. Despite a surprisingly close xG battle (1.16 vs 1.01), Colombia's superior finishing proved the difference-maker.",
+    "ai_verdict": "Colombia combined possession control (61%) with sharp verticality, creating 3 big chances. While the xG was surprisingly close (1.16 vs 1.01), Colombia's superior finishing power was the difference-maker.",
+    "advanced_stats": {
+      "xg_a": 1.16,
+      "xg_b": 1.01,
+      "possession_a": 39,
+      "possession_b": 61,
+      "total_shots_a": 8,
+      "total_shots_b": 15,
+      "big_chances_a": 1,
+      "big_chances_b": 3,
+      "duels_won_a": 34,
+      "duels_won_b": 36
+    }
+  },
+  {
+    "match_id": "J1-L-1",
+    "narrative": "England put on an offensive clinic in Group L, defeating Croatia 4-2 in a high-scoring encounter. With an astonishing 3.20 xG, 22 shots, and 5 big chances, England consistently carved through Croatia's defensive structure throughout the match.",
+    "ai_verdict": "An absolute offensive clinic from England. Racking up an astonishing 3.20 xG, 22 shots, and 5 big chances, they consistently carved through Croatia's defensive structure in a highly entertaining shootout.",
+    "advanced_stats": {
+      "xg_a": 3.20,
+      "xg_b": 0.70,
+      "possession_a": 52,
+      "possession_b": 48,
+      "total_shots_a": 22,
+      "total_shots_b": 10,
+      "big_chances_a": 5,
+      "big_chances_b": 1,
+      "duels_won_a": 40,
+      "duels_won_b": 42
+    }
+  },
+  {
+    "match_id": "J1-L-2",
+    "narrative": "Ghana earned a 1-0 win over Panama in Group L despite Panama controlling 62% of the ball. Ghana's defensive solidity and sharp counter-attacking transitions generated higher-quality chances (1.31 xG), making sterile possession the story of the match.",
+    "ai_verdict": "A classic example of sterile possession. Panama controlled the ball for 62% of the match, but Ghana's defensive solidity and sharp transitions generated higher quality chances (1.31 xG), earning them a deserved victory.",
+    "advanced_stats": {
+      "xg_a": 1.31,
+      "xg_b": 0.73,
+      "possession_a": 38,
+      "possession_b": 62,
+      "total_shots_a": 8,
+      "total_shots_b": 11,
+      "big_chances_a": 2,
+      "big_chances_b": 2,
+      "duels_won_a": 56,
+      "duels_won_b": 57
+    }
+  },
+  {
+    "match_id": "J2-B-1",
+    "ai_verdict": "A merciless 6-0 demolition. Canada completely suffocated Qatar with 79% possession and a staggering 32 shots, translating their overwhelming 4.60 xG into a flawless victory.",
+    "advanced_stats": {
+      "xg_a": 4.60,
+      "xg_b": 0.22,
+      "possession_a": 79,
+      "possession_b": 21,
+      "total_shots_a": 32,
+      "total_shots_b": 2,
+      "big_chances_a": 6,
+      "big_chances_b": 0,
+      "duels_won_a": 33,
+      "duels_won_b": 34
+    }
+  },
+  {
+    "match_id": "J2-B-2",
+    "ai_verdict": "A dominant display by Switzerland, who controlled the midfield and generated 4 big chances, completely neutralizing Bosnia's offensive transitions.",
+    "advanced_stats": {
+      "xg_a": 0.23,
+      "xg_b": 2.06,
+      "possession_a": 38,
+      "possession_b": 62,
+      "total_shots_a": 5,
+      "total_shots_b": 13,
+      "big_chances_a": 0,
+      "big_chances_b": 4,
+      "duels_won_a": 38,
+      "duels_won_b": 52
+    }
+  },
+  {
+    "match_id": "J2-C-1",
+    "ai_verdict": "Brazil efficiently dispatched Haiti. While the shot volume was surprisingly close (8 to 7), Brazil's ability to create 5 big chances showcased their lethal quality in the final third.",
+    "advanced_stats": {
+      "xg_a": 1.75,
+      "xg_b": 0.23,
+      "possession_a": 57,
+      "possession_b": 43,
+      "total_shots_a": 8,
+      "total_shots_b": 7,
+      "big_chances_a": 5,
+      "big_chances_b": 0,
+      "duels_won_a": 52,
+      "duels_won_b": 42
+    }
+  },
+  {
+    "match_id": "J2-C-2",
+    "ai_verdict": "A tightly contested tactical affair. Morocco held the majority of possession and generated twice as many shots, rightfully earning a narrow 1-0 win.",
+    "advanced_stats": {
+      "xg_a": 0.99,
+      "xg_b": 0.51,
+      "possession_a": 59,
+      "possession_b": 41,
+      "total_shots_a": 12,
+      "total_shots_b": 6,
+      "big_chances_a": 1,
+      "big_chances_b": 0,
+      "duels_won_a": 34,
+      "duels_won_b": 38
+    }
+  },
+  {
+    "match_id": "J2-D-1",
+    "ai_verdict": "The USA controlled the tempo with 62% possession and effectively limited Australia to just 0.35 xG, securing a comfortable and professional 2-0 victory.",
+    "advanced_stats": {
+      "xg_a": 1.08,
+      "xg_b": 0.35,
+      "possession_a": 62,
+      "possession_b": 38,
+      "total_shots_a": 10,
+      "total_shots_b": 5,
+      "big_chances_a": 2,
+      "big_chances_b": 0,
+      "duels_won_a": 59,
+      "duels_won_b": 64
+    }
+  },
+  {
+    "match_id": "J2-D-2",
+    "ai_verdict": "The ultimate smash-and-grab and a defensive masterclass. Turkey besieged the box with 32 shots, 5 big chances, and 78% possession, but Paraguay's monumental resilience and duel dominance (72 won) earned them an impossible 1-0 win.",
+    "advanced_stats": {
+      "xg_a": 0.32,
+      "xg_b": 2.17,
+      "possession_a": 22,
+      "possession_b": 78,
+      "total_shots_a": 7,
+      "total_shots_b": 32,
+      "big_chances_a": 0,
+      "big_chances_b": 5,
+      "duels_won_a": 72,
+      "duels_won_b": 60
+    }
+  },
+  {
+    "match_id": "J2-E-1",
+    "ai_verdict": "An intense and open battle. Ivory Coast posed a consistent threat (1.23 xG), but Germany's sheer volume of high-quality opportunities (6 big chances) ultimately proved decisive.",
+    "advanced_stats": {
+      "xg_a": 1.83,
+      "xg_b": 1.23,
+      "possession_a": 59,
+      "possession_b": 41,
+      "total_shots_a": 16,
+      "total_shots_b": 9,
+      "big_chances_a": 6,
+      "big_chances_b": 2,
+      "duels_won_a": 45,
+      "duels_won_b": 49
+    }
+  },
+  {
+    "match_id": "J2-F-1",
+    "ai_verdict": "An incredibly clinical performance from the Netherlands. Scoring 5 goals from just 10 total attempts is a statistical anomaly, violently punishing a Swedish side that actually outshot them 16 to 10.",
+    "advanced_stats": {
+      "xg_a": 2.47,
+      "xg_b": 0.99,
+      "possession_a": 51,
+      "possession_b": 49,
+      "total_shots_a": 10,
+      "total_shots_b": 16,
+      "big_chances_a": 1,
+      "big_chances_b": 1,
+      "duels_won_a": 42,
+      "duels_won_b": 46
+    }
+  },
+  {
+    "match_id": "J2-A-1",
+    "ai_verdict": "A gritty, variance-heavy win for Mexico. South Korea dominated possession and generated higher chance quality (0.91 xG and 3 big chances), but failed to convert their territorial edge.",
+    "advanced_stats": {
+      "xg_a": 0.53,
+      "xg_b": 0.91,
+      "possession_a": 42,
+      "possession_b": 58,
+      "total_shots_a": 8,
+      "total_shots_b": 9,
+      "big_chances_a": 2,
+      "big_chances_b": 3,
+      "duels_won_a": 42,
+      "duels_won_b": 47
+    }
+  },
+  {
+    "match_id": "J2-A-2",
+    "ai_verdict": "A highly entertaining and balanced 1-1 draw. Both sides effectively bypassed the midfield to generate strong xG numbers and multiple big chances, making a shared point the fairest outcome.",
+    "advanced_stats": {
+      "xg_a": 1.38,
+      "xg_b": 1.02,
+      "possession_a": 62,
+      "possession_b": 38,
+      "total_shots_a": 11,
+      "total_shots_b": 14,
+      "big_chances_a": 2,
+      "big_chances_b": 3,
+      "duels_won_a": 47,
+      "duels_won_b": 45
+    }
+  }
+]

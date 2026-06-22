@@ -464,5 +464,117 @@
       "duels_won_a": 47,
       "duels_won_b": 45
     }
+  },
+  {
+    "match_id": "J2-E-2",
+    "ai_verdict": "A deeply frustrating 0-0 draw for Ecuador. Despite monopolizing the ball (75% possession) and generating a massive 2.84 xG with 27 shots, poor finishing and Curacao's stubborn low block denied them the victory.",
+    "advanced_stats": {
+      "xg_a": 2.84,
+      "xg_b": 0.50,
+      "possession_a": 75,
+      "possession_b": 25,
+      "total_shots_a": 27,
+      "total_shots_b": 10,
+      "big_chances_a": 6,
+      "big_chances_b": 0,
+      "duels_won_a": 51,
+      "duels_won_b": 52
+    }
+  },
+  {
+    "match_id": "J2-F-2",
+    "ai_verdict": "A clinical 4-0 dismantling by Japan. They completely controlled the tempo (62% possession) and created 5 big chances, while restricting Tunisia to a virtually non-existent 0.05 xG.",
+    "advanced_stats": {
+      "xg_a": 0.05,
+      "xg_b": 2.13,
+      "possession_a": 38,
+      "possession_b": 62,
+      "total_shots_a": 2,
+      "total_shots_b": 11,
+      "big_chances_a": 0,
+      "big_chances_b": 5,
+      "duels_won_a": 38,
+      "duels_won_b": 43
+    }
+  },
+  {
+    "match_id": "J2-G-1",
+    "ai_verdict": "Sterile dominance from Belgium. They held 70% of the ball and fired 23 shots, but Iran's compact defensive structure limited them to just 1 big chance, earning the underdogs a hard-fought point.",
+    "advanced_stats": {
+      "xg_a": 1.79,
+      "xg_b": 0.62,
+      "possession_a": 70,
+      "possession_b": 30,
+      "total_shots_a": 23,
+      "total_shots_b": 7,
+      "big_chances_a": 1,
+      "big_chances_b": 1,
+      "duels_won_a": 52,
+      "duels_won_b": 43
+    }
+  },
+  {
+    "match_id": "J2-G-2",
+    "ai_verdict": "An open, dynamic match. Egypt leveraged their superior possession (56%) to consistently threaten the final third, accumulating 1.87 xG and 19 shots to rightfully claim a 3-1 victory.",
+    "advanced_stats": {
+      "xg_a": 1.24,
+      "xg_b": 1.87,
+      "possession_a": 44,
+      "possession_b": 56,
+      "total_shots_a": 11,
+      "total_shots_b": 19,
+      "big_chances_a": 3,
+      "big_chances_b": 3,
+      "duels_won_a": 43,
+      "duels_won_b": 54
+    }
+  },
+  {
+    "match_id": "J2-H-1",
+    "ai_verdict": "An absolute masterclass from Spain. They suffocated Saudi Arabia, holding 67% possession and generating 5 big chances (2.30 xG) while allowing practically zero offensive threat.",
+    "advanced_stats": {
+      "xg_a": 2.30,
+      "xg_b": 0.14,
+      "possession_a": 67,
+      "possession_b": 33,
+      "total_shots_a": 22,
+      "total_shots_b": 3,
+      "big_chances_a": 5,
+      "big_chances_b": 0,
+      "duels_won_a": 29,
+      "duels_won_b": 37
+    }
+  },
+  {
+    "match_id": "J2-H-2",
+    "ai_verdict": "Cape Verde continues their giant-slaying run! Despite facing a relentless Uruguayan attack (65% possession, 2.32 xG, 17 shots), the islanders maximized their 0.88 xG and won the physical battle (55 duels won) to secure another historic draw.",
+    "advanced_stats": {
+      "xg_a": 2.32,
+      "xg_b": 0.88,
+      "possession_a": 65,
+      "possession_b": 35,
+      "total_shots_a": 17,
+      "total_shots_b": 12,
+      "big_chances_a": 2,
+      "big_chances_b": 1,
+      "duels_won_a": 47,
+      "duels_won_b": 55
+    }
+  },
+  {
+    "match_id": "J2-J-1",
+    "ai_verdict": "A historic night where Lionel Messi broke the all-time World Cup scoring record. Argentina dictated the rhythm (54% possession), suffocated Austria's offense (allowing just 0.50 xG), and comfortably generated 2.65 xG to secure a 2-0 win.",
+    "advanced_stats": {
+      "xg_a": 2.65,
+      "xg_b": 0.50,
+      "possession_a": 54,
+      "possession_b": 46,
+      "total_shots_a": 12,
+      "total_shots_b": 6,
+      "big_chances_a": 3,
+      "big_chances_b": 1,
+      "duels_won_a": 49,
+      "duels_won_b": 47
+    }
   }
 ]

@@ -1,8 +1,8 @@
 {
   "topScorers": [
+    { "name": "Lionel Messi", "team": "Argentina", "stats": 5 },
     { "name": "Jonathan David", "team": "Canada", "stats": 3 },
-    { "name": "Lionel Messi", "team": "Argentina", "stats": 3 },
-    { "name": "Cody Gakpo", "team": "Netherlands", "stats": 2 }
+    { "name": "Ayase Ueda", "team": "Japan", "stats": 2 }
   ],
   "topAssists": [
     { "name": "Alistair Johnston", "team": "Canada", "stats": 2 },
@@ -11,7 +11,7 @@
   ],
   "topShooters": [
     { "name": "Son Heung-Min", "team": "South Korea", "stats": 6 },
-    { "name": "Lionel Messi", "team": "Argentina", "stats": 5 },
+    { "name": "Lionel Messi", "team": "Argentina", "stats": 8 },
     { "name": "Hakan Çalhanoğlu", "team": "Turkey", "stats": 5 }
   ]
 }

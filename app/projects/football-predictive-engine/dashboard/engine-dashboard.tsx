@@ -357,8 +357,14 @@ function LeaderboardColumn({
                   {i + 1}
                 </span>
                 <div className="min-w-0">
-                  <p className="text-[12px] font-semibold text-[#1d1d1f] dark:text-white truncate">
+                  <p className="text-[12px] font-semibold text-[#1d1d1f] dark:text-white truncate flex items-center gap-1 flex-wrap">
                     {p.name}
+                    {p.name === "Lionel Messi" && (
+                      <>
+                        <span aria-label="All-Time World Cup Top Scorer">👑</span>
+                        <span className="text-[10px] font-bold text-yellow-500 whitespace-nowrap">All-Time WC Top Scorer</span>
+                      </>
+                    )}
                   </p>
                   <p className="text-[10px] text-[#86868b] dark:text-[#8e8e93] truncate">
                     {p.team}

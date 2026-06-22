@@ -350,7 +350,7 @@ function LeaderboardColumn({
         </p>
       ) : (
         <div className="space-y-2.5">
-          {entries.map((p, i) => (
+          {[...entries].sort((a, b) => b.stats - a.stats).map((p, i) => (
             <div key={`${p.name}-${i}`} className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="shrink-0 w-5 h-5 rounded-full bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[10px] font-bold text-[#86868b] dark:text-[#8e8e93] flex items-center justify-center">

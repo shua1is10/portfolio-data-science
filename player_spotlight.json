@@ -1,8 +1,13 @@
 {
   "topScorers": [
     { "name": "Lionel Messi", "team": "Argentina", "stats": 5 },
+    { "name": "Youssef En-Nesyri", "team": "Morocco", "stats": 4 },
     { "name": "Jonathan David", "team": "Canada", "stats": 3 },
-    { "name": "Ayase Ueda", "team": "Japan", "stats": 2 }
+    { "name": "Vinícius Júnior", "team": "Brazil", "stats": 2 },
+    { "name": "Ayase Ueda", "team": "Japan", "stats": 2 },
+    { "name": "Rodrygo", "team": "Brazil", "stats": 1 },
+    { "name": "Hakim Ziyech", "team": "Morocco", "stats": 1 },
+    { "name": "Brahim Díaz", "team": "Morocco", "stats": 1 }
   ],
   "topAssists": [
     { "name": "Alistair Johnston", "team": "Canada", "stats": 2 },

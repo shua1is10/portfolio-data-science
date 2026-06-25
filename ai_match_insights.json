@@ -688,5 +688,101 @@
       "duels_won_a": 58,
       "duels_won_b": 63
     }
+  },
+  {
+    "match_id": "J3-A-1",
+    "ai_verdict": "Mexico delivered a highly clinical performance, converting 1.79 xG into a 3-0 victory. They neutralized the Czech Republic's attack, restricting them to low-quality chances (0.47 xG) despite an even possession battle.",
+    "advanced_stats": {
+      "xg_a": 0.47,
+      "xg_b": 1.79,
+      "possession_a": 50,
+      "possession_b": 50,
+      "total_shots_a": 13,
+      "total_shots_b": 11,
+      "big_chances_a": 0,
+      "big_chances_b": 2,
+      "duels_won_a": 48,
+      "duels_won_b": 52
+    }
+  },
+  {
+    "match_id": "J3-A-2",
+    "ai_verdict": "South Africa executed a perfect smash-and-grab. Despite South Korea dominating possession (68%) and generating 1.42 xG with 4 big chances, South Africa capitalized on their limited opportunities to secure a 1-0 win.",
+    "advanced_stats": {
+      "xg_a": 1.00,
+      "xg_b": 1.42,
+      "possession_a": 32,
+      "possession_b": 68,
+      "total_shots_a": 8,
+      "total_shots_b": 16,
+      "big_chances_a": 1,
+      "big_chances_b": 4,
+      "duels_won_a": 45,
+      "duels_won_b": 55
+    }
+  },
+  {
+    "match_id": "J3-B-1",
+    "ai_verdict": "Switzerland maximized their efficiency to edge out Canada 2-1. Canada generated superior shot volume and xG (1.66), but Switzerland's precision with their 3 big chances made the difference.",
+    "advanced_stats": {
+      "xg_a": 1.11,
+      "xg_b": 1.66,
+      "possession_a": 58,
+      "possession_b": 42,
+      "total_shots_a": 6,
+      "total_shots_b": 13,
+      "big_chances_a": 3,
+      "big_chances_b": 3,
+      "duels_won_a": 50,
+      "duels_won_b": 50
+    }
+  },
+  {
+    "match_id": "J3-B-2",
+    "ai_verdict": "A match defined by severe overperformance. Bosnia secured a 3-1 victory from a meager 0.68 xG, ruthlessly punishing a Qatari side that slightly edged the underlying chance quality.",
+    "advanced_stats": {
+      "xg_a": 0.68,
+      "xg_b": 0.77,
+      "possession_a": 55,
+      "possession_b": 45,
+      "total_shots_a": 14,
+      "total_shots_b": 9,
+      "big_chances_a": 1,
+      "big_chances_b": 0,
+      "duels_won_a": 52,
+      "duels_won_b": 48
+    }
+  },
+  {
+    "match_id": "J3-C-1",
+    "ai_verdict": "An overwhelming offensive display by Brazil. Accumulating a massive 4.46 xG and 21 shots, they easily dismantled Scotland 3-0, showcasing elite chance creation.",
+    "advanced_stats": {
+      "xg_a": 1.13,
+      "xg_b": 4.46,
+      "possession_a": 44,
+      "possession_b": 56,
+      "total_shots_a": 14,
+      "total_shots_b": 21,
+      "big_chances_a": 2,
+      "big_chances_b": 6,
+      "duels_won_a": 45,
+      "duels_won_b": 55
+    }
+  },
+  {
+    "match_id": "J3-C-2",
+    "ai_verdict": "Morocco utterly controlled the match with 71% possession and an immense 3.26 xG. While Haiti managed to score twice from low-probability chances, Morocco's 4-2 win perfectly reflects their dominance.",
+    "advanced_stats": {
+      "xg_a": 3.26,
+      "xg_b": 0.66,
+      "possession_a": 71,
+      "possession_b": 29,
+      "total_shots_a": 22,
+      "total_shots_b": 9,
+      "big_chances_a": 5,
+      "big_chances_b": 1,
+      "duels_won_a": 60,
+      "duels_won_b": 40
+    }
   }
 ]

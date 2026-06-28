@@ -784,5 +784,165 @@
       "duels_won_a": 60,
       "duels_won_b": 40
     }
+  },
+  {
+    "match_id": "J3-D-1",
+    "ai_verdict": "An absolute offensive shootout. Turkey drastically overperformed with 18 shots and an immense 3.01 xG, overcoming the USA in a chaotic 3-2 thriller.",
+    "advanced_stats": {
+      "xg_a": 2.13,
+      "xg_b": 3.01,
+      "possession_a": 53,
+      "possession_b": 47,
+      "total_shots_a": 9,
+      "total_shots_b": 18,
+      "big_chances_a": 2,
+      "big_chances_b": 4,
+      "duels_won_a": 48,
+      "duels_won_b": 53
+    }
+  },
+  {
+    "match_id": "J3-D-2",
+    "ai_verdict": "A highly physical and sterile 0-0 draw. Both teams struggled immensely in the final third, combining for zero big chances from Paraguay and only marginal threat from Australia.",
+    "advanced_stats": {
+      "xg_a": 0.24,
+      "xg_b": 0.55,
+      "possession_a": 44,
+      "possession_b": 56,
+      "total_shots_a": 7,
+      "total_shots_b": 11,
+      "big_chances_a": 0,
+      "big_chances_b": 1,
+      "duels_won_a": 52,
+      "duels_won_b": 49
+    }
+  },
+  {
+    "match_id": "J3-E-1",
+    "ai_verdict": "Germany controlled the tempo with 61% possession, limiting Ecuador to just 0.65 xG. Despite a late push from the South Americans, Germany's structured chance creation secured a tight 2-1 win.",
+    "advanced_stats": {
+      "xg_a": 1.45,
+      "xg_b": 0.65,
+      "possession_a": 61,
+      "possession_b": 39,
+      "total_shots_a": 14,
+      "total_shots_b": 7,
+      "big_chances_a": 3,
+      "big_chances_b": 2,
+      "duels_won_a": 54,
+      "duels_won_b": 42
+    }
+  },
+  {
+    "match_id": "J3-E-2",
+    "ai_verdict": "A comfortable 2-0 victory for Ivory Coast. They monopolized the ball and entirely neutralized Curacao's offense, allowing only 2 total shots and zero big chances.",
+    "advanced_stats": {
+      "xg_a": 0.50,
+      "xg_b": 1.56,
+      "possession_a": 37,
+      "possession_b": 63,
+      "total_shots_a": 2,
+      "total_shots_b": 13,
+      "big_chances_a": 0,
+      "big_chances_b": 2,
+      "duels_won_a": 40,
+      "duels_won_b": 55
+    }
+  },
+  {
+    "match_id": "J3-F-1",
+    "ai_verdict": "The Netherlands dictated play with 69% possession and relentless offensive pressure. Generating 20 shots and 1.85 xG, their 3-1 victory perfectly reflects their superiority.",
+    "advanced_stats": {
+      "xg_a": 1.85,
+      "xg_b": 0.62,
+      "possession_a": 69,
+      "possession_b": 31,
+      "total_shots_a": 20,
+      "total_shots_b": 10,
+      "big_chances_a": 4,
+      "big_chances_b": 1,
+      "duels_won_a": 62,
+      "duels_won_b": 39
+    }
+  },
+  {
+    "match_id": "J3-F-2",
+    "ai_verdict": "A tightly contested 1-1 draw. Japan generated better quality chances (1.21 xG), but Sweden's defensive resilience and ball retention (55%) earned them a crucial point.",
+    "advanced_stats": {
+      "xg_a": 1.21,
+      "xg_b": 0.64,
+      "possession_a": 45,
+      "possession_b": 55,
+      "total_shots_a": 14,
+      "total_shots_b": 8,
+      "big_chances_a": 2,
+      "big_chances_b": 1,
+      "duels_won_a": 48,
+      "duels_won_b": 51
+    }
+  },
+  {
+    "match_id": "J3-H-1",
+    "ai_verdict": "Spain secured a highly tactical 1-0 win. They starved Uruguay of the ball (67% possession) and restricted them to a miserable 0.20 xG, winning through sheer control.",
+    "advanced_stats": {
+      "xg_a": 0.86,
+      "xg_b": 0.20,
+      "possession_a": 67,
+      "possession_b": 33,
+      "total_shots_a": 12,
+      "total_shots_b": 5,
+      "big_chances_a": 1,
+      "big_chances_b": 0,
+      "duels_won_a": 53,
+      "duels_won_b": 45
+    }
+  },
+  {
+    "match_id": "J3-H-2",
+    "ai_verdict": "Cape Verde continues their incredible defensive run with another clean sheet. They actually drove the match offensively (1.39 xG) but were held to a 0-0 draw by poor finishing.",
+    "advanced_stats": {
+      "xg_a": 1.39,
+      "xg_b": 0.39,
+      "possession_a": 51,
+      "possession_b": 49,
+      "total_shots_a": 15,
+      "total_shots_b": 7,
+      "big_chances_a": 2,
+      "big_chances_b": 0,
+      "duels_won_a": 56,
+      "duels_won_b": 48
+    }
+  },
+  {
+    "match_id": "J3-I-1",
+    "ai_verdict": "France delivered a masterclass in attacking efficiency. Creating 5 big chances and 2.80 xG, they dismantled Norway's defensive structure with ease.",
+    "advanced_stats": {
+      "xg_a": 2.80,
+      "xg_b": 1.15,
+      "possession_a": 57,
+      "possession_b": 43,
+      "total_shots_a": 15,
+      "total_shots_b": 10,
+      "big_chances_a": 5,
+      "big_chances_b": 1,
+      "duels_won_a": 58,
+      "duels_won_b": 44
+    }
+  },
+  {
+    "match_id": "J3-I-2",
+    "ai_verdict": "Total annihilation. Senegal crushed Iraq with 69% possession and a staggering 28 shots, turning a dominant 3.01 xG into a ruthless 5-0 victory.",
+    "advanced_stats": {
+      "xg_a": 3.01,
+      "xg_b": 0.14,
+      "possession_a": 69,
+      "possession_b": 31,
+      "total_shots_a": 28,
+      "total_shots_b": 6,
+      "big_chances_a": 5,
+      "big_chances_b": 0,
+      "duels_won_a": 64,
+      "duels_won_b": 35
+    }
   }
 ]

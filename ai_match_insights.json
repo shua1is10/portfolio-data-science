@@ -944,5 +944,133 @@
       "duels_won_a": 64,
       "duels_won_b": 35
     }
+  },
+  {
+    "match_id": "J3-G-1",
+    "ai_verdict": "An absolute demolition. Belgium relentlessly bombarded the Kiwi goal with 35 shots and 3.64 xG, resulting in a comfortable 5-1 thrashing.",
+    "advanced_stats": {
+      "xg_a": 3.64,
+      "xg_b": 0.24,
+      "possession_a": 54,
+      "possession_b": 46,
+      "total_shots_a": 35,
+      "total_shots_b": 6,
+      "big_chances_a": 5,
+      "big_chances_b": 0,
+      "duels_won_a": 51,
+      "duels_won_b": 49
+    }
+  },
+  {
+    "match_id": "J3-G-2",
+    "ai_verdict": "Iran generated far superior chances (1.97 xG, 5 big chances) despite lower possession, but poor finishing allowed Egypt to escape with a 1-1 draw.",
+    "advanced_stats": {
+      "xg_a": 0.84,
+      "xg_b": 1.97,
+      "possession_a": 61,
+      "possession_b": 39,
+      "total_shots_a": 19,
+      "total_shots_b": 15,
+      "big_chances_a": 0,
+      "big_chances_b": 5,
+      "duels_won_a": 63,
+      "duels_won_b": 71
+    }
+  },
+  {
+    "match_id": "J3-J-1",
+    "ai_verdict": "Complete control by Argentina. Operating with 73% possession and 2.13 xG, they methodically picked apart Jordan's deep defense for a solid 3-1 win.",
+    "advanced_stats": {
+      "xg_a": 2.13,
+      "xg_b": 0.76,
+      "possession_a": 73,
+      "possession_b": 27,
+      "total_shots_a": 12,
+      "total_shots_b": 5,
+      "big_chances_a": 2,
+      "big_chances_b": 1,
+      "duels_won_a": 32,
+      "duels_won_b": 34
+    }
+  },
+  {
+    "match_id": "J3-J-2",
+    "ai_verdict": "A chaotic 3-3 thriller. Algeria held the bulk of possession and big chances, but Austria's incredibly clinical finishing earned them a dramatic point.",
+    "advanced_stats": {
+      "xg_a": 1.67,
+      "xg_b": 1.49,
+      "possession_a": 65,
+      "possession_b": 35,
+      "total_shots_a": 10,
+      "total_shots_b": 10,
+      "big_chances_a": 3,
+      "big_chances_b": 0,
+      "duels_won_a": 34,
+      "duels_won_b": 28
+    }
+  },
+  {
+    "match_id": "J3-K-1",
+    "ai_verdict": "Colombia dictated the offensive flow with 24 shots and 1.70 xG, but an inspired Portuguese defense kept the game scoreless in a tense 0-0 stalemate.",
+    "advanced_stats": {
+      "xg_a": 0.93,
+      "xg_b": 1.70,
+      "possession_a": 45,
+      "possession_b": 55,
+      "total_shots_a": 13,
+      "total_shots_b": 24,
+      "big_chances_a": 2,
+      "big_chances_b": 2,
+      "duels_won_a": 37,
+      "duels_won_b": 29
+    }
+  },
+  {
+    "match_id": "J3-K-2",
+    "ai_verdict": "DR Congo overwhelmed their opponents, heavily restricting Uzbekistan's offense (0.20 xG) while creating multiple high-value opportunities to win 3-1.",
+    "advanced_stats": {
+      "xg_a": 2.18,
+      "xg_b": 0.20,
+      "possession_a": 58,
+      "possession_b": 42,
+      "total_shots_a": 12,
+      "total_shots_b": 3,
+      "big_chances_a": 2,
+      "big_chances_b": 1,
+      "duels_won_a": 58,
+      "duels_won_b": 63
+    }
+  },
+  {
+    "match_id": "J3-L-1",
+    "ai_verdict": "A highly professional performance by England. They monopolized possession (67%) and steadily created high-quality chances to secure a routine 2-0 victory.",
+    "advanced_stats": {
+      "xg_a": 1.56,
+      "xg_b": 0.66,
+      "possession_a": 67,
+      "possession_b": 33,
+      "total_shots_a": 17,
+      "total_shots_b": 13,
+      "big_chances_a": 3,
+      "big_chances_b": 0,
+      "duels_won_a": 61,
+      "duels_won_b": 43
+    }
+  },
+  {
+    "match_id": "J3-L-2",
+    "ai_verdict": "Croatia showcased ruthless efficiency, scoring twice from a minimal 0.42 xG to overcome a Ghanaian side that struggled to capitalize on their slight edge in chance quality.",
+    "advanced_stats": {
+      "xg_a": 0.42,
+      "xg_b": 0.87,
+      "possession_a": 53,
+      "possession_b": 47,
+      "total_shots_a": 6,
+      "total_shots_b": 6,
+      "big_chances_a": 0,
+      "big_chances_b": 1,
+      "duels_won_a": 42,
+      "duels_won_b": 38
+    }
   }
 ]

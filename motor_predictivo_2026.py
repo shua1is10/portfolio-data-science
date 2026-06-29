@@ -47,11 +47,12 @@ from sklearn.metrics import log_loss
 # -----------------------------------------------------------------------------
 # CONFIGURACION GLOBAL
 # -----------------------------------------------------------------------------
-DATASET_CSV   = "world_cup_ml_dataset.csv"
-TRACKING_CSV  = "tracking_predicciones_2026.csv"
-MODELO_FILE   = "modelo_wc2026.joblib"
-FORM_FILE     = "live_form_index.json"
-RANDOM_STATE  = 42
+DATASET_CSV        = "world_cup_ml_dataset.csv"
+TRACKING_CSV       = "tracking_predicciones_2026.csv"
+MODELO_FILE        = "modelo_wc2026.joblib"
+FORM_FILE          = "live_form_index.json"
+KNOCKOUT_FILE      = "knockout_bracket.json"
+RANDOM_STATE       = 42
 
 # Hiperparametros del sistema de forma dinamica (live_form_index)
 FORM_INICIAL  = 1.00   # valor neutro (equipos sin odds de mercado)
@@ -311,15 +312,19 @@ def guardar_form(form):
 # MODULO 2/5: PREDICCION DE UN PARTIDO (modelo estatico + forma dinamica)
 # =============================================================================
 
-def predecir_partido(modelo, perfiles, form, equipo_A, equipo_B):
+def predecir_partido(modelo, perfiles, form, equipo_A, equipo_B, knockout=False):
     """Devuelve (prob_A, prob_Empate, prob_B) para un match-up.
 
     Paso 1: el modelo estatico (entrenado una vez) produce probabilidades base
             a partir de los Deltas del perfil.
     Paso 2: se aplica el live_form_index como 'tilt' multiplicativo sobre las
             cuotas: si A viene en racha (form > 1) sus odds se inflan con
-            exponente GAMMA_FORM y luego se renormaliza. Esto hace evolucionar
+            exponente GAMMA_FORM y luego se renormalizan. Esto hace evolucionar
             las probabilidades durante el torneo SIN tocar el modelo.
+
+    Si knockout=True (fase eliminatoria), el empate es imposible: prob_Empate
+    se fija a 0 y las probabilidades de victoria se renormalizan para sumar
+    exactamente 1.0 — probabilidades binarias puras.
     """
     X = pd.DataFrame([features_matchup(perfiles[equipo_A], perfiles[equipo_B])],
                      columns=FEATURES)
@@ -332,6 +337,13 @@ def predecir_partido(modelo, perfiles, form, equipo_A, equipo_B):
     pA = p["A"] * ratio
     pB = p["B"] / ratio
     pE = p["E"]
+
+    if knockout:
+        # Eliminatoria: empate imposible -> redistribuir pE entre los dos equipos
+        # proporcionalmente y renormalizar a 1.0
+        total_ko = pA + pB
+        return pA / total_ko, 0.0, pB / total_ko
+
     total = pA + pE + pB                            # renormalizacion a 1.0
     return pA / total, pE / total, pB / total
 
@@ -561,6 +573,51 @@ def comando_form():
         print(f"{i:>2}. [{marca}] {eq:<22} {v:.3f}")
 
 
+def comando_predecir_ko(match_id, equipo_A, equipo_B):
+    """Genera probabilidades binarias (sin empate) para un partido de eliminatoria.
+
+    Usa el mismo modelo estatico + live_form_index que la fase de grupos, pero
+    fija prob_Empate = 0 y renormaliza prob_A + prob_B = 1.0.
+    Actualiza knockout_bracket.json si el archivo existe.
+    """
+    df = cargar_dataset()
+    perfiles = construir_perfiles(df)
+    modelo = cargar_o_entrenar_modelo(df, perfiles)
+    form = cargar_form(perfiles)
+
+    pA, _, pB = predecir_partido(
+        modelo, perfiles, form, equipo_A, equipo_B, knockout=True
+    )
+    pred = equipo_A if pA >= pB else equipo_B
+
+    print(f"\n[AI KO] {match_id}: {equipo_A} vs {equipo_B}")
+    print(f"  {equipo_A}: {pA*100:.1f}%  |  {equipo_B}: {pB*100:.1f}%")
+    print(f"  Proyeccion AI: {pred}  (prob_Empate = 0.0 — knockout rules)")
+
+    # Persist to knockout_bracket.json
+    if os.path.exists(KNOCKOUT_FILE):
+        with open(KNOCKOUT_FILE, "r", encoding="utf-8") as f:
+            bracket = json.load(f)
+        updated = False
+        for match in bracket:
+            if match["id"] == match_id:
+                match["probA"] = round(pA, 4)
+                match["probB"] = round(pB, 4)
+                match["projectedWinner"] = pred
+                updated = True
+                break
+        if not updated:
+            print(f"[AI KO] WARN: match_id '{match_id}' no encontrado en {KNOCKOUT_FILE}")
+        else:
+            with open(KNOCKOUT_FILE, "w", encoding="utf-8") as f:
+                json.dump(bracket, f, ensure_ascii=False, indent=2)
+            print(f"[AI KO] {KNOCKOUT_FILE} actualizado con proyeccion.")
+    else:
+        print(f"[AI KO] {KNOCKOUT_FILE} no encontrado — crea el archivo primero.")
+
+    return pA, pB
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Motor Predictivo y Sistema de Tracking - Mundial 2026")
@@ -580,6 +637,14 @@ def main():
 
     sub.add_parser("form", help="Muestra el live_form_index actual")
 
+    p_ko = sub.add_parser(
+        "predecir-ko",
+        help="Genera probabilidades binarias (sin empate) para un partido eliminatorio",
+    )
+    p_ko.add_argument("match_id", help="Ej: R32-1")
+    p_ko.add_argument("equipo_A", help="Nombre exacto del equipo A (ganador local)")
+    p_ko.add_argument("equipo_B", help="Nombre exacto del equipo B (visitante)")
+
     args = parser.parse_args()
     if args.comando == "actualizar":
         actualizar_resultado_real(args.match_id, args.goles_A, args.goles_B,
@@ -588,6 +653,8 @@ def main():
         comando_form()
     elif args.comando == "predecir":
         comando_predecir(args.jornada, reentrenar=args.reentrenar)
+    elif args.comando == "predecir-ko":
+        comando_predecir_ko(args.match_id, args.equipo_A, args.equipo_B)
     else:
         # Sin argumentos: flujo completo por defecto (entrenar si hace falta + J1)
         comando_predecir(jornada=1)

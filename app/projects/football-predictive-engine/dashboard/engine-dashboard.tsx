@@ -11,7 +11,7 @@ import {
   TrendingUp, TrendingDown, Activity, Target, FlaskConical,
   ChevronRight, Sparkles, BookOpenText, BarChart3, BrainCircuit,
   LayoutGrid, Table2, CalendarRange, ArrowUpRight, ArrowDownRight,
-  Goal, Percent, Flame, Award,
+  Goal, Percent, Flame, Award, Trophy,
 } from "lucide-react";
 import { FadeUp, StaggerGrid, StaggerItem } from "@/components/ui/animate";
 import {
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import { GenAIBadge } from "@/components/ui/genai-badge";
 import { Tabs, type TabItem } from "@/components/ui/tabs";
+import { KnockoutTree } from "./KnockoutTree";
 
 /* ── Types (filled server-side from the engine's output files) ─────────── */
 export interface TrackedMatch {
@@ -66,6 +67,18 @@ export interface LeaderboardEntry {
   name:  string;
   team:  string;
   stats: number;
+}
+
+/** A single knockout-stage matchup as stored in knockout_bracket.json.
+ *  probA/probB are binary (draw = 0) and null until the AI projects them. */
+export interface KnockoutMatch {
+  id:               string;        // "R32-1" … "R32-16"
+  round:            string;        // "Round of 32"
+  teamA:            string;
+  teamB:            string;
+  probA:            number | null; // binary: no draw
+  probB:            number | null;
+  projectedWinner:  string | null;
 }
 
 /** Tournament-wide player leaderboard, extracted by the AI scraping layer
@@ -350,7 +363,7 @@ function LeaderboardColumn({
         </p>
       ) : (
         <div className="space-y-2.5">
-          {[...entries].sort((a, b) => b.stats - a.stats).map((p, i) => (
+          {[...entries].sort((a, b) => b.stats - a.stats).slice(0, 5).map((p, i) => (
             <div key={`${p.name}-${i}`} className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="shrink-0 w-5 h-5 rounded-full bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[10px] font-bold text-[#86868b] dark:text-[#8e8e93] flex items-center justify-center">
@@ -685,6 +698,7 @@ const TAB_ITEMS: TabItem[] = [
   { value: "fixtures",  label: "Upcoming Fixtures",          icon: CalendarRange },
   { value: "form",      label: "Dynamic Form Index",         icon: TrendingUp },
   { value: "telemetry", label: "AI Telemetry Insights",      icon: BrainCircuit },
+  { value: "knockout",  label: "Knockout Bracket",           icon: Trophy },
 ];
 
 /* ═════════════════════════════════════════════════════════════════════════
@@ -695,10 +709,10 @@ const EMPTY_LEADERBOARD: TournamentLeaderboard = {
 };
 
 export function EngineDashboard({
-  matches, form, insights = [], playerSpotlight = EMPTY_LEADERBOARD,
+  matches, form, insights = [], playerSpotlight = EMPTY_LEADERBOARD, bracket = [],
 }: {
   matches: TrackedMatch[]; form: FormEntry[]; insights?: MatchInsight[];
-  playerSpotlight?: TournamentLeaderboard;
+  playerSpotlight?: TournamentLeaderboard; bracket?: KnockoutMatch[];
 }) {
   const [activeTab, setActiveTab] = useState<string>("summary");
   const [groupFilter, setGroupFilter] = useState<string>("All");
@@ -1336,6 +1350,43 @@ export function EngineDashboard({
                   </FadeUp>
                 </div>
               </>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* ════════════════════════════════════════════════════
+          TAB 6 — Knockout Bracket
+      ════════════════════════════════════════════════════ */}
+      {activeTab === "knockout" && (
+        <section className="px-4 sm:px-6 mb-14">
+          <div className="max-w-6xl mx-auto rounded-[2rem] sm:rounded-[2.5rem] bg-[#f5f5f7] dark:bg-[#1d1d1f] px-4 sm:px-10 py-8 sm:py-10">
+            <FadeUp>
+              <div className="flex items-center gap-3 mb-2">
+                <Trophy className="w-5 h-5 text-[#0071e3]" />
+                <h2 className="text-lg sm:text-2xl font-bold tracking-[-0.02em] text-[#1d1d1f] dark:text-white">
+                  Knockout Bracket
+                </h2>
+              </div>
+              <p className="text-xs sm:text-[13px] text-[#86868b] dark:text-[#8e8e93] mb-7 max-w-2xl">
+                AI-projected Round of 32 matchups. When binary probabilities
+                have been computed (draw = 0, knockout rules), the team with
+                probability &gt; 50% advances automatically to the projected
+                Round of 16 slot.
+              </p>
+            </FadeUp>
+            {bracket.length === 0 ? (
+              <FadeUp>
+                <div className="rounded-3xl border-2 border-dashed border-[#d2d2d7] dark:border-[#3a3a3c] py-12 text-center">
+                  <p className="text-sm font-medium text-[#6e6e73] dark:text-[#8e8e93]">
+                    Bracket data not available yet.
+                  </p>
+                </div>
+              </FadeUp>
+            ) : (
+              <FadeUp delay={0.05}>
+                <KnockoutTree bracket={bracket} />
+              </FadeUp>
             )}
           </div>
         </section>

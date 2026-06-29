@@ -5,6 +5,7 @@ import Papa from "papaparse";
 import {
   EngineDashboard,
   type TrackedMatch, type FormEntry, type MatchInsight, type TournamentLeaderboard,
+  type KnockoutMatch,
 } from "./engine-dashboard";
 
 export const metadata: Metadata = {
@@ -68,11 +69,24 @@ function loadPlayerSpotlight(root: string): TournamentLeaderboard {
   }
 }
 
+/** Tolerant loader for the knockout bracket store. */
+function loadKnockoutBracket(root: string): KnockoutMatch[] {
+  const file = path.join(root, "knockout_bracket.json");
+  if (!existsSync(file)) return [];
+  try {
+    const raw = readFileSync(file, "utf-8").replace(/^﻿/, "");
+    const data = JSON.parse(raw);
+    return Array.isArray(data) ? (data as KnockoutMatch[]) : [];
+  } catch {
+    return [];
+  }
+}
+
 /** Reads the engine's own output files (tracking CSV + form JSON) at build
  *  time and normalizes them into English-labelled props for the client UI. */
 function loadEngineOutput(): {
   matches: TrackedMatch[]; form: FormEntry[]; insights: MatchInsight[];
-  playerSpotlight: TournamentLeaderboard;
+  playerSpotlight: TournamentLeaderboard; bracket: KnockoutMatch[];
 } {
   const root = process.cwd();
 
@@ -122,15 +136,16 @@ function loadEngineOutput(): {
     matches, form,
     insights: loadInsights(root),
     playerSpotlight: loadPlayerSpotlight(root),
+    bracket: loadKnockoutBracket(root),
   };
 }
 
 export default function EngineDashboardPage() {
-  const { matches, form, insights, playerSpotlight } = loadEngineOutput();
+  const { matches, form, insights, playerSpotlight, bracket } = loadEngineOutput();
   return (
     <EngineDashboard
       matches={matches} form={form} insights={insights}
-      playerSpotlight={playerSpotlight}
+      playerSpotlight={playerSpotlight} bracket={bracket}
     />
   );
 }

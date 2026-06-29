@@ -694,7 +694,7 @@ function GroupStandingsTable({ group, rows }: { group: string; rows: StandingRow
 /* ── Tab definitions ─────────────────────────────────────────────────────── */
 const TAB_ITEMS: TabItem[] = [
   { value: "summary",   label: "Tournament Summary",        icon: LayoutGrid },
-  { value: "standings", label: "Group Standings & Tracking", icon: Table2 },
+  { value: "standings", label: "Match Tracking",             icon: Table2 },
   { value: "fixtures",  label: "Upcoming Fixtures",          icon: CalendarRange },
   { value: "form",      label: "Dynamic Form Index",         icon: TrendingUp },
   { value: "telemetry", label: "AI Telemetry Insights",      icon: BrainCircuit },
@@ -965,11 +965,12 @@ export function EngineDashboard({
       )}
 
       {/* ════════════════════════════════════════════════════
-          TAB 2 — Group Standings & Tracking
+          TAB 2 — Match Tracking
       ════════════════════════════════════════════════════ */}
       {activeTab === "standings" && (
         <>
-          <section className="px-4 sm:px-6 mb-10">
+          {/* Group Standings tables — hidden post-group stage */}
+          <section className="hidden">
             <div className="max-w-6xl mx-auto rounded-[2rem] sm:rounded-[2.5rem] bg-[#f5f5f7] dark:bg-[#1d1d1f] px-4 sm:px-10 py-8 sm:py-10">
               <FadeUp>
                 <div className="flex items-center gap-3 mb-2">

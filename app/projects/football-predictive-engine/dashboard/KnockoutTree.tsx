@@ -3,216 +3,269 @@
 import { useMemo } from "react";
 import type { KnockoutMatch } from "./engine-dashboard";
 
-/* ── Palette (mirrors engine-dashboard tokens) ──────────────────────────── */
-const BLUE  = "#0071e3";
-const GREEN = "#30d158";
-const MUTED = "#86868b";
+/* ─────────────────────────────────────────────────────────────────────────
+   Layout constants — tweak here to adjust sizing
+────────────────────────────────────────────────────────────────────────── */
+const SLOT_H  = 68;          // height of one R32 "slot" (px)
+const NODE_H  = 52;          // match-card height (px)
+const NODE_W  = 152;         // match-card width (px)
+const CONN_W  = 34;          // connector column width (px)
+const TOTAL_H = 16 * SLOT_H; // 1088 px — total bracket height
 
-/* ── Helpers ─────────────────────────────────────────────────────────────── */
-function fmtPct(p: number | null): string {
-  return p === null ? "—" : `${Math.round(p * 100)}%`;
+const ROUND_LABELS = [
+  "Round of 32",
+  "Round of 16",
+  "Quarter-Finals",
+  "Semi-Finals",
+  "Final",
+];
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Internal bracket match type
+────────────────────────────────────────────────────────────────────────── */
+interface BM {
+  id: string;
+  teamA: string;
+  teamB: string;
+  probA: number | null;
+  probB: number | null;
+  projectedWinner: string | null;
+  r: number;  // 0 = R32 … 4 = Final
+  i: number;  // 0-based index within the round
 }
 
-function resolveWinner(match: KnockoutMatch): string | null {
-  if (match.projectedWinner) return match.projectedWinner;
-  if (match.probA !== null && match.probB !== null) {
-    return match.probA >= match.probB ? match.teamA : match.teamB;
+/* ─────────────────────────────────────────────────────────────────────────
+   Geometry — bracket positioning
+────────────────────────────────────────────────────────────────────────── */
+
+/** Absolute center-Y of a match card in round r, index i. */
+function cy(r: number, i: number): number {
+  return SLOT_H * (i * Math.pow(2, r) + Math.pow(2, r) / 2);
+}
+
+/** Absolute top of a match card (for CSS `top`). */
+function cardTop(r: number, i: number): number {
+  return cy(r, i) - NODE_H / 2;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Winner resolver (uses projectedWinner then falls back to highest prob)
+────────────────────────────────────────────────────────────────────────── */
+function resolveWinner(m: BM): string | null {
+  if (m.projectedWinner) return m.projectedWinner;
+  if (m.probA !== null && m.probB !== null) {
+    return m.probA >= m.probB ? m.teamA : m.teamB;
   }
   return null;
 }
 
-/* ── MatchCard ───────────────────────────────────────────────────────────── */
-function MatchCard({ match }: { match: KnockoutMatch }) {
-  const hasProbs = match.probA !== null && match.probB !== null;
-  const winner   = resolveWinner(match);
+/* ─────────────────────────────────────────────────────────────────────────
+   Build the full 5-round bracket from R32 data only.
+   Rounds R16 → Final are auto-derived by cascading projected winners.
+────────────────────────────────────────────────────────────────────────── */
+function buildBracket(r32: KnockoutMatch[]): BM[][] {
+  const sorted = [...r32].sort(
+    (a, b) =>
+      Number(a.id.replace("R32-", "")) - Number(b.id.replace("R32-", ""))
+  );
 
-  const dimA = winner !== null && winner !== match.teamA;
-  const dimB = winner !== null && winner !== match.teamB;
+  const round0: BM[] = sorted.map((m, idx) => ({
+    id: m.id,
+    teamA: m.teamA, teamB: m.teamB,
+    probA: m.probA, probB: m.probB,
+    projectedWinner: m.projectedWinner,
+    r: 0, i: idx,
+  }));
+
+  const allRounds: BM[][] = [round0];
+  const ids = ["R16", "QF", "SF", "F"];
+
+  let prev = round0;
+  for (let rIdx = 0; rIdx < 4; rIdx++) {
+    const next: BM[] = [];
+    for (let j = 0; j < prev.length; j += 2) {
+      const a = prev[j];
+      const b = prev[j + 1];
+      const wA = resolveWinner(a) ?? "TBD";
+      const wB = b ? (resolveWinner(b) ?? "TBD") : "TBD";
+      next.push({
+        id:    `${ids[rIdx]}-${Math.floor(j / 2) + 1}`,
+        teamA: wA, teamB: wB,
+        probA: null, probB: null, projectedWinner: null,
+        r: rIdx + 1, i: Math.floor(j / 2),
+      });
+    }
+    allRounds.push(next);
+    prev = next;
+  }
+
+  return allRounds;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Connector SVG — sits between two consecutive round columns.
+   Draws right-stubs, a vertical bar, and a horizontal line to the parent.
+────────────────────────────────────────────────────────────────────────── */
+function Connector({ round, matchCount }: { round: number; matchCount: number }) {
+  const paths: string[] = [];
+
+  for (let i = 0; i < matchCount; i += 2) {
+    const yTop  = cy(round, i);
+    const yBot  = cy(round, i + 1);
+    const yPar  = cy(round + 1, Math.floor(i / 2));
+    const xMid  = CONN_W / 2;
+
+    paths.push(
+      `M 0 ${yTop} H ${xMid}`,           // stub: top match → centre
+      `M 0 ${yBot} H ${xMid}`,           // stub: bottom match → centre
+      `M ${xMid} ${yTop} V ${yBot}`,     // vertical bar connecting pair
+      `M ${xMid} ${yPar} H ${CONN_W}`,   // horizontal → next-round card
+    );
+  }
 
   return (
-    <div className="rounded-2xl bg-white dark:bg-[#2c2c2e] border border-[#e8e8ed] dark:border-[#3a3a3c] p-3 shadow-sm h-full">
-      {/* Match ID chip */}
-      <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#86868b] dark:text-[#8e8e93] mb-2">
-        {match.id}
-      </p>
+    <svg
+      width={CONN_W}
+      height={TOTAL_H}
+      style={{ display: "block", flexShrink: 0 }}
+      className="overflow-visible"
+      aria-hidden
+    >
+      {paths.map((d, k) => (
+        <path
+          key={k} d={d} fill="none"
+          stroke="#d2d2d7" strokeWidth={1.5} strokeLinecap="round"
+          className="dark:stroke-[#3a3a3c]"
+        />
+      ))}
+    </svg>
+  );
+}
 
-      {/* Team A */}
-      <div className={`flex items-center justify-between gap-1 transition-opacity ${dimA ? "opacity-35" : ""}`}>
-        <span className="text-[11px] font-semibold text-[#1d1d1f] dark:text-white truncate">
-          {match.teamA}
+/* ─────────────────────────────────────────────────────────────────────────
+   Compact Match Card — absolutely positioned within a round column
+────────────────────────────────────────────────────────────────────────── */
+function MatchCard({ m }: { m: BM }) {
+  const w        = resolveWinner(m);
+  const hasProbs = m.probA !== null && m.probB !== null;
+  const isFinal  = m.r === 4;
+
+  const TeamRow = ({
+    team, prob, isWin, isLose,
+  }: { team: string; prob: number | null; isWin: boolean; isLose: boolean }) => (
+    <div
+      className={`flex items-center justify-between gap-1 px-2 flex-1 min-h-0 transition-opacity duration-200 ${
+        isLose ? "opacity-25" : ""
+      }`}
+    >
+      <span
+        className="text-[10px] font-semibold leading-tight truncate"
+        style={{ color: isWin ? "#0071e3" : undefined }}
+      >
+        {team}
+      </span>
+      {hasProbs && prob !== null && (
+        <span
+          className="text-[10px] font-bold tabular-nums shrink-0"
+          style={{ color: isWin ? "#0071e3" : "#86868b" }}
+        >
+          {Math.round(prob * 100)}%
         </span>
-        {hasProbs && (
-          <span
-            className="text-[11px] font-bold tabular-nums shrink-0"
-            style={{ color: winner === match.teamA ? BLUE : MUTED }}
-          >
-            {fmtPct(match.probA)}
-          </span>
-        )}
+      )}
+    </div>
+  );
+
+  const aWins = w === m.teamA;
+  const bWins = w === m.teamB;
+
+  return (
+    <div
+      className={`absolute left-0 flex flex-col overflow-hidden rounded-xl shadow-sm border ${
+        isFinal
+          ? "border-[#f5c400] dark:border-[#b38e00]"
+          : "border-[#e8e8ed] dark:border-[#3a3a3c]"
+      } bg-white dark:bg-[#2c2c2e]`}
+      style={{ top: cardTop(m.r, m.i), width: NODE_W, height: NODE_H }}
+    >
+      {/* Team A row */}
+      <div className="border-b border-[#f0f0f5] dark:border-[#3a3a3c] flex-1 min-h-0 flex items-stretch">
+        <TeamRow team={m.teamA} prob={m.probA} isWin={aWins} isLose={w !== null && !aWins} />
       </div>
 
-      {/* Binary probability bar */}
+      {/* Team B row */}
+      <div className="flex-1 min-h-0 flex items-stretch">
+        <TeamRow team={m.teamB} prob={m.probB} isWin={bWins} isLose={w !== null && !bWins} />
+      </div>
+
+      {/* Probability fill bar (bottom edge) */}
       {hasProbs && (
-        <div className="relative h-[3px] rounded-full bg-[#f0f0f5] dark:bg-[#3a3a3c] overflow-hidden my-1.5">
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#f0f0f5] dark:bg-[#3a3a3c]">
           <div
-            className="absolute left-0 h-full rounded-full"
-            style={{ width: fmtPct(match.probA), backgroundColor: BLUE }}
+            className="h-full bg-[#0071e3] rounded-r-full"
+            style={{ width: `${Math.round((m.probA ?? 0) * 100)}%` }}
           />
         </div>
       )}
 
-      {/* Team B */}
-      <div className={`flex items-center justify-between gap-1 transition-opacity ${dimB ? "opacity-35" : ""}`}>
-        <span className="text-[11px] font-semibold text-[#1d1d1f] dark:text-white truncate">
-          {match.teamB}
+      {/* Final champion label */}
+      {isFinal && w && (
+        <span className="absolute bottom-[3px] right-[5px] text-[7px] font-extrabold tracking-[0.06em] uppercase text-[#a07d00] dark:text-[#f5c400]">
+          Champion
         </span>
-        {hasProbs && (
-          <span
-            className="text-[11px] font-bold tabular-nums shrink-0"
-            style={{ color: winner === match.teamB ? BLUE : MUTED }}
-          >
-            {fmtPct(match.probB)}
-          </span>
-        )}
-      </div>
-
-      {/* AI projected winner label */}
-      {winner && (
-        <p
-          className="mt-2 pt-1.5 border-t border-[#f0f0f5] dark:border-[#3a3a3c] text-[9px] font-bold uppercase tracking-[0.1em]"
-          style={{ color: GREEN }}
-        >
-          AI → {winner}
-        </p>
       )}
     </div>
   );
 }
 
-/* ── R16 projected slot ─────────────────────────────────────────────────── */
-function R16Slot({
-  label, teamA, teamB,
-}: {
-  label: string;
-  teamA: string | null;
-  teamB: string | null;
-}) {
-  const ready = teamA && teamB;
-
+/* ─────────────────────────────────────────────────────────────────────────
+   Round Column — label + absolutely-positioned match cards
+────────────────────────────────────────────────────────────────────────── */
+function RoundCol({ matches, label }: { matches: BM[]; label: string }) {
   return (
-    <div className="rounded-2xl bg-white dark:bg-[#1d1d1f] border-2 border-dashed border-[#d2d2d7] dark:border-[#3a3a3c] p-3 w-full">
-      <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#86868b] dark:text-[#8e8e93] mb-1.5">
+    <div style={{ flexShrink: 0, display: "flex", flexDirection: "column" }}>
+      {/* Round label */}
+      <p
+        className="text-[9px] font-bold uppercase tracking-[0.1em] text-[#86868b] dark:text-[#8e8e93] mb-2 text-center"
+        style={{ width: NODE_W }}
+      >
         {label}
       </p>
-      {ready ? (
-        <div className="space-y-0.5">
-          <p className="text-[11px] font-bold text-[#1d1d1f] dark:text-white truncate">{teamA}</p>
-          <p className="text-[9px] text-[#86868b] dark:text-[#8e8e93]">vs</p>
-          <p className="text-[11px] font-bold text-[#1d1d1f] dark:text-white truncate">{teamB}</p>
-        </div>
-      ) : (
-        <p className="text-[11px] italic text-[#86868b] dark:text-[#8e8e93]">TBD</p>
-      )}
-    </div>
-  );
-}
 
-/* ── BracketPair ─────────────────────────────────────────────────────────── */
-function BracketPair({
-  top, bottom, r16Label,
-}: {
-  top:      KnockoutMatch;
-  bottom:   KnockoutMatch;
-  r16Label: string;
-}) {
-  const winnerTop    = resolveWinner(top);
-  const winnerBottom = resolveWinner(bottom);
-
-  return (
-    <div className="flex items-stretch gap-0">
-      {/* Two R32 match cards */}
-      <div className="flex-1 flex flex-col gap-2 min-w-0">
-        <div className="flex-1">
-          <MatchCard match={top} />
-        </div>
-        <div className="flex-1">
-          <MatchCard match={bottom} />
-        </div>
-      </div>
-
-      {/* Bracket connector — top arm (border-right + border-bottom) and
-          bottom arm (border-right + border-top) form an L-bracket */}
-      <div className="w-5 shrink-0 flex flex-col">
-        <div className="flex-1 border-r-2 border-b-2 border-[#d2d2d7] dark:border-[#3a3a3c] rounded-br-lg" />
-        <div className="flex-1 border-r-2 border-t-2 border-[#d2d2d7] dark:border-[#3a3a3c] rounded-tr-lg" />
-      </div>
-
-      {/* Projected R16 slot */}
-      <div className="w-[132px] shrink-0 flex items-center pl-1.5">
-        <R16Slot
-          label={r16Label}
-          teamA={winnerTop}
-          teamB={winnerBottom}
-        />
-      </div>
-    </div>
-  );
-}
-
-/* ── KnockoutTree (exported) ─────────────────────────────────────────────── */
-export function KnockoutTree({ bracket }: { bracket: KnockoutMatch[] }) {
-  const r32 = useMemo(
-    () =>
-      [...bracket].sort(
-        (a, b) =>
-          Number(a.id.replace("R32-", "")) - Number(b.id.replace("R32-", ""))
-      ),
-    [bracket]
-  );
-
-  /* Group sorted R32 matches into pairs: (0,1), (2,3) … (14,15) */
-  const pairs = useMemo<[KnockoutMatch, KnockoutMatch][]>(() => {
-    const out: [KnockoutMatch, KnockoutMatch][] = [];
-    for (let i = 0; i + 1 < r32.length; i += 2) {
-      out.push([r32[i], r32[i + 1]]);
-    }
-    return out;
-  }, [r32]);
-
-  const leftPairs  = pairs.slice(0, 4); // R32 1-8  → R16 1-4
-  const rightPairs = pairs.slice(4, 8); // R32 9-16 → R16 5-8
-
-  const SideLabel = ({ label }: { label: string }) => (
-    <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#86868b] dark:text-[#8e8e93] mb-2 pl-0.5">
-      {label}
-    </p>
-  );
-
-  return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-      {/* ── Left bracket: matches 1-8 ──────────────────────── */}
-      <div className="space-y-3">
-        <SideLabel label="Left Bracket — R32 matches 1–8" />
-        {leftPairs.map((pair, i) => (
-          <BracketPair
-            key={pair[0].id}
-            top={pair[0]}
-            bottom={pair[1]}
-            r16Label={`R16-${i + 1}`}
-          />
+      {/* Positioned container */}
+      <div className="relative" style={{ width: NODE_W, height: TOTAL_H }}>
+        {matches.map((m) => (
+          <MatchCard key={m.id} m={m} />
         ))}
       </div>
+    </div>
+  );
+}
 
-      {/* ── Right bracket: matches 9-16 ────────────────────── */}
-      <div className="space-y-3">
-        <SideLabel label="Right Bracket — R32 matches 9–16" />
-        {rightPairs.map((pair, i) => (
-          <BracketPair
-            key={pair[0].id}
-            top={pair[0]}
-            bottom={pair[1]}
-            r16Label={`R16-${i + 5}`}
-          />
+/* ─────────────────────────────────────────────────────────────────────────
+   KnockoutTree — public export
+────────────────────────────────────────────────────────────────────────── */
+export function KnockoutTree({ bracket }: { bracket: KnockoutMatch[] }) {
+  const rounds = useMemo(() => buildBracket(bracket), [bracket]);
+
+  return (
+    /* Outer wrapper: horizontal scroll on overflow */
+    <div
+      className="overflow-x-auto pb-4"
+      style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+    >
+      {/* Inner flex-row: all round columns + connectors */}
+      <div
+        className="flex flex-row items-start"
+        style={{ minWidth: "max-content" }}
+      >
+        {rounds.map((roundMatches, r) => (
+          <div key={r} className="flex flex-row items-start">
+            <RoundCol matches={roundMatches} label={ROUND_LABELS[r]} />
+            {/* Draw connector only between consecutive rounds, not after Final */}
+            {r < rounds.length - 1 && (
+              <Connector round={r} matchCount={roundMatches.length} />
+            )}
+          </div>
         ))}
       </div>
     </div>

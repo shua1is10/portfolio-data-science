@@ -36,7 +36,13 @@
     { "name": "Nikola Vlasic", "team": "Croatia", "stats": 1 },
     { "name": "Riyad Mahrez", "team": "Algeria", "stats": 1 },
     { "name": "Marko Arnautovic", "team": "Austria", "stats": 1 },
-    { "name": "Marcel Sabitzer", "team": "Austria", "stats": 1 }
+    { "name": "Marcel Sabitzer", "team": "Austria", "stats": 1 },
+    { "name": "Stephen Eustaquio", "team": "Canada", "stats": 1 },
+    { "name": "Casemiro", "team": "Brazil", "stats": 1 },
+    { "name": "Gabriel Martinelli", "team": "Brazil", "stats": 1 },
+    { "name": "Kaishu Sano", "team": "Japan", "stats": 1 },
+    { "name": "Kai Havertz", "team": "Germany", "stats": 1 },
+    { "name": "Julio Enciso", "team": "Paraguay", "stats": 1 }
   ],
   "topAssists": [
     { "name": "Alistair Johnston", "team": "Canada", "stats": 2 },

@@ -1072,5 +1072,56 @@
       "duels_won_a": 42,
       "duels_won_b": 38
     }
+  },
+  {
+    "match_id": "R32-1",
+    "narrative": "Canada defeated South Africa 1-0 in the opening Round of 32 clash, with Stephen Eustaquio's goal proving the difference. Canada controlled the match throughout, generating 4 big chances and a dominant 1.38 xG against a South African side that managed just 0.14 xG and 6 total shots.",
+    "ai_verdict": "Model Prediction: Correct. Canada translated their clear superiority (1.38 xG and 4 big chances) into a controlled 1-0 victory, ending South Africa's run.",
+    "advanced_stats": {
+      "xg_a": 0.14,
+      "xg_b": 1.38,
+      "possession_a": 42,
+      "possession_b": 58,
+      "total_shots_a": 6,
+      "total_shots_b": 12,
+      "big_chances_a": 0,
+      "big_chances_b": 4,
+      "duels_won_a": 49,
+      "duels_won_b": 57
+    }
+  },
+  {
+    "match_id": "R32-2",
+    "narrative": "Brazil advanced to the Round of 16 with a 2-1 victory over a resilient Japan side. Goals from Casemiro and Gabriel Martinelli secured the win for the Seleção, who dominated every metric. Kaishu Sano scored a stunning consolation for Japan, but Brazil's 69% possession and 2.07 xG were ultimately decisive.",
+    "ai_verdict": "Model Prediction: Correct. Brazil dominated possession (69%) and chance creation (2.07 xG). Despite a resilient Japan, Brazil's offensive volume secured a logical 2-1 progression.",
+    "advanced_stats": {
+      "xg_a": 2.07,
+      "xg_b": 0.33,
+      "possession_a": 69,
+      "possession_b": 31,
+      "total_shots_a": 15,
+      "total_shots_b": 5,
+      "big_chances_a": 5,
+      "big_chances_b": 0,
+      "duels_won_a": 45,
+      "duels_won_b": 34
+    }
+  },
+  {
+    "match_id": "R32-3",
+    "narrative": "One of the biggest upsets in World Cup knockout history. Kai Havertz's goal gave Germany a deserved lead, but Julio Enciso's stunner leveled for Paraguay in the second half. Despite Germany's staggering 75% possession and 16 shots, Paraguay's monumental defensive effort — winning 76 duels — forced extra time and a penalty shootout, which the South Americans won 4-3.",
+    "ai_verdict": "Model Prediction: FAILED. Massive upset. Germany completely dominated the ball (75%) and metrics, but Paraguay's monumental defensive effort (76 duels won) dragged the game to penalties, where the South Americans triumphed 4-3.",
+    "advanced_stats": {
+      "xg_a": 1.49,
+      "xg_b": 0.42,
+      "possession_a": 75,
+      "possession_b": 25,
+      "total_shots_a": 16,
+      "total_shots_b": 7,
+      "big_chances_a": 3,
+      "big_chances_b": 2,
+      "duels_won_a": 60,
+      "duels_won_b": 76
+    }
   }
 ]

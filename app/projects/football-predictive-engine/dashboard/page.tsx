@@ -88,7 +88,7 @@ function loadEngineOutput(): {
   matches: TrackedMatch[]; form: FormEntry[]; insights: MatchInsight[];
   playerSpotlight: TournamentLeaderboard; bracket: KnockoutMatch[];
 } {
-  const root = process.cwd();
+  const root = path.join(process.cwd(), "data", "football");
 
   const csv = readFileSync(path.join(root, "tracking_predicciones_2026.csv"), "utf-8");
   const parsed = Papa.parse<RawTrackingRow>(csv.trim(), {

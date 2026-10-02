@@ -1,7 +1,7 @@
 """
 Digital Addiction -- Data Processing Pipeline
 Reads the 3 CSV sources, computes all metrics and chart series,
-and writes public/data_insights.json for the Next.js dashboard.
+and writes data/digital-addiction/data_insights.json for the Next.js dashboard.
 Author: Joshua Sanchez (Data Science Engineer)
 """
 
@@ -11,17 +11,18 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-BASE   = os.path.dirname(__file__)
-PUBLIC = os.path.join(BASE, '..', 'public')
-OUT    = os.path.join(PUBLIC, 'data_insights.json')
+BASE   = os.path.dirname(os.path.abspath(__file__))
+RAW    = os.path.join(BASE, 'data', 'raw')
+WEB    = os.path.join(BASE, '..', '..', 'data', 'digital-addiction')
+OUT    = os.path.join(WEB, 'data_insights.json')
 
-os.makedirs(PUBLIC, exist_ok=True)
+os.makedirs(WEB, exist_ok=True)
 
 # ---- 0. Load -----------------------------------------------------------------
 print("Loading CSV sources...")
-df_country  = pd.read_csv(os.path.join(BASE, 'country_wise_analysis_addiction.csv'))
-df_behavior = pd.read_csv(os.path.join(BASE, 'screen_time_behavior.csv'))
-df_global   = pd.read_csv(os.path.join(BASE, 'tiktok_instagram_global_100countries.csv'))
+df_country  = pd.read_csv(os.path.join(RAW, 'country_wise_analysis_addiction.csv'))
+df_behavior = pd.read_csv(os.path.join(RAW, 'screen_time_behavior.csv'))
+df_global   = pd.read_csv(os.path.join(RAW, 'tiktok_instagram_global_100countries.csv'))
 
 print(f"  country_wise : {len(df_country):>5} rows")
 print(f"  screen_time  : {len(df_behavior):>5} rows")

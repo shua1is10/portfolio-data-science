@@ -37,6 +37,8 @@ import numpy as np
 import pandas as pd
 import joblib
 
+from paths import PROCESSED, MODELS, WEB_DATA
+
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
@@ -47,11 +49,11 @@ from sklearn.metrics import log_loss
 # -----------------------------------------------------------------------------
 # CONFIGURACION GLOBAL
 # -----------------------------------------------------------------------------
-DATASET_CSV        = "world_cup_ml_dataset.csv"
-TRACKING_CSV       = "tracking_predicciones_2026.csv"
-MODELO_FILE        = "modelo_wc2026.joblib"
-FORM_FILE          = "live_form_index.json"
-KNOCKOUT_FILE      = "knockout_bracket.json"
+DATASET_CSV        = PROCESSED / "world_cup_ml_dataset.csv"
+TRACKING_CSV       = WEB_DATA / "tracking_predicciones_2026.csv"
+MODELO_FILE        = MODELS / "modelo_wc2026.joblib"
+FORM_FILE          = WEB_DATA / "live_form_index.json"
+KNOCKOUT_FILE      = WEB_DATA / "knockout_bracket.json"
 RANDOM_STATE       = 42
 
 # Hiperparametros del sistema de forma dinamica (live_form_index)

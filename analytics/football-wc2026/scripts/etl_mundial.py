@@ -23,6 +23,8 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import declarative_base, relationship, Session
 
+from paths import RAW, LOCAL
+
 # ---------------------------------------------------------------------------
 # Config & Logging
 # ---------------------------------------------------------------------------
@@ -34,9 +36,9 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-STATE_FILE = "estado.json"
-DB_FILE = "mundial2026.db"
-CACHE_FILE = "http_cache"
+STATE_FILE = str(LOCAL / "estado.json")
+DB_FILE = str(LOCAL / "mundial2026.db")
+CACHE_FILE = str(LOCAL / "http_cache")
 
 # World Cup 2026 host venues with approximate altitude (meters)
 WC2026_VENUES = {
@@ -364,7 +366,7 @@ def init_cache():
 # ---------------------------------------------------------------------------
 # Step 1: Load teams / players / coaches from local JSON file
 # ---------------------------------------------------------------------------
-LOCAL_LINEUPS_FILE = "equipos_mundial.json"
+LOCAL_LINEUPS_FILE = str(RAW / "equipos_mundial.json")
 
 
 def load_local_lineups(state: StateManager) -> list[dict]:

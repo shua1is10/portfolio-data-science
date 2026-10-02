@@ -355,7 +355,7 @@ export function WebAnalyticsDashboard() {
 
   /* ── Load CSV ────────────────────────────────────────────────────────── */
   useEffect(() => {
-    fetch("/data/web_analytics_data.csv")
+    fetch("/data/web-analytics/web_analytics_data.csv")
       .then(r => r.text())
       .then(text => {
         const parsed = Papa.parse<WebRow>(text, {

@@ -18,6 +18,8 @@ import nodriver as uc
 import pandas as pd
 from bs4 import BeautifulSoup, Comment
 
+from paths import RAW
+
 BASE_URL = "https://fbref.com"
 
 # Pausa defensiva entre requests (segundos). fbref permite ~10 req/min;
@@ -274,7 +276,7 @@ async def scrape_team(squad_url: str, tab: uc.Tab) -> pd.DataFrame | None:
 
 
 # %% ── CELDA 5: Orquestador principal ────────────────────────────────────────
-async def run_pipeline(output_csv: str = "fbref_matchlogs.csv") -> pd.DataFrame:
+async def run_pipeline(output_csv: str = str(RAW / "fbref_matchlogs.csv")) -> pd.DataFrame:
     """
     Recorre TEAM_URLS, scrapea cada selección y consolida todo en un único
     DataFrame/CSV listo para limpieza.

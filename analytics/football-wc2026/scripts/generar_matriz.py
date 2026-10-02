@@ -8,8 +8,10 @@ import sqlite3
 import itertools
 import pandas as pd
 
-DB_FILE  = "mundial2026.db"
-OUT_FILE = "matriz_partidos.csv"
+from paths import PROCESSED, LOCAL
+
+DB_FILE  = str(LOCAL / "mundial2026.db")
+OUT_FILE = str(PROCESSED / "matriz_partidos.csv")
 
 # ---------------------------------------------------------------------------
 # 1. Diccionario de Grupos

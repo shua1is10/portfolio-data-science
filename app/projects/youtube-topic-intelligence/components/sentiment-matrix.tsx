@@ -12,7 +12,7 @@ const EXPECTED = 20; // % per cell if tone and performance were unrelated
 const MIN_COLUMN_N = 15;
 
 const METRICS: { value: MatrixMetric; label: string; long: string }[] = [
-  { value: "eer", label: "Interaction (EER)", long: "engagement-efficiency quintile" },
+  { value: "engagement", label: "Interaction (engagement)", long: "engagement-ratio quintile" },
   { value: "rvi", label: "Reach (velocity index)", long: "Relative Velocity Index quintile" },
 ];
 
@@ -60,7 +60,7 @@ export function SentimentMatrix({ matrix, metric, onMetricChange, sentimentLabel
       }}
       footnote={
         <>
-          Spearman ρ (sentiment, {metric === "eer" ? "EER" : "velocity quintile"}) ={" "}
+          Spearman ρ (sentiment, {metric === "engagement" ? "engagement ratio" : "velocity quintile"}) ={" "}
           <strong className="font-semibold text-[#1d1d1f] dark:text-white">{fmtNum(matrix.rho, 2)}</strong>
           {" · "}n = {fmtNum(matrix.total)}. Columns with fewer than {MIN_COLUMN_N} videos are faded.
         </>

@@ -1,17 +1,17 @@
 import { ChevronRight, Database, Eraser, Sigma, MessageSquareText, FlaskConical, Share2 } from "lucide-react";
 
 const NODES = [
-  { icon: Database, label: "Ingestion", sub: "API v3 · month-stratified", mono: "search → videos → comments", tint: "#ff9f0a" },
-  { icon: Eraser, label: "Cleaning", sub: "dedupe · window · hidden counts", mono: "likes=None ≠ 0", tint: "#ff6961" },
-  { icon: Sigma, label: "Features", sub: "age-normalized metrics", mono: "velocity · EER · RVI", tint: "#0071e3" },
-  { icon: MessageSquareText, label: "NLP", sub: "sentiment · topics · terms", mono: "lexicon + log-odds", tint: "#a855f7" },
-  { icon: FlaskConical, label: "Inference", sub: "non-parametric tests", mono: "bootstrap · Mann-Whitney", tint: "#30d158" },
+  { icon: Database, label: "Ingestion", sub: "API v3 · month × query strata", mono: "search → videos → comments", tint: "#ff9f0a" },
+  { icon: Eraser, label: "Cleaning", sub: "language · spam · astroturfing", mono: "likes=None ≠ 0", tint: "#ff6961" },
+  { icon: Sigma, label: "Features", sub: "age-normalized metrics", mono: "velocity · engagement · RVI", tint: "#0071e3" },
+  { icon: MessageSquareText, label: "NLP", sub: "sentiment · topics · terms", mono: "VADER + log-odds", tint: "#a855f7" },
+  { icon: FlaskConical, label: "Inference", sub: "non-parametric tests", mono: "bootstrap · MWU · BH-FDR", tint: "#30d158" },
   { icon: Share2, label: "Export", sub: "typed JSON contracts", mono: "data/ · public/data/", tint: "#5ac8fa" },
 ];
 
 /** Conceptual pipeline diagram — pure Tailwind, server-rendered, same blueprint
  *  aesthetic as the football engine's architecture panel. */
-export function PipelineDiagram({ records, comments }: { records: number; comments: number }) {
+export function PipelineDiagram({ records, comments, quota }: { records: number; comments: number; quota: number }) {
   return (
     <div className="relative rounded-[28px] bg-[#0a0a0f] border border-white/10 overflow-hidden">
       <div
@@ -27,7 +27,7 @@ export function PipelineDiagram({ records, comments }: { records: number; commen
         <div className="flex flex-wrap items-center justify-between gap-3 mb-7">
           <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-white">Data pipeline</p>
           <p className="font-mono text-[10px] text-[#8e8e93]">
-            // {records.toLocaleString("en-US")} videos · {comments.toLocaleString("en-US")} comments scored · stdlib-only Python
+            // {records.toLocaleString("en-US")} videos · {comments.toLocaleString("en-US")} comments scored · {quota.toLocaleString("en-US")} API quota units
           </p>
         </div>
         <ol className="flex flex-col lg:flex-row items-stretch lg:items-center gap-1 lg:gap-1.5">

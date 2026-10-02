@@ -18,8 +18,10 @@ export function fmtDelta(v: Num | undefined, digits = 0): string {
   return `${v >= 0 ? "+" : "−"}${s}%`;
 }
 
+/** 12.4K / 1.2M for executive readability; below 1,000 a plain integer (799, not 798.8). */
 export function fmtCompact(v: Num | undefined): string {
   if (v === null || v === undefined) return DASH;
+  if (Math.abs(v) < 1000) return Math.round(v).toLocaleString("en-US");
   return v.toLocaleString("en-US", { notation: "compact", maximumFractionDigits: 1 });
 }
 

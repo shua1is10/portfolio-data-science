@@ -382,9 +382,9 @@ function PredictiveEngineMockup() {
 function YouTubeIntelMockup({ summary }: { summary: InsightsSummary }) {
   const [prevP, currP] = summary.meta.periods;
   const formats = summary.formats;
-  const max = Math.max(...formats.flatMap((f) => [f.eer.median_prev ?? 0, f.eer.median_curr ?? 0]), 1);
-  const rising = summary.emerging_terms.rising.slice(0, 3);
-  const growth = summary.supply_growth_pct ?? 0;
+  const max = Math.max(...formats.flatMap((f) => [f.share_prev, f.share_curr]), 1);
+  const rising = summary.emerging_terms.titles.rising.slice(0, 3);
+  const longForm = formats.find((f) => f.key === "long");
 
   return (
     <div className="absolute inset-0 flex flex-col bg-white dark:bg-[#141416] p-5 sm:p-7">
@@ -400,10 +400,10 @@ function YouTubeIntelMockup({ summary }: { summary: InsightsSummary }) {
       <div className="flex items-start justify-between mb-4 shrink-0">
         <div>
           <p className="text-[10px] font-medium text-[#6e6e73] dark:text-[#8e8e93] uppercase tracking-[0.06em]">
-            Engagement efficiency by format · YoY
+            Share of surfaced videos by format · YoY
           </p>
           <p className="text-2xl sm:text-3xl font-bold text-[#1d1d1f] dark:text-white mt-1 tracking-tight">
-            {growth >= 0 ? "+" : "−"}{Math.abs(growth).toFixed(0)}% uploads
+            {(longForm?.share_curr ?? 0).toFixed(0)}% long-form
           </p>
         </div>
         <span className="mt-1 px-2.5 py-1 rounded-full bg-[#0071e3]/10 text-[#0071e3] text-xs font-semibold">
@@ -411,13 +411,13 @@ function YouTubeIntelMockup({ summary }: { summary: InsightsSummary }) {
         </span>
       </div>
 
-      {/* Grouped bars: prior vs current median EER per format */}
+      {/* Grouped bars: prior vs current share of videos per format */}
       <div className="flex-1 min-h-0 flex items-end justify-around gap-4 mb-4 px-2" aria-hidden>
         {formats.map((f) => (
           <div key={f.key} className="flex flex-col items-center gap-2 h-full justify-end">
             <div className="flex items-end gap-1 h-full">
-              {([["#eb6834", f.eer.median_prev], ["#0071e3", f.eer.median_curr]] as const).map(([c, v]) => (
-                <span key={c} className="w-5 sm:w-7 rounded-t-[4px]" style={{ background: c, height: `${((v ?? 0) / max) * 100}%` }} />
+              {([["#eb6834", f.share_prev], ["#0071e3", f.share_curr]] as const).map(([c, v]) => (
+                <span key={c} className="w-5 sm:w-7 rounded-t-[4px]" style={{ background: c, height: `${(v / max) * 100}%` }} />
               ))}
             </div>
             <p className="text-[9px] sm:text-[10px] font-medium text-[#6e6e73] dark:text-[#8e8e93]">
@@ -435,7 +435,7 @@ function YouTubeIntelMockup({ summary }: { summary: InsightsSummary }) {
           </span>
         ))}
         <span className="px-2 py-0.5 rounded-full bg-[#f5f5f7] dark:bg-[#3a3a3c] text-[9px] font-medium text-[#6e6e73] dark:text-[#8e8e93]">
-          NLP · log-odds
+          Live YouTube data
         </span>
       </div>
     </div>
@@ -588,10 +588,10 @@ export default function ProjectsPage() {
           <ProjectCard
             eyebrow="Social Media Data Science · Market Intelligence"
             title="YouTube Topic Intelligence"
-            subtitle="Topic dynamics, engagement efficiency and algorithmic shifting on YouTube, measured year over year with age-normalized metrics, NLP sentiment and non-parametric inference."
+            subtitle="Topic dynamics, engagement and algorithmic shifting in the AI agents niche, measured on real YouTube Data API data with age-normalized metrics, VADER sentiment and FDR-corrected inference."
             tags={[
-              "Python", "YouTube Data API", "NLP", "Bootstrap CI",
-              "Mann-Whitney U", "Next.js", "TypeScript", "Recharts",
+              "Python", "YouTube Data API", "VADER NLP", "Bootstrap CI",
+              "Benjamini-Hochberg", "Next.js", "TypeScript", "Recharts",
             ]}
             cta="Explore Dashboard"
             href="/projects/youtube-topic-intelligence/dashboard"

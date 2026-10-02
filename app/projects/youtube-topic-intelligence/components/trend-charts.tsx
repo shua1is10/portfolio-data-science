@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { PeriodKey } from "../types";
 import type { MonthPoint } from "./aggregations";
 import { ChartCard } from "./chart-card";
@@ -11,52 +11,69 @@ import { AXIS_TICK, MONTHS, SERIES } from "./viz-theme";
 
 const monthLabel = (m: string | number) => MONTHS[Number(m) - 1] ?? String(m);
 
-/** Publishing volume and interaction, month by month. Two charts sharing an x-axis
- *  instead of one dual-axis chart: uploads and EER live on unrelated scales. */
+/** Month-by-month video length and engagement. Two charts sharing an x-axis instead of
+ *  one dual-axis chart: minutes and a percentage live on unrelated scales. Upload volume
+ *  is deliberately absent — the sample takes a fixed number of videos per month. */
 export function TrendCharts({ data, visible, prevLabel, currLabel }: {
   data: MonthPoint[];
   visible: PeriodKey[];
   prevLabel: string;
   currLabel: string;
 }) {
-  const show = (p: PeriodKey) => visible.includes(p);
   const legend = <PeriodLegend prevLabel={prevLabel} currLabel={currLabel} show={visible} />;
   const labelOf = { prev: prevLabel, curr: currLabel };
+  const nFooter = (d: Record<string, unknown>) =>
+    visible.map((k) => `${labelOf[k]}: n = ${String(d[k === "prev" ? "prevN" : "currN"])}`).join(" · ");
+
+  const lines = (prefix: "Length" | "Engagement") =>
+    visible.map((p) => (
+      <Line
+        key={p}
+        dataKey={`${p}${prefix}`}
+        name={labelOf[p]}
+        stroke={SERIES[p]}
+        strokeWidth={2}
+        type="monotone"
+        dot={{ r: 3, fill: SERIES[p], strokeWidth: 0 }}
+        activeDot={{ r: 5 }}
+        connectNulls
+      />
+    ));
 
   return (
     <div className="grid lg:grid-cols-2 gap-4">
       <ChartCard
-        title="Uploads per month"
-        subtitle="Supply: videos published in the topic, Jan–Sep"
+        title="Median video length per month"
+        subtitle="Minutes, among the videos surfaced for the topic each month"
         legend={legend}
         table={{
-          columns: ["Month", ...visible.map((p) => labelOf[p])],
-          rows: data.map((d) => [monthLabel(d.month), ...visible.map((p) => (p === "prev" ? d.prevUploads : d.currUploads))]),
+          columns: ["Month", ...visible.map((p) => `${labelOf[p]} (min)`)],
+          rows: data.map((d) => [monthLabel(d.month), ...visible.map((p) => fmtNum(p === "prev" ? d.prevLength : d.currLength, 1))]),
         }}
       >
         <ResponsiveContainer width="100%" height={240}>
-          <BarChart data={data} barGap={2} margin={{ top: 4, right: 4, left: -12, bottom: 0 }}>
+          <LineChart data={data} margin={{ top: 8, right: 8, left: -12, bottom: 0 }}>
             <CartesianGrid vertical={false} stroke="var(--yt-grid)" />
             <XAxis dataKey="month" tickFormatter={monthLabel} tick={AXIS_TICK} axisLine={false} tickLine={false} />
-            <YAxis tick={AXIS_TICK} axisLine={false} tickLine={false} allowDecimals={false} width={44} />
+            <YAxis tick={AXIS_TICK} axisLine={false} tickLine={false} width={44} tickFormatter={(v: number) => `${v}m`} />
             <Tooltip
-              cursor={{ fill: "var(--yt-grid)" }}
-              content={(p) => <VizTooltip {...p} formatLabel={monthLabel} formatValue={(v) => `${fmtNum(v)} videos`} />}
+              cursor={{ stroke: "var(--yt-axis)", strokeDasharray: "3 3" }}
+              content={(p) => <VizTooltip {...p} formatLabel={monthLabel} formatValue={(v) => `${fmtNum(v, 1)} min`} footer={nFooter} />}
             />
-            {show("prev") && <Bar dataKey="prevUploads" name={prevLabel} fill={SERIES.prev} radius={[4, 4, 0, 0]} maxBarSize={18} />}
-            {show("curr") && <Bar dataKey="currUploads" name={currLabel} fill={SERIES.curr} radius={[4, 4, 0, 0]} maxBarSize={18} />}
-          </BarChart>
+            {lines("Length")}
+          </LineChart>
         </ResponsiveContainer>
       </ChartCard>
 
       <ChartCard
-        title="Median engagement efficiency per month"
-        subtitle="(likes + comments) / views × 100, median of videos published that month"
+        title="Median engagement ratio per month"
+        subtitle="(likes + comments) / views × 100, videos published that month"
         legend={legend}
         table={{
-          columns: ["Month", ...visible.map((p) => `${labelOf[p]} EER`)],
-          rows: data.map((d) => [monthLabel(d.month), ...visible.map((p) => fmtPct(p === "prev" ? d.prevEer : d.currEer, 2))]),
+          columns: ["Month", ...visible.map((p) => `${labelOf[p]} engagement`)],
+          rows: data.map((d) => [monthLabel(d.month), ...visible.map((p) => fmtPct(p === "prev" ? d.prevEngagement : d.currEngagement, 2))]),
         }}
+        footnote="About 20 videos per month and period: read the overall direction, not single months."
       >
         <ResponsiveContainer width="100%" height={240}>
           <LineChart data={data} margin={{ top: 8, right: 8, left: -12, bottom: 0 }}>
@@ -66,16 +83,9 @@ export function TrendCharts({ data, visible, prevLabel, currLabel }: {
               tickFormatter={(v: number) => `${v.toFixed(1)}%`} />
             <Tooltip
               cursor={{ stroke: "var(--yt-axis)", strokeDasharray: "3 3" }}
-              content={(p) => <VizTooltip {...p} formatLabel={monthLabel} formatValue={(v) => fmtPct(v, 2)} />}
+              content={(p) => <VizTooltip {...p} formatLabel={monthLabel} formatValue={(v) => fmtPct(v, 2)} footer={nFooter} />}
             />
-            {show("prev") && (
-              <Line dataKey="prevEer" name={prevLabel} stroke={SERIES.prev} strokeWidth={2} type="monotone"
-                dot={{ r: 3, fill: SERIES.prev, strokeWidth: 0 }} activeDot={{ r: 5 }} connectNulls />
-            )}
-            {show("curr") && (
-              <Line dataKey="currEer" name={currLabel} stroke={SERIES.curr} strokeWidth={2} type="monotone"
-                dot={{ r: 3, fill: SERIES.curr, strokeWidth: 0 }} activeDot={{ r: 5 }} connectNulls />
-            )}
+            {lines("Engagement")}
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>

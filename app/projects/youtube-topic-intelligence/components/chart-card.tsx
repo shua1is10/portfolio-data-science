@@ -25,7 +25,8 @@ export function ChartCard({
   const [asTable, setAsTable] = useState(false);
 
   return (
-    <section className={cn("rounded-3xl bg-[#f5f5f7] dark:bg-[#1d1d1f] p-5 sm:p-6 flex flex-col", className)}>
+    // min-w-0: as a grid item it must not grow to its content's min width (wide tables, the matrix)
+    <section className={cn("min-w-0 rounded-3xl bg-[#f5f5f7] dark:bg-[#1d1d1f] p-5 sm:p-6 flex flex-col", className)}>
       <header className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h2 className="text-[15px] font-semibold text-[#1d1d1f] dark:text-white">{title}</h2>

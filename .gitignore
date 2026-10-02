@@ -17,5 +17,7 @@ build/
 tsconfig.tsbuildinfo
 .local/
 
-# YouTube Topic Intelligence: cache de la API / dataset sintetico (regenerable)
+# YouTube Topic Intelligence: dataset crudo de la API (contiene comentarios de terceros)
 analytics/youtube-topic-intelligence/data/raw/
+.env.local
+analytics/.venv/

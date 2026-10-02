@@ -117,3 +117,17 @@ def two_proportion_z(x1: int, n1: int, x2: int, n2: int) -> float:
         return 1.0
     z = (x2 / n2 - x1 / n1) / se
     return math.erfc(abs(z) / math.sqrt(2))
+
+
+def benjamini_hochberg(pvalues: dict[str, float]) -> dict[str, float]:
+    """q-values de Benjamini-Hochberg (control de la tasa de falsos descubrimientos)
+    para una familia de pruebas. Los NaN se ignoran."""
+    items = sorted(((k, p) for k, p in pvalues.items() if p == p), key=lambda kv: kv[1])
+    m = len(items)
+    q: dict[str, float] = {}
+    running = 1.0
+    for rank in range(m, 0, -1):
+        key, p = items[rank - 1]
+        running = min(running, p * m / rank)
+        q[key] = running
+    return q

@@ -8,3 +8,6 @@ SQLAlchemy
 git+https://github.com/federicorabanos/LanusStats.git
 transfermarkt-wrapper
 cloudscraper
+
+# youtube-topic-intelligence
+vaderSentiment

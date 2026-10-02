@@ -7,14 +7,15 @@ import { FadeUp } from "@/components/ui/animate";
 import { decodeVideos, type InsightsSummary, type Video, type VideosPayload } from "../types";
 import {
   applyFilters, byPeriod, durationBins, kpis, monthly, pctChange, quintileEdges, sentimentMatrix,
-  topicShares, visiblePeriods, type Filters, type MatrixMetric,
+  sentimentMix, topicShares, visiblePeriods, type BinMetric, type Filters, type MatrixMetric,
 } from "../components/aggregations";
 import { DataSourceNotice } from "../components/data-source-notice";
+import { DurationChart } from "../components/duration-chart";
 import { FilterBar } from "../components/filters";
-import { FormatEngagementChart } from "../components/format-engagement-chart";
-import { fmtDate, fmtDelta, fmtNum } from "../components/format";
+import { fmtCompact, fmtDate, fmtDelta, fmtNum, fmtPct } from "../components/format";
 import { KpiCard } from "../components/kpi-card";
 import { SentimentMatrix } from "../components/sentiment-matrix";
+import { SentimentMixChart } from "../components/sentiment-mix-chart";
 import { TopicShareChart } from "../components/topic-share-chart";
 import { TrendCharts } from "../components/trend-charts";
 import { VIZ_VARS } from "../components/viz-theme";
@@ -24,12 +25,17 @@ const DATA_URL = "/data/youtube-topic-intelligence/videos.json";
 type LoadState =
   | { status: "loading" }
   | { status: "error"; message: string }
-  | { status: "ready"; payload: VideosPayload; videos: Video[]; eerEdges: number[] };
+  | { status: "ready"; payload: VideosPayload; videos: Video[]; engagementEdges: number[] };
 
-export function YouTubeDashboard({ meta, maturityDays }: { meta: InsightsSummary["meta"]; maturityDays: number }) {
+export function YouTubeDashboard({ meta, maturityDays, organicComments }: {
+  meta: InsightsSummary["meta"];
+  maturityDays: number;
+  organicComments: number;
+}) {
   const [state, setState] = useState<LoadState>({ status: "loading" });
   const [filters, setFilters] = useState<Filters>({ period: "compare", format: "all", category: "all" });
-  const [matrixMetric, setMatrixMetric] = useState<MatrixMetric>("eer");
+  const [matrixMetric, setMatrixMetric] = useState<MatrixMetric>("engagement");
+  const [binMetric, setBinMetric] = useState<BinMetric>("engagement");
   const [prevP, currP] = meta.periods;
 
   useEffect(() => {
@@ -42,8 +48,8 @@ export function YouTubeDashboard({ meta, maturityDays }: { meta: InsightsSummary
       .then((payload) => {
         if (cancelled) return;
         const videos = decodeVideos(payload);
-        const eerEdges = quintileEdges(videos.flatMap((v) => (v.eer === null ? [] : [v.eer])));
-        setState({ status: "ready", payload, videos, eerEdges });
+        const engagementEdges = quintileEdges(videos.flatMap((v) => (v.engagementRatio === null ? [] : [v.engagementRatio])));
+        setState({ status: "ready", payload, videos, engagementEdges });
       })
       .catch((e: unknown) => {
         if (!cancelled) setState({ status: "error", message: e instanceof Error ? e.message : String(e) });
@@ -55,26 +61,30 @@ export function YouTubeDashboard({ meta, maturityDays }: { meta: InsightsSummary
 
   const view = useMemo(() => {
     if (state.status !== "ready") return null;
-    const { payload, videos, eerEdges } = state;
+    const { payload, videos, engagementEdges } = state;
     const filtered = applyFilters(videos, filters);
     const visible = visiblePeriods(filters.period);
     const inView = filtered.filter((v) => visible.includes(v.period));
-    const prevK = kpis(byPeriod(filtered, "prev"));
-    const currK = kpis(byPeriod(filtered, "curr"));
+    // topic share and sentiment mix ignore the subtopic filter for their base (a subtopic's
+    // share of itself is 100%); the mix then shows only the selected subtopic's rows
+    const allTopics = applyFilters(videos, { ...filters, category: "all" });
+    const groups = payload.categories
+      .map((c, index) => ({ label: c.label, index }))
+      .filter((g) => filters.category === "all" || g.index === filters.category);
     return {
       payload,
       visible,
       inView,
-      prevK,
-      currK,
+      prevK: kpis(byPeriod(filtered, "prev")),
+      currK: kpis(byPeriod(filtered, "curr")),
       viewK: kpis(inView),
       monthly: monthly(filtered),
-      bins: durationBins(filtered, payload.durationBins),
-      // topic shares ignore the subtopic filter: one subtopic's share of itself is 100%
-      shares: topicShares(applyFilters(videos, { ...filters, category: "all" }), payload.categories),
-      matrix: sentimentMatrix(inView, matrixMetric, eerEdges),
+      bins: durationBins(filtered, payload.durationBins, binMetric),
+      shares: topicShares(allTopics, payload.categories),
+      mix: sentimentMix(allTopics, groups, visible, { prev: prevP.label, curr: currP.label }, filters.category === "all"),
+      matrix: sentimentMatrix(inView, matrixMetric, engagementEdges),
     };
-  }, [state, filters, matrixMetric]);
+  }, [state, filters, matrixMetric, binMetric, prevP.label, currP.label]);
 
   return (
     <div className={`${VIZ_VARS} px-4 sm:px-6 pt-12 sm:pt-16 pb-24`}>
@@ -100,7 +110,12 @@ export function YouTubeDashboard({ meta, maturityDays }: { meta: InsightsSummary
               {prevP.label} vs {currP.label} · metrics as of {fmtDate(meta.snapshot)}
             </p>
           </div>
-          <DataSourceNotice isSynthetic={meta.is_synthetic} className="mt-5" />
+          <DataSourceNotice
+            fetchedAt={meta.fetched_at}
+            videos={state.status === "ready" ? state.videos.length : 0}
+            comments={organicComments}
+            className="mt-4"
+          />
         </FadeUp>
 
         {state.status === "loading" && (
@@ -143,33 +158,33 @@ export function YouTubeDashboard({ meta, maturityDays }: { meta: InsightsSummary
                     icon={Clapperboard}
                     label="Total analyzed videos"
                     value={fmtNum(view.viewK.videos)}
-                    sub={filters.period === "compare"
-                      ? `${fmtNum(view.prevK.videos)} + ${fmtNum(view.currK.videos)} across both windows`
-                      : "in the selected window"}
+                    sub={`median ${fmtCompact(view.viewK.medianViews)} views per video`}
+                    note={filters.period === "compare"
+                      ? `${fmtNum(view.prevK.videos)} in ${prevP.label} + ${fmtNum(view.currK.videos)} in ${currP.label}`
+                      : undefined}
                   />
                   <KpiCard
                     icon={Gauge}
                     label="Median velocity (views/day)"
-                    value={fmtNum(filters.period === "prev" ? view.prevK.medianVelocity : view.currK.medianVelocity)}
+                    value={fmtCompact(filters.period === "prev" ? view.prevK.medianVelocity : view.currK.medianVelocity)}
                     sub={filters.period === "compare"
-                      ? `${currP.label}; ${prevP.label}: ${fmtNum(view.prevK.medianVelocity)}`
+                      ? `${currP.label}; ${prevP.label}: ${fmtCompact(view.prevK.medianVelocity)}`
                       : `videos ≥ ${maturityDays} days old`}
-                    note="Within-period only: videos from different years differ in age, so velocity is not compared across years."
+                    note="Within a year only: last year's videos are older, so views/day are not comparable across years."
                   />
                   <KpiCard
                     icon={MessageCircleHeart}
                     label="Average sentiment index"
                     value={fmtNum(view.viewK.sentiment, 1)}
-                    sub={filters.period === "compare"
-                      ? `${prevP.label} ${fmtNum(view.prevK.sentiment, 1)} → ${currP.label} ${fmtNum(view.currK.sentiment, 1)}`
-                      : "scale −100 to +100, from comment text"}
+                    sub={`${fmtPct(view.viewK.positiveShare, 0)} of organic comments positive`}
+                    note="Scale −100 to +100 (VADER on comment text)."
                   />
                   <KpiCard
                     icon={TrendingUp}
-                    label="YoY growth rate (uploads)"
-                    value={fmtDelta(pctChange(view.currK.videos, view.prevK.videos))}
-                    sub={`median EER ${fmtDelta(pctChange(view.currK.medianEer, view.prevK.medianEer))} YoY`}
-                    note="Always current vs prior window, for the active format and subtopic."
+                    label="YoY engagement ratio"
+                    value={fmtDelta(pctChange(view.currK.medianEngagement, view.prevK.medianEngagement))}
+                    sub={`median ${fmtPct(view.prevK.medianEngagement, 2)} → ${fmtPct(view.currK.medianEngagement, 2)}`}
+                    note="Current vs prior window, for the active format and subtopic."
                   />
                 </div>
 
@@ -178,14 +193,22 @@ export function YouTubeDashboard({ meta, maturityDays }: { meta: InsightsSummary
                   <TrendCharts data={view.monthly} visible={view.visible} prevLabel={prevP.label} currLabel={currP.label} />
                 </div>
 
-                {/* ── Format vs engagement · topic share ────── */}
+                {/* ── Duration vs performance · topic share ─── */}
                 <div className="mt-4 grid lg:grid-cols-2 gap-4">
-                  <FormatEngagementChart data={view.bins} visible={view.visible} prevLabel={prevP.label} currLabel={currP.label} />
+                  <DurationChart
+                    data={view.bins}
+                    metric={binMetric}
+                    onMetricChange={setBinMetric}
+                    visible={view.visible}
+                    prevLabel={prevP.label}
+                    currLabel={currP.label}
+                  />
                   <TopicShareChart data={view.shares} visible={view.visible} prevLabel={prevP.label} currLabel={currP.label} />
                 </div>
 
-                {/* ── Sentiment × performance ───────────────── */}
-                <div className="mt-4">
+                {/* ── Sentiment ─────────────────────────────── */}
+                <div className="mt-4 grid lg:grid-cols-2 gap-4">
+                  <SentimentMixChart rows={view.mix} />
                   <SentimentMatrix
                     matrix={view.matrix}
                     metric={matrixMetric}

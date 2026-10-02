@@ -20,8 +20,8 @@ export function TopicShareChart({ data, visible, prevLabel, currLabel }: {
   const labelOf = { prev: prevLabel, curr: currLabel };
   return (
     <ChartCard
-      title="Subtopic share of uploads"
-      subtitle="Where supply is moving — % of each period's videos"
+      title="Subtopic share of surfaced videos"
+      subtitle="Share of the videos YouTube surfaces for the topic, by subtopic"
       legend={<PeriodLegend prevLabel={prevLabel} currLabel={currLabel} show={visible} />}
       table={{
         columns: ["Subtopic", ...visible.map((p) => labelOf[p])],

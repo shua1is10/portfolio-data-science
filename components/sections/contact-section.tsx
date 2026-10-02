@@ -72,7 +72,7 @@ export function ContactSection() {
           }}
         />
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[2px]"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] max-w-full h-[2px]"
           style={{
             background:
               "linear-gradient(90deg, transparent, rgba(0,122,255,0.20), transparent)",

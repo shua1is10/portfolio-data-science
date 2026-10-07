@@ -1,0 +1,1035 @@
+{
+  "meta": {
+    "topic": "AI Agents & Automation",
+    "data_source": "youtube_data_api_v3",
+    "fetched_at": "2026-10-02T03:15:21Z",
+    "snapshot": "2026-10-02",
+    "periods": [
+      {
+        "key": "prev",
+        "label": "2025 YTD",
+        "start": "2025-01-01",
+        "end": "2025-09-30"
+      },
+      {
+        "key": "curr",
+        "label": "2026 YTD",
+        "start": "2026-01-01",
+        "end": "2026-09-30"
+      }
+    ],
+    "queries": [
+      "AI agents",
+      "AI automation"
+    ],
+    "results_per_query_month": 12,
+    "generated_at": "2026-10-01T21:32:32-0600"
+  },
+  "audit": {
+    "raw_videos": 404,
+    "quota_used": 4006,
+    "comments_fetched": 6211,
+    "comments_dropped_creator_or_link": 156,
+    "comments_dropped_duplicate_spam": 14,
+    "comments_dropped_promotional": 199,
+    "comments_scored_english": 5459,
+    "dropped_non_english": 29,
+    "engagement_missing_hidden_counts": 19,
+    "immature_excluded_from_velocity": 12,
+    "analyzed_videos": 375
+  },
+  "kpis": {
+    "prev": {
+      "videos": 187,
+      "channels": 130,
+      "median_age_days": 511,
+      "median_views": 175579,
+      "median_daily_velocity": 344.4913,
+      "median_engagement_ratio": 2.3802,
+      "median_like_rate": 2.3052,
+      "median_comment_rate": 0.0718,
+      "mean_sentiment_index": 43.0226,
+      "median_duration_s": 332,
+      "format_share": {
+        "short": 32.6203,
+        "mid": 23.5294,
+        "long": 43.8503
+      },
+      "comments": {
+        "n": 2648,
+        "positive": 1950,
+        "neutral": 469,
+        "negative": 229,
+        "positive_pct": 73.6405,
+        "neutral_pct": 17.7115,
+        "negative_pct": 8.648
+      }
+    },
+    "curr": {
+      "videos": 188,
+      "channels": 96,
+      "median_age_days": 142.0,
+      "median_views": 77111.0,
+      "median_daily_velocity": 798.7914,
+      "median_engagement_ratio": 2.7332,
+      "median_like_rate": 2.6095,
+      "median_comment_rate": 0.0881,
+      "mean_sentiment_index": 42.7993,
+      "median_duration_s": 801.5,
+      "format_share": {
+        "short": 12.234,
+        "mid": 20.7447,
+        "long": 67.0213
+      },
+      "comments": {
+        "n": 2811,
+        "positive": 2110,
+        "neutral": 449,
+        "negative": 252,
+        "positive_pct": 75.0623,
+        "neutral_pct": 15.973,
+        "negative_pct": 8.9648
+      }
+    }
+  },
+  "overall": {
+    "engagement": {
+      "n_prev": 186,
+      "n_curr": 170,
+      "median_prev": 2.3802,
+      "median_curr": 2.7332,
+      "change_pct": 14.8294,
+      "ci95": [
+        -0.7802,
+        31.6096
+      ],
+      "p_value": 0.0096,
+      "q_value": 0.0331,
+      "cliffs_delta": 0.1588
+    },
+    "like_rate": {
+      "n_prev": 186,
+      "n_curr": 170,
+      "median_prev": 2.3052,
+      "median_curr": 2.6095,
+      "change_pct": 13.2012,
+      "ci95": [
+        -3.0008,
+        28.2762
+      ],
+      "p_value": 0.0157,
+      "q_value": 0.047,
+      "cliffs_delta": 0.1483
+    },
+    "comment_rate": {
+      "n_prev": 186,
+      "n_curr": 170,
+      "median_prev": 0.0718,
+      "median_curr": 0.0881,
+      "change_pct": 22.6692,
+      "ci95": [
+        -8.004,
+        73.6681
+      ],
+      "p_value": 0.0034,
+      "q_value": 0.0138,
+      "cliffs_delta": 0.1794
+    },
+    "sentiment": {
+      "n_prev": 164,
+      "n_curr": 167,
+      "median_prev": 45.2878,
+      "median_curr": 45.6253,
+      "change_pct": 0.7453,
+      "ci95": [
+        -10.4413,
+        13.0205
+      ],
+      "p_value": 0.9482,
+      "q_value": 0.9482,
+      "cliffs_delta": -0.0042
+    },
+    "duration": {
+      "n_prev": 187,
+      "n_curr": 188,
+      "median_prev": 332,
+      "median_curr": 801.5,
+      "change_pct": 141.4157,
+      "ci95": [
+        27.581,
+        548.8
+      ],
+      "p_value": 0.0,
+      "q_value": 0.0001,
+      "cliffs_delta": 0.2555
+    }
+  },
+  "comment_tests": {
+    "negative_p": 0.6799,
+    "positive_p": 0.2291,
+    "negative_q": 0.8588,
+    "positive_q": 0.3928
+  },
+  "age_bias": {
+    "median_age_days": [
+      511,
+      142.0
+    ],
+    "raw_views_change_pct": -56.0819,
+    "velocity_change_pct": 131.8756,
+    "rho_age_velocity_curr": -0.3125
+  },
+  "robustness": {
+    "rho_age_engagement_curr_mature": 0.2528,
+    "rho_age_engagement_prev": 0.0088,
+    "engagement_change_all_pct": 14.8294,
+    "engagement_change_curr_aged_120d_pct": 25.0201,
+    "n_curr_aged_120d": 103
+  },
+  "formats": [
+    {
+      "key": "short",
+      "label": "Short (<1 min)",
+      "n_prev": 61,
+      "n_curr": 23,
+      "share_prev": 32.6203,
+      "share_curr": 12.234,
+      "share_p_value": 0.0,
+      "engagement": {
+        "n_prev": 60,
+        "n_curr": 23,
+        "median_prev": 1.8618,
+        "median_curr": 3.1642,
+        "change_pct": 69.9516,
+        "ci95": [
+          18.7523,
+          149.7152
+        ],
+        "p_value": 0.0005,
+        "q_value": 0.0023,
+        "cliffs_delta": 0.4986
+      },
+      "median_velocity_prev": 361.2775,
+      "median_velocity_curr": 387.3716,
+      "median_rvi_prev": 1.0,
+      "median_rvi_curr": 0.481,
+      "mean_sentiment_prev": 31.5307,
+      "mean_sentiment_curr": 30.6499,
+      "share_q_value": 0.0
+    },
+    {
+      "key": "mid",
+      "label": "Mid-length (1–10 min)",
+      "n_prev": 44,
+      "n_curr": 39,
+      "share_prev": 23.5294,
+      "share_curr": 20.7447,
+      "share_p_value": 0.516,
+      "engagement": {
+        "n_prev": 44,
+        "n_curr": 37,
+        "median_prev": 2.1416,
+        "median_curr": 3.0939,
+        "change_pct": 44.4654,
+        "ci95": [
+          -6.8827,
+          101.1026
+        ],
+        "p_value": 0.106,
+        "q_value": 0.212,
+        "cliffs_delta": 0.2101
+      },
+      "median_velocity_prev": 250.5679,
+      "median_velocity_curr": 253.4351,
+      "median_rvi_prev": 0.7337,
+      "median_rvi_curr": 0.6705,
+      "mean_sentiment_prev": 37.0997,
+      "mean_sentiment_curr": 35.166,
+      "share_q_value": 0.688
+    },
+    {
+      "key": "long",
+      "label": "Long-form (>10 min)",
+      "n_prev": 82,
+      "n_curr": 126,
+      "share_prev": 43.8503,
+      "share_curr": 67.0213,
+      "share_p_value": 0.0,
+      "engagement": {
+        "n_prev": 82,
+        "n_curr": 110,
+        "median_prev": 2.9064,
+        "median_curr": 2.5959,
+        "change_pct": -10.6839,
+        "ci95": [
+          -20.8471,
+          7.7896
+        ],
+        "p_value": 0.3506,
+        "q_value": 0.526,
+        "cliffs_delta": -0.0789
+      },
+      "median_velocity_prev": 506.0916,
+      "median_velocity_curr": 1292.6559,
+      "median_rvi_prev": 1.048,
+      "median_rvi_curr": 1.1019,
+      "mean_sentiment_prev": 52.3232,
+      "mean_sentiment_curr": 46.4287,
+      "share_q_value": 0.0001
+    }
+  ],
+  "duration_bins": [
+    {
+      "label": "<1m",
+      "n_prev": 61,
+      "n_curr": 23,
+      "median_engagement_prev": 1.8618,
+      "median_engagement_curr": 3.1642,
+      "median_velocity_prev": 361.2775,
+      "median_velocity_curr": 387.3716,
+      "median_rvi_all": 0.9196,
+      "n_rvi_all": 84
+    },
+    {
+      "label": "1–3m",
+      "n_prev": 28,
+      "n_curr": 9,
+      "median_engagement_prev": 2.2519,
+      "median_engagement_curr": 2.452,
+      "median_velocity_prev": 176.9841,
+      "median_velocity_curr": 186.1417,
+      "median_rvi_all": 0.382,
+      "n_rvi_all": 37
+    },
+    {
+      "label": "3–10m",
+      "n_prev": 16,
+      "n_curr": 30,
+      "median_engagement_prev": 1.9009,
+      "median_engagement_curr": 3.098,
+      "median_velocity_prev": 289.9098,
+      "median_velocity_curr": 297.2941,
+      "median_rvi_all": 1.0,
+      "n_rvi_all": 43
+    },
+    {
+      "label": "10–20m",
+      "n_prev": 38,
+      "n_curr": 67,
+      "median_engagement_prev": 2.7556,
+      "median_engagement_curr": 2.9757,
+      "median_velocity_prev": 215.477,
+      "median_velocity_curr": 1111.3348,
+      "median_rvi_all": 0.7982,
+      "n_rvi_all": 99
+    },
+    {
+      "label": "20–40m",
+      "n_prev": 26,
+      "n_curr": 39,
+      "median_engagement_prev": 2.8293,
+      "median_engagement_curr": 2.2002,
+      "median_velocity_prev": 439.1048,
+      "median_velocity_curr": 1654.114,
+      "median_rvi_all": 1.8196,
+      "n_rvi_all": 63
+    },
+    {
+      "label": "40m+",
+      "n_prev": 18,
+      "n_curr": 20,
+      "median_engagement_prev": 2.9516,
+      "median_engagement_curr": 2.2158,
+      "median_velocity_prev": 658.3184,
+      "median_velocity_curr": 1875.4598,
+      "median_rvi_all": 1.7966,
+      "n_rvi_all": 37
+    }
+  ],
+  "categories": [
+    {
+      "key": "build",
+      "label": "Build & Tutorials",
+      "n_prev": 84,
+      "n_curr": 105,
+      "share_prev": 44.9198,
+      "share_curr": 55.8511,
+      "share_p_value": 0.0343,
+      "median_engagement_prev": 2.599,
+      "median_engagement_curr": 2.5024,
+      "median_rvi_prev": 1.1885,
+      "median_rvi_curr": 0.8,
+      "mean_sentiment_prev": 46.3405,
+      "mean_sentiment_curr": 42.5043,
+      "negative_share_prev": 7.187,
+      "negative_share_curr": 7.942,
+      "positive_share_prev": 75.3478,
+      "positive_share_curr": 75.2072,
+      "negative_p_value": 0.456,
+      "comments_scored_prev": 1294,
+      "comments_scored_curr": 1448,
+      "share_q_value": 0.0822,
+      "negative_q_value": 0.6438
+    },
+    {
+      "key": "explainers",
+      "label": "Explainers & Concepts",
+      "n_prev": 28,
+      "n_curr": 16,
+      "share_prev": 14.9733,
+      "share_curr": 8.5106,
+      "share_p_value": 0.0518,
+      "median_engagement_prev": 1.8351,
+      "median_engagement_curr": 2.6032,
+      "median_rvi_prev": 0.7891,
+      "median_rvi_curr": 1.0487,
+      "mean_sentiment_prev": 48.984,
+      "mean_sentiment_curr": 49.2625,
+      "negative_share_prev": 5.7971,
+      "negative_share_curr": 3.9474,
+      "positive_share_prev": 80.8696,
+      "positive_share_curr": 79.386,
+      "negative_p_value": 0.3228,
+      "comments_scored_prev": 345,
+      "comments_scored_curr": 228,
+      "share_q_value": 0.1131,
+      "negative_q_value": 0.5165
+    },
+    {
+      "key": "tools",
+      "label": "Tools & Launches",
+      "n_prev": 21,
+      "n_curr": 20,
+      "share_prev": 11.2299,
+      "share_curr": 10.6383,
+      "share_p_value": 0.8543,
+      "median_engagement_prev": 1.8297,
+      "median_engagement_curr": 2.6913,
+      "median_rvi_prev": 1.2303,
+      "median_rvi_curr": 1.0327,
+      "mean_sentiment_prev": 33.5901,
+      "mean_sentiment_curr": 33.3984,
+      "negative_share_prev": 9.3633,
+      "negative_share_curr": 15.1603,
+      "positive_share_prev": 71.5356,
+      "positive_share_curr": 64.4315,
+      "negative_p_value": 0.0325,
+      "comments_scored_prev": 267,
+      "comments_scored_curr": 343,
+      "share_q_value": 0.9033,
+      "negative_q_value": 0.0822
+    },
+    {
+      "key": "business",
+      "label": "Business & Monetization",
+      "n_prev": 27,
+      "n_curr": 26,
+      "share_prev": 14.4385,
+      "share_curr": 13.8298,
+      "share_p_value": 0.8657,
+      "median_engagement_prev": 2.9712,
+      "median_engagement_curr": 3.352,
+      "median_rvi_prev": 0.3524,
+      "median_rvi_curr": 1.2367,
+      "mean_sentiment_prev": 48.0274,
+      "mean_sentiment_curr": 48.3264,
+      "negative_share_prev": 6.5854,
+      "negative_share_curr": 7.0776,
+      "positive_share_prev": 76.3415,
+      "positive_share_curr": 80.137,
+      "negative_p_value": 0.7766,
+      "comments_scored_prev": 410,
+      "comments_scored_curr": 438,
+      "share_q_value": 0.9033,
+      "negative_q_value": 0.9033
+    },
+    {
+      "key": "risks",
+      "label": "Risks & Future of Work",
+      "n_prev": 7,
+      "n_curr": 8,
+      "share_prev": 3.7433,
+      "share_curr": 4.2553,
+      "share_p_value": 0.8003,
+      "median_engagement_prev": 2.0552,
+      "median_engagement_curr": 3.0643,
+      "median_rvi_prev": 5.5435,
+      "median_rvi_curr": 0.9038,
+      "mean_sentiment_prev": 15.6823,
+      "mean_sentiment_curr": 29.2888,
+      "negative_share_prev": 29.0598,
+      "negative_share_curr": 21.1268,
+      "positive_share_prev": 52.9915,
+      "positive_share_curr": 63.3803,
+      "negative_p_value": 0.1407,
+      "comments_scored_prev": 117,
+      "comments_scored_curr": 142,
+      "share_q_value": 0.9033,
+      "negative_q_value": 0.2598
+    },
+    {
+      "key": "other",
+      "label": "Other / Mixed",
+      "n_prev": 20,
+      "n_curr": 13,
+      "share_prev": 10.6952,
+      "share_curr": 6.9149,
+      "share_p_value": 0.1963,
+      "median_engagement_prev": 1.9689,
+      "median_engagement_curr": 2.4514,
+      "median_rvi_prev": 0.5539,
+      "median_rvi_curr": 2.3229,
+      "mean_sentiment_prev": 33.3704,
+      "mean_sentiment_curr": 49.1422,
+      "negative_share_prev": 13.9535,
+      "negative_share_curr": 7.0755,
+      "positive_share_prev": 60.4651,
+      "positive_share_curr": 83.9623,
+      "negative_p_value": 0.0206,
+      "comments_scored_prev": 215,
+      "comments_scored_curr": 212,
+      "share_q_value": null,
+      "negative_q_value": null
+    }
+  ],
+  "correlations": [
+    {
+      "x": "sentiment_index",
+      "y": "engagement_ratio",
+      "label": "Comment sentiment × engagement ratio",
+      "prev": {
+        "rho": 0.2096,
+        "n": 163
+      },
+      "curr": {
+        "rho": 0.0024,
+        "n": 153
+      },
+      "all": {
+        "rho": 0.1131,
+        "n": 316
+      }
+    },
+    {
+      "x": "sentiment_index",
+      "y": "rvi",
+      "label": "Comment sentiment × relative velocity",
+      "prev": {
+        "rho": 0.0272,
+        "n": 164
+      },
+      "curr": {
+        "rho": 0.247,
+        "n": 156
+      },
+      "all": {
+        "rho": 0.13,
+        "n": 320
+      }
+    },
+    {
+      "x": "duration_s",
+      "y": "engagement_ratio",
+      "label": "Duration × engagement ratio",
+      "prev": {
+        "rho": 0.3601,
+        "n": 186
+      },
+      "curr": {
+        "rho": -0.2158,
+        "n": 170
+      },
+      "all": {
+        "rho": 0.1222,
+        "n": 356
+      }
+    },
+    {
+      "x": "duration_s",
+      "y": "rvi",
+      "label": "Duration × relative velocity",
+      "prev": {
+        "rho": 0.0419,
+        "n": 187
+      },
+      "curr": {
+        "rho": 0.2999,
+        "n": 176
+      },
+      "all": {
+        "rho": 0.1625,
+        "n": 363
+      }
+    },
+    {
+      "x": "subscriber_count",
+      "y": "rvi",
+      "label": "Channel subscribers × relative velocity",
+      "prev": {
+        "rho": 0.3603,
+        "n": 187
+      },
+      "curr": {
+        "rho": 0.3791,
+        "n": 176
+      },
+      "all": {
+        "rho": 0.3659,
+        "n": 363
+      }
+    },
+    {
+      "x": "subscriber_count",
+      "y": "engagement_ratio",
+      "label": "Channel subscribers × engagement ratio",
+      "prev": {
+        "rho": 0.3028,
+        "n": 186
+      },
+      "curr": {
+        "rho": -0.2038,
+        "n": 170
+      },
+      "all": {
+        "rho": 0.0786,
+        "n": 356
+      }
+    },
+    {
+      "x": "like_rate",
+      "y": "comment_rate",
+      "label": "Like rate × comment rate",
+      "prev": {
+        "rho": 0.5227,
+        "n": 186
+      },
+      "curr": {
+        "rho": 0.5448,
+        "n": 170
+      },
+      "all": {
+        "rho": 0.5367,
+        "n": 356
+      }
+    }
+  ],
+  "emerging_terms": {
+    "titles": {
+      "rising": [
+        {
+          "term": "claude",
+          "z": 2.99,
+          "prev_per_100": 1.1,
+          "curr_per_100": 9.0
+        },
+        {
+          "term": "business",
+          "z": 2.52,
+          "prev_per_100": 1.1,
+          "curr_per_100": 6.9
+        },
+        {
+          "term": "claude code",
+          "z": 2.16,
+          "prev_per_100": 0.0,
+          "curr_per_100": 4.3
+        },
+        {
+          "term": "actually",
+          "z": 2.03,
+          "prev_per_100": 0.5,
+          "curr_per_100": 4.3
+        },
+        {
+          "term": "first ai",
+          "z": 2.0,
+          "prev_per_100": 2.7,
+          "curr_per_100": 7.4
+        },
+        {
+          "term": "youtube",
+          "z": 1.94,
+          "prev_per_100": 1.1,
+          "curr_per_100": 4.8
+        },
+        {
+          "term": "skills",
+          "z": 1.94,
+          "prev_per_100": 1.1,
+          "curr_per_100": 4.8
+        },
+        {
+          "term": "build first",
+          "z": 1.92,
+          "prev_per_100": 2.1,
+          "curr_per_100": 6.4
+        }
+      ],
+      "declining": [
+        {
+          "term": "n8n",
+          "z": -3.52,
+          "prev_per_100": 20.3,
+          "curr_per_100": 4.3
+        },
+        {
+          "term": "aiagent",
+          "z": -1.73,
+          "prev_per_100": 3.2,
+          "curr_per_100": 0.0
+        },
+        {
+          "term": "agentic",
+          "z": -1.72,
+          "prev_per_100": 7.0,
+          "curr_per_100": 2.1
+        },
+        {
+          "term": "agentic ai",
+          "z": -1.69,
+          "prev_per_100": 5.9,
+          "curr_per_100": 1.6
+        },
+        {
+          "term": "automation agency",
+          "z": -1.67,
+          "prev_per_100": 4.8,
+          "curr_per_100": 1.1
+        },
+        {
+          "term": "ultimate",
+          "z": -1.5,
+          "prev_per_100": 4.3,
+          "curr_per_100": 1.1
+        },
+        {
+          "term": "artificialintelligence",
+          "z": -1.48,
+          "prev_per_100": 3.2,
+          "curr_per_100": 0.5
+        },
+        {
+          "term": "tutorial beginners",
+          "z": -1.48,
+          "prev_per_100": 3.2,
+          "curr_per_100": 0.5
+        }
+      ]
+    },
+    "comments": {
+      "rising": [
+        {
+          "term": "claude",
+          "z": 3.46,
+          "prev_per_100": 8.9,
+          "curr_per_100": 27.1
+        },
+        {
+          "term": "security",
+          "z": 2.87,
+          "prev_per_100": 1.1,
+          "curr_per_100": 10.5
+        },
+        {
+          "term": "skill",
+          "z": 2.87,
+          "prev_per_100": 3.3,
+          "curr_per_100": 13.8
+        },
+        {
+          "term": "claude code",
+          "z": 2.77,
+          "prev_per_100": 1.7,
+          "curr_per_100": 10.5
+        },
+        {
+          "term": "top",
+          "z": 2.44,
+          "prev_per_100": 3.3,
+          "curr_per_100": 11.6
+        },
+        {
+          "term": "skills",
+          "z": 2.32,
+          "prev_per_100": 6.7,
+          "curr_per_100": 16.6
+        },
+        {
+          "term": "alone",
+          "z": 2.28,
+          "prev_per_100": 0.6,
+          "curr_per_100": 6.6
+        },
+        {
+          "term": "loop",
+          "z": 2.27,
+          "prev_per_100": 4.4,
+          "curr_per_100": 12.7
+        }
+      ],
+      "declining": [
+        {
+          "term": "n8n",
+          "z": -3.22,
+          "prev_per_100": 27.2,
+          "curr_per_100": 13.8
+        },
+        {
+          "term": "life",
+          "z": -3.1,
+          "prev_per_100": 17.8,
+          "curr_per_100": 7.2
+        },
+        {
+          "term": "ai automation",
+          "z": -2.91,
+          "prev_per_100": 18.3,
+          "curr_per_100": 8.3
+        },
+        {
+          "term": "easy understand",
+          "z": -2.88,
+          "prev_per_100": 14.4,
+          "curr_per_100": 5.5
+        },
+        {
+          "term": "automation",
+          "z": -2.81,
+          "prev_per_100": 40.6,
+          "curr_per_100": 27.1
+        },
+        {
+          "term": "easy",
+          "z": -2.78,
+          "prev_per_100": 33.3,
+          "curr_per_100": 21.0
+        },
+        {
+          "term": "skool",
+          "z": -2.69,
+          "prev_per_100": 8.9,
+          "curr_per_100": 2.2
+        },
+        {
+          "term": "super helpful",
+          "z": -2.59,
+          "prev_per_100": 13.9,
+          "curr_per_100": 6.1
+        }
+      ]
+    }
+  },
+  "quotes": {
+    "prev": {
+      "positive": [
+        {
+          "text": "Imagine standing in a future elevator and the elevator AI and your phone start cracking jokes about you like this.",
+          "likes": 12231,
+          "compound": 0.542
+        },
+        {
+          "text": "It warms my heart to hear that one of the AI protocols has an ego already",
+          "likes": 6322,
+          "compound": 0.743
+        }
+      ],
+      "negative": [
+        {
+          "text": "Why do I suddenly see my grandson in the year 2100, lying old in bed, getting PTSD flashbacks when he hears that sound because he fought in the Great AI Robot War",
+          "likes": 14130,
+          "compound": -0.67
+        },
+        {
+          "text": "The one problem with replacing employees with robots.....when no one is earning an income who's going to have money to buy anything?",
+          "likes": 8878,
+          "compound": -0.599
+        }
+      ]
+    },
+    "curr": {
+      "positive": [
+        {
+          "text": "This is great. I tell everyone, if I were 30, I would dive deep into AI, but then seeing videos like this I think, why would I not do it at 71?",
+          "likes": 1618,
+          "compound": 0.7
+        },
+        {
+          "text": "I'm waiting for us to start ataching legal liability instead of treating AI like it's different than other software in that respect.",
+          "likes": 1153,
+          "compound": 0.649
+        }
+      ],
+      "negative": [
+        {
+          "text": "AI will kill us all: by the way, buy my stock....",
+          "likes": 874,
+          "compound": -0.691
+        },
+        {
+          "text": "If hell is other people, a world of AI agents is hell infinitely photocopied",
+          "likes": 321,
+          "compound": -0.881
+        }
+      ]
+    }
+  },
+  "promotional_comments": {
+    "prev": {
+      "comments": 191,
+      "videos": 59,
+      "video_share": 31.5508,
+      "comment_share": 6.7277,
+      "by_brand": {
+        "pneumaticworkflow": 35,
+        "aicarma": 20,
+        "rumora": 12,
+        "workbeaver": 16,
+        "backboardio": 15
+      },
+      "by_category": {
+        "build": 32,
+        "explainers": 9,
+        "tools": 6,
+        "business": 7,
+        "risks": 0,
+        "other": 5
+      }
+    },
+    "curr": {
+      "comments": 8,
+      "videos": 7,
+      "video_share": 3.7234,
+      "comment_share": 0.2838,
+      "by_brand": {
+        "pneumaticworkflow": 5,
+        "aicarma": 1,
+        "rumora": 1,
+        "workbeaver": 1,
+        "backboardio": 0
+      },
+      "by_category": {
+        "build": 3,
+        "explainers": 0,
+        "tools": 1,
+        "business": 2,
+        "risks": 1,
+        "other": 0
+      }
+    },
+    "brands": [
+      "pneumaticworkflow",
+      "aicarma",
+      "rumora",
+      "workbeaver",
+      "backboardio"
+    ],
+    "video_share_p_value": 0.0,
+    "video_share_q_value": 0.0
+  },
+  "tests_in_family": 24,
+  "thresholds": {
+    "maturity_days": 14,
+    "age_band_days": 30,
+    "min_views": 100,
+    "min_group_n": 15,
+    "min_comments_for_sentiment": 5,
+    "negative_threshold": -0.05,
+    "positive_threshold": 0.05,
+    "bootstrap_resamples": 2000,
+    "alpha": 0.05
+  },
+  "highlights": [
+    {
+      "id": "format-shift",
+      "kicker": "Algorithmic format shift",
+      "headline": "Long-form rose from 44% to 67% of the videos YouTube surfaces for the topic; Shorts went from 33% to 12%",
+      "detail": "Median video length moved from 5.5 min to 13.4 min. Within 2026 YTD, longer videos also earn more reach relative to videos of the same age (Spearman ρ duration × relative velocity = 0.30, vs 0.04 in 2025 YTD).",
+      "evidence": "Long-form share q < 0.001 · Shorts share q < 0.001 · median length q < 0.001 (Benjamini-Hochberg, 24 tests)",
+      "unit": "% of videos",
+      "bars": [
+        {
+          "label": "Short",
+          "prev": 32.6203,
+          "curr": 12.234
+        },
+        {
+          "label": "Mid-length",
+          "prev": 23.5294,
+          "curr": 20.7447
+        },
+        {
+          "label": "Long-form",
+          "prev": 43.8503,
+          "curr": 67.0213
+        }
+      ]
+    },
+    {
+      "id": "engagement",
+      "kicker": "Reach and interaction decoupled",
+      "headline": "Engagement ratio +15% YoY, driven by Shorts (+70%) while long-form moved −11%",
+      "detail": "The link between length and engagement reversed: Spearman ρ duration × engagement went from +0.36 to −0.22. Comment rate moved +23% (q = 0.014). Long-form now wins reach; short videos win interaction per view.",
+      "evidence": "Overall 95% CI [−1%, +32%] · q = 0.033 · Shorts n = 23 this year, q = 0.002 · long-form q = 0.526",
+      "unit": "% engagement",
+      "bars": [
+        {
+          "label": "Short",
+          "prev": 1.8618,
+          "curr": 3.1642
+        },
+        {
+          "label": "Mid-length",
+          "prev": 2.1416,
+          "curr": 3.0939
+        },
+        {
+          "label": "Long-form",
+          "prev": 2.9064,
+          "curr": 2.5959
+        }
+      ]
+    },
+    {
+      "id": "astroturfing",
+      "kicker": "Comment-section integrity",
+      "headline": "32% of 2025 YTD videos carried coordinated brand-promotion comments, vs 4% in 2026 YTD",
+      "detail": "199 comments promoting 5 products were removed before scoring sentiment. On the remaining organic comments, the negative share went from 8.6% to 9.0%: no significant change.",
+      "evidence": "Videos with promo comments: two-proportion z-test q < 0.001 · organic negative share q = 0.859. Older videos had more time to collect spam.",
+      "unit": "% of videos",
+      "bars": [
+        {
+          "label": "Videos with promo comments",
+          "prev": 31.5508,
+          "curr": 3.7234
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "audience": "Creators",
+      "title": "Build for reach with long-form, for interaction with Shorts",
+      "body": "Across both windows the 20–40m band earns the most reach relative to videos of the same age (median 1.82× the typical video), and in 2026 YTD the duration–reach correlation rose to 0.30. Shorts are now a minority of what surfaces but carry a higher engagement ratio (3.16% vs 2.60% for long-form, on only 23 Shorts): use them to start conversations, not to win discovery."
+    },
+    {
+      "audience": "Creators",
+      "title": "Follow the vocabulary: claude, business",
+      "body": "Title terms gaining weight: “claude”, “business”, “claude code”. Fading: “n8n”, “aiagent”. “claude”, “claude code”, “n8n” move the same way in what viewers write in comments, which makes it a demand signal and not only a creator trend."
+    },
+    {
+      "audience": "Brands",
+      "title": "Audit comment sections before reading sentiment",
+      "body": "32% of last year's videos in this niche carried coordinated brand-promotion comments. Positive-sounding comment sections can be bought: require organic-engagement reporting (with spam and creator comments removed) before using comment sentiment as a placement KPI."
+    },
+    {
+      "audience": "Brands",
+      "title": "Price reach on channel size, judge quality on engagement",
+      "body": "Channel size is the most stable predictor of reach in both years (Spearman ρ subscribers × relative velocity = 0.36 → 0.38). Use it to set CPM expectations. The link between channel size and engagement flipped sign (ρ = +0.30 → −0.20): in the current window larger channels get less interaction per view. Compare creators on engagement only within the same subscriber tier."
+    },
+    {
+      "audience": "Brands",
+      "title": "Watch Tools & Launches as an early friction signal",
+      "body": "Negative organic comments in Tools & Launches went from 9.4% to 15.2% (q = 0.082). Not significant after correcting for multiple tests: monitor it, but don't act on it yet."
+    }
+  ]
+}

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FadeUp } from "@/components/ui/animate";
+import { loadSummary } from "./youtube-topic-intelligence/load-summary";
+import type { InsightsSummary } from "./youtube-topic-intelligence/types";
 
 export const metadata: Metadata = {
   title: "Projects — Joshua Sánchez",
@@ -375,6 +377,72 @@ function PredictiveEngineMockup() {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   YOUTUBE TOPIC INTELLIGENCE MOCKUP — fed by the pipeline summary
+───────────────────────────────────────────────────────────── */
+function YouTubeIntelMockup({ summary }: { summary: InsightsSummary }) {
+  const [prevP, currP] = summary.meta.periods;
+  const formats = summary.formats;
+  const max = Math.max(...formats.flatMap((f) => [f.share_prev, f.share_curr]), 1);
+  const rising = summary.emerging_terms.titles.rising.slice(0, 3);
+  const longForm = formats.find((f) => f.key === "long");
+
+  return (
+    <div className="absolute inset-0 flex flex-col bg-white dark:bg-[#141416] p-5 sm:p-7">
+      {/* Window chrome */}
+      <div className="flex items-center gap-1.5 mb-4 shrink-0">
+        <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+        <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+        <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+        <span className="ml-4 h-5 w-48 rounded-lg bg-[#f5f5f7] dark:bg-[#2c2c2e]" />
+      </div>
+
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4 shrink-0">
+        <div>
+          <p className="text-[10px] font-medium text-[#6e6e73] dark:text-[#8e8e93] uppercase tracking-[0.06em]">
+            Share of surfaced videos by format · YoY
+          </p>
+          <p className="text-2xl sm:text-3xl font-bold text-[#1d1d1f] dark:text-white mt-1 tracking-tight">
+            {(longForm?.share_curr ?? 0).toFixed(0)}% long-form
+          </p>
+        </div>
+        <span className="mt-1 px-2.5 py-1 rounded-full bg-[#0071e3]/10 text-[#0071e3] text-xs font-semibold">
+          {prevP.label} vs {currP.label}
+        </span>
+      </div>
+
+      {/* Grouped bars: prior vs current share of videos per format */}
+      <div className="flex-1 min-h-0 flex items-end justify-around gap-4 mb-4 px-2" aria-hidden>
+        {formats.map((f) => (
+          <div key={f.key} className="flex flex-col items-center gap-2 h-full justify-end">
+            <div className="flex items-end gap-1 h-full">
+              {([["#eb6834", f.share_prev], ["#0071e3", f.share_curr]] as const).map(([c, v]) => (
+                <span key={c} className="w-5 sm:w-7 rounded-t-[4px]" style={{ background: c, height: `${(v / max) * 100}%` }} />
+              ))}
+            </div>
+            <p className="text-[9px] sm:text-[10px] font-medium text-[#6e6e73] dark:text-[#8e8e93]">
+              {f.label.replace(/\s*\(.*\)/, "")}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Rising title terms */}
+      <div className="flex flex-wrap gap-1.5 shrink-0">
+        {rising.map((t) => (
+          <span key={t.term} className="px-2 py-0.5 rounded-full bg-[#0071e3]/10 text-[9px] font-semibold text-[#0071e3]">
+            ↑ {t.term}
+          </span>
+        ))}
+        <span className="px-2 py-0.5 rounded-full bg-[#f5f5f7] dark:bg-[#3a3a3c] text-[9px] font-medium text-[#6e6e73] dark:text-[#8e8e93]">
+          Live YouTube data
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
    APPLE-STYLE PROJECT CARD
 ───────────────────────────────────────────────────────────── */
 interface ProjectCardProps {
@@ -470,6 +538,7 @@ function ProjectCard({
    PAGE
 ───────────────────────────────────────────────────────────── */
 export default function ProjectsPage() {
+  const youtubeSummary = loadSummary();
   return (
     <>
       {/* ── Minimal hero ───────────────────────────────────── */}
@@ -514,6 +583,22 @@ export default function ProjectsPage() {
             hrefSecondary="/projects/football-predictive-engine"
             mockup={<PredictiveEngineMockup />}
             delay={0}
+          />
+
+          <ProjectCard
+            eyebrow="Social Media Data Science · Market Intelligence"
+            title="YouTube Topic Intelligence"
+            subtitle="Topic dynamics, engagement and algorithmic shifting in the AI agents niche, measured on real YouTube Data API data with age-normalized metrics, VADER sentiment and FDR-corrected inference."
+            tags={[
+              "Python", "YouTube Data API", "VADER NLP", "Bootstrap CI",
+              "Benjamini-Hochberg", "Next.js", "TypeScript", "Recharts",
+            ]}
+            cta="Explore Dashboard"
+            href="/projects/youtube-topic-intelligence/dashboard"
+            ctaSecondary="Read Case Study"
+            hrefSecondary="/projects/youtube-topic-intelligence"
+            mockup={<YouTubeIntelMockup summary={youtubeSummary} />}
+            delay={0.05}
           />
 
           <ProjectCard

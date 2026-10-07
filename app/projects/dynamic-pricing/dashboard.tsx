@@ -234,9 +234,9 @@ export function DynamicPricingDashboard() {
     const run = async () => {
       try {
         const [csvText, compJson, featJson] = await Promise.all([
-          fetch("/data/forecast_48h.csv").then(r => r.text()),
-          fetch("/data/top_competitors_insights.json").then(r => r.json()),
-          fetch("/data/feature_importance.json").then(r => r.json()),
+          fetch("/data/dynamic-pricing/forecast_48h.csv").then(r => r.text()),
+          fetch("/data/dynamic-pricing/top_competitors_insights.json").then(r => r.json()),
+          fetch("/data/dynamic-pricing/feature_importance.json").then(r => r.json()),
         ]);
 
         const parsed = Papa.parse<ForecastRow>(csvText, {

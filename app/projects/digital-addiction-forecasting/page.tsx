@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function DigitalAddictionPage() {
   const raw  = readFileSync(
-    path.join(process.cwd(), "public", "data_insights.json"),
+    path.join(process.cwd(), "data", "digital-addiction", "data_insights.json"),
     "utf-8"
   );
   const data = JSON.parse(raw) as DashboardData;
